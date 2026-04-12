@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller de Programación · Ciclo Superior · Escuela Industrial N°9</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f6f3;--bg2:#e6ede8;--bg3:#d8e4db;--card:#fff;
+  --gr:#166534;--gr2:#14532d;--gr3:#dcfce7;--gr4:#f0fdf4;
+  --dk:#0f2318;--muted:#5a7a62;--border:#c6dbc9;--dim:#dde8df;--txt:#0f2318;
+  --am:#b45309;--am2:#78350f;--am3:#fef3c7;--am4:#fffbeb;
+  --bl:#1d4ed8;--bl3:#dbeafe;--bl4:#eff6ff;
+  --or:#c2410c;--or3:#ffedd5;--or4:#fff7ed;
+  --re:#b91c1c;--re3:#fee2e2;
+  --cy:#0e7490;--cy3:#cffafe;--cy4:#f0fdff;
+  --mono:"IBM Plex Mono",monospace;--sans:"Plus Jakarta Sans",sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#0a140d;--bg2:#0f1c12;--bg3:#152418;--card:#0c1810;
+  --gr:#22d3a0;--gr2:#16a87e;--gr3:#062414;--gr4:#041008;
+  --dk:#e8f5ec;--muted:#4a6450;--border:#1a3020;--dim:#152418;--txt:#d0e8d4;
+  --am:#f0a030;--am2:#d4820a;--am3:#2a1a06;--am4:#1c1208;
+  --bl:#60a5fa;--bl3:#1e3a5f;--bl4:#0f1f40;
+  --or:#fb923c;--or3:#431407;--or4:#2c0e04;
+  --re:#fca5a5;--re3:#1f0a0a;
+  --cy:#22d3ee;--cy3:#0a3040;--cy4:#061820;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+.topbar{position:sticky;top:0;z-index:300;background:var(--card);border-bottom:2px solid var(--border);display:flex;justify-content:space-between;align-items:center;padding:8px 16px;}
+.tb-brand{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tb-brand b{color:var(--dk);}
+.tb-acts{display:flex;gap:6px;flex-shrink:0;}
+.tbtn{background:var(--bg2);border:1.5px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.tbtn:hover{border-color:var(--gr);color:var(--gr);}
+
+.prog-strip{background:var(--bg);border-bottom:1px solid var(--border);padding:8px 16px;}
+.prog-in{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.pbar{flex:1;height:4px;background:var(--dim);border-radius:2px;overflow:hidden;}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--gr2),var(--gr));transition:width .5s;border-radius:2px;}
+.pbar-lbl{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;}
+
+.hero{background:var(--dk);padding:44px 16px 36px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,.04);pointer-events:none;}
+.hero-in{max-width:900px;margin:0 auto;position:relative;z-index:2;}
+.hero-eye{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.eye-dot{width:6px;height:6px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);animation:pulse 2s ease infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(24px,6vw,46px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:10px;letter-spacing:-.5px;}
+.h-gr{color:#86efac;}.h-or{color:#fdba74;}
+.hero-desc{color:rgba(255,255,255,.5);font-size:14px;max-width:540px;margin-bottom:20px;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);}
+.tag-gr{border-color:rgba(134,239,172,.35);color:rgba(134,239,172,.85);}
+.tag-or{border-color:rgba(253,186,116,.3);color:rgba(253,186,116,.8);}
+.tag-bl{border-color:rgba(96,165,250,.3);color:rgba(96,165,250,.8);}
+
+nav{background:var(--card);border-bottom:2px solid var(--border);position:sticky;top:45px;z-index:90;}
+.nav-in{max-width:900px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;}
+.nav-in::-webkit-scrollbar{height:0;}
+.nb{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:10px 11px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;}
+.nb:hover,.nb.on{color:var(--gr);border-bottom-color:var(--gr);}
+
+main{max-width:900px;margin:0 auto;padding:30px 16px 80px;}
+section{margin-bottom:60px;}
+.s-eye{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gr);margin-bottom:8px;}
+.s-h2{font-size:clamp(19px,3.5vw,27px);font-weight:800;color:var(--dk);margin-bottom:6px;}
+.s-sub{color:var(--muted);font-size:14px;margin-bottom:20px;max-width:560px;}
+.div{height:2px;background:linear-gradient(90deg,var(--gr),transparent);border-radius:2px;margin-bottom:22px;}
+.div-or{background:linear-gradient(90deg,var(--or),transparent);}
+
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:box-shadow .2s;}
+.card:hover{box-shadow:0 4px 14px rgba(22,101,52,.1);}
+.card.card-or:hover{box-shadow:0 4px 14px rgba(194,65,12,.1);}
+.card-hdr{display:grid;grid-template-columns:48px 1fr;cursor:pointer;min-height:54px;}
+.card-ico{display:flex;align-items:center;justify-content:center;font-size:18px;border-right:1.5px solid var(--border);}
+.ico-gr{background:var(--gr4);}
+.ico-am{background:var(--am4);}
+.ico-or{background:var(--or4);}
+.ico-bl{background:var(--bl4);}
+.ico-cy{background:var(--cy4);}
+.card-inf{padding:11px 15px;}
+.card-tag{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.card-tit{font-size:14px;font-weight:700;color:var(--dk);}
+.card-body{padding:2px 15px 16px;border-top:1.5px solid var(--border);display:none;}
+.card.open .card-body{display:block;}
+.card-body p{font-size:14px;color:var(--txt);margin:11px 0 5px;}
+
+.code{background:var(--dk);color:#bbf7d0;border-radius:8px;padding:13px 15px;font-family:var(--mono);font-size:13px;margin:10px 0;line-height:1.9;white-space:pre-wrap;overflow-x:auto;}
+.cm{color:#2a5038;font-style:italic;}.kw{color:#86efac;font-weight:600;}
+.st{color:#fde68a;}.nm{color:#93c5fd;}.fn{color:#c4b5fd;}.op{color:#6ee7b7;}
+
+.tbl-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;border-radius:8px;border:1px solid var(--border);}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;}
+.tbl th{background:var(--bg2);color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 12px;text-align:left;border-bottom:1.5px solid var(--border);white-space:nowrap;}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--dim);}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--bg2);}
+.ch{display:inline-block;padding:2px 8px;border-radius:8px;font-family:var(--mono);font-size:10px;font-weight:600;}
+.ch-gr{background:var(--gr3);color:var(--gr2);}
+.ch-am{background:var(--am3);color:var(--am);}
+.ch-bl{background:var(--bl3);color:var(--bl);}
+.ch-re{background:var(--re3);color:var(--re);}
+.ch-or{background:var(--or3);color:var(--or);}
+.ch-cy{background:var(--cy3);color:var(--cy);}
+
+.anal{border-radius:8px;padding:12px 15px;margin:10px 0;display:flex;gap:10px;font-size:14px;align-items:flex-start;background:var(--gr4);border-left:4px solid var(--gr);}
+.anal.or{background:var(--or4);border-left-color:var(--or);}
+.anal.bl{background:var(--bl4);border-left-color:var(--bl);}
+.an-ico{font-size:20px;flex-shrink:0;}
+
+.nota{background:var(--bl4);border:1.5px solid var(--bl3);border-left:4px solid var(--bl);border-radius:8px;padding:12px 15px;margin:10px 0;font-size:14px;}
+.nota b{color:var(--bl);}
+.alerta{background:var(--am4);border:1.5px solid var(--am3);border-left:4px solid var(--am);border-radius:8px;padding:12px 15px;margin:10px 0;font-size:14px;}
+.alerta b{color:var(--am);}
+.tip{background:var(--gr4);border:1.5px solid var(--gr3);border-left:4px solid var(--gr2);border-radius:7px;padding:10px 14px;margin:10px 0;font-size:13px;color:var(--gr2);}
+
+.mision{background:var(--gr4);border:1.5px solid var(--gr3);border-left:5px solid var(--gr);border-radius:10px;padding:14px 17px;margin:12px 0;}
+.mision.am{background:var(--am4);border-color:var(--am3);border-left-color:var(--am);}
+.mision.or{background:var(--or4);border-color:var(--or3);border-left-color:var(--or);}
+.mision.cy{background:var(--cy4);border-color:var(--cy3);border-left-color:var(--cy);}
+.mision-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.mision-num{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;background:var(--gr3);color:var(--gr2);padding:2px 10px;border-radius:12px;}
+.mision.am .mision-num{background:var(--am3);color:var(--am);}
+.mision.or .mision-num{background:var(--or3);color:var(--or);}
+.mision.cy .mision-num{background:var(--cy3);color:var(--cy);}
+.mision-tit{font-size:15px;font-weight:700;color:var(--dk);}
+.mision p{font-size:14px;color:var(--txt);margin:4px 0;}
+
+.paso{display:flex;gap:10px;margin:8px 0;align-items:flex-start;}
+.paso-n{width:26px;height:26px;border-radius:50%;background:var(--gr);color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.paso-txt{font-size:14px;color:var(--txt);}
+.paso-txt b{color:var(--gr2);}
+
+/* PROYECTO CARDS */
+.proyecto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0;}
+.proyecto{border-radius:12px;overflow:hidden;border:2px solid;transition:box-shadow .2s;}
+.proyecto:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);}
+.proy-hdr{padding:16px 18px;}
+.proy-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px;}
+.proy-tit{font-size:16px;font-weight:800;color:#fff;margin-bottom:3px;}
+.proy-sub{font-size:12px;color:rgba(255,255,255,.6);}
+.proy-body{padding:14px 18px;font-size:13px;line-height:1.65;}
+.proy-item{padding:2px 0;display:flex;align-items:flex-start;gap:6px;}
+.proy-item::before{content:"›";font-weight:700;flex-shrink:0;}
+.proy-rec{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:6px;margin-top:10px;display:inline-block;font-weight:700;}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;margin:14px 0;}
+.tl-item{display:flex;gap:14px;align-items:flex-start;padding-bottom:20px;position:relative;}
+.tl-item::before{content:'';position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--dim);}
+.tl-item:last-child::before{display:none;}
+.tl-dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:2px solid;}
+.dot-hecho{background:var(--gr3);border-color:var(--gr);}
+.dot-prox{background:var(--am3);border-color:var(--am);}
+.dot-fut{background:var(--bg3);border-color:var(--dim);}
+.tl-body{flex:1;padding-top:4px;}
+.tl-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.badge-hecho{color:var(--gr2);}.badge-prox{color:var(--am);}.badge-fut{color:var(--muted);}
+.tl-tit{font-size:15px;font-weight:700;color:var(--dk);margin-bottom:4px;}
+.tl-items{font-size:13px;color:var(--muted);line-height:1.9;}
+.tl-items span{display:block;}
+.tl-items span::before{content:'› ';color:var(--gr);font-weight:700;}
+
+/* IF VISUALIZER */
+.if-viz{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin:14px 0;}
+.if-block{display:flex;align-items:stretch;border-radius:7px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:5px;transition:all .3s;}
+.if-block.activo{border-color:var(--gr);box-shadow:0 0 0 3px rgba(22,101,52,.1);}
+.if-block.skip{opacity:.35;}
+.if-kw{background:var(--dk);color:#86efac;font-family:var(--mono);font-size:12px;padding:10px 12px;font-weight:600;display:flex;align-items:center;min-width:50px;}
+.if-cond{flex:1;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:12px;color:var(--muted);}
+.if-res{background:var(--bg3);padding:10px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);min-width:80px;text-align:right;}
+.if-block.activo .if-cond{color:var(--dk);font-weight:600;}
+.if-block.activo .if-res{background:var(--gr3);color:var(--gr2);font-weight:700;}
+
+/* DEMO */
+.demo{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin:14px 0;}
+.demo-lbl{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:12px;font-weight:600;}
+.demo-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px;}
+.demo-grp{display:flex;flex-direction:column;gap:4px;}
+.demo-gl{font-size:12px;color:var(--muted);font-weight:500;}
+.demo-in{background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--mono);font-size:14px;padding:7px 10px;border-radius:6px;width:120px;outline:none;transition:border-color .2s;}
+.demo-in:focus{border-color:var(--gr);}
+.demo-btn{background:var(--gr);color:#fff;border:none;font-family:var(--sans);font-size:13px;font-weight:700;padding:8px 16px;border-radius:6px;cursor:pointer;transition:background .2s;}
+.demo-btn:hover{background:var(--gr2);}
+.demo-out{background:var(--dk);color:#bbf7d0;border-radius:6px;padding:11px 14px;font-family:var(--mono);font-size:13px;min-height:50px;white-space:pre-wrap;line-height:1.8;margin-top:10px;}
+
+/* SENSOR VISUAL */
+.sensor-box{background:var(--dk);border-radius:12px;padding:20px;margin:14px 0;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.thermometer{position:relative;width:60px;height:140px;display:flex;align-items:center;justify-content:center;}
+.therm-tube{width:16px;height:100px;background:rgba(255,255,255,.1);border-radius:8px 8px 0 0;overflow:hidden;position:relative;}
+.therm-fill{position:absolute;bottom:0;width:100%;background:linear-gradient(180deg,#ef4444,#f59e0b);border-radius:6px;transition:height .5s ease;}
+.therm-bulb{width:36px;height:36px;border-radius:50%;background:#ef4444;margin-top:-4px;display:flex;align-items:center;justify-content:center;font-size:12px;}
+.sensor-data{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;}
+.sensor-val{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px;text-align:center;}
+.sv-label{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.sv-num{font-family:var(--mono);font-size:22px;font-weight:600;color:#86efac;}
+.sv-unit{font-size:12px;color:rgba(255,255,255,.4);}
+.sv-estado{font-family:var(--mono);font-size:12px;margin-top:6px;}
+.sensor-controls{display:flex;gap:8px;align-items:center;}
+.sc-lbl{color:rgba(255,255,255,.5);font-size:13px;}
+.sc-slider{width:160px;accent-color:var(--gr);}
+
+/* QUIZ */
+.nom-row{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:10px;margin-bottom:14px;background:var(--gr4);border:1.5px solid var(--gr3);}
+.nom-lbl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.nom-in{flex:1;background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:15px;font-weight:500;padding:8px 13px;border-radius:6px;outline:none;transition:border-color .2s;}
+.nom-in:focus{border-color:var(--gr);}
+.qcard{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:18px;margin-bottom:10px;transition:all .3s;}
+.qcard.ok{border-color:var(--gr)!important;background:var(--gr4);}
+.qcard.mal{border-color:#fca5a5!important;background:var(--re3);}
+.qnum{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:8px;}
+.qq{font-size:15px;font-weight:700;color:var(--dk);margin-bottom:8px;}
+.qcode{background:var(--dk);border-radius:6px;padding:9px 13px;font-family:var(--mono);font-size:12px;color:#bbf7d0;margin-bottom:12px;white-space:pre-wrap;line-height:1.8;}
+.qopts{display:flex;flex-direction:column;gap:6px;}
+.qopt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:500;padding:9px 14px;border-radius:7px;cursor:pointer;text-align:left;transition:all .2s;}
+.qopt:hover:not(:disabled){background:var(--gr4);border-color:var(--gr3);}
+.qopt.ca{background:var(--gr4)!important;border-color:var(--gr)!important;color:var(--gr2)!important;font-weight:700;}
+.qopt.in{background:var(--re3)!important;border-color:#fca5a5!important;color:var(--re)!important;}
+.qopt:disabled{cursor:default;}
+.qfb{display:none;margin-top:9px;padding:10px 13px;border-radius:7px;font-size:13px;line-height:1.5;}
+.qfb.show{display:block;}
+.qfb-ok{background:var(--gr4);color:var(--gr2);border:1.5px solid var(--gr3);}
+.qfb-mal{background:var(--re3);color:var(--re);border:1.5px solid #fca5a5;}
+.score{display:none;border-radius:12px;padding:28px;text-align:center;margin-top:14px;background:var(--gr4);border:2px solid var(--gr3);}
+.score.show{display:block;animation:pop .4s ease;}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.sc-n{font-size:56px;font-weight:800;color:var(--gr2);line-height:1;margin-bottom:8px;}
+.sc-msg{font-size:17px;font-weight:700;color:var(--dk);margin-bottom:4px;}
+.sc-sub{font-size:14px;color:var(--muted);}
+.send-box{margin-top:14px;padding:16px 18px;border-radius:9px;display:none;background:var(--card);border:1.5px solid var(--border);}
+.send-box.show{display:block;}
+.send-txt{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5;}
+.send-btn{background:var(--gr);color:#fff;border:none;font-family:var(--sans);font-size:15px;font-weight:700;padding:11px 20px;border-radius:7px;cursor:pointer;width:100%;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.send-btn:hover{background:var(--gr2);}
+.send-btn:disabled{opacity:.5;cursor:not-allowed;}
+.send-ok{display:none;text-align:center;padding:10px;margin-top:10px;border-radius:7px;font-size:14px;font-weight:600;background:var(--gr4);color:var(--gr2);border:1.5px solid var(--gr3);}
+.send-ok.show{display:block;}
+.retry-btn{margin-top:12px;border:1.5px solid var(--border);background:var(--card);font-family:var(--sans);font-weight:600;font-size:14px;padding:9px 20px;border-radius:7px;cursor:pointer;color:var(--muted);transition:all .2s;}
+.retry-btn:hover{border-color:var(--gr);color:var(--gr);}
+
+footer{text-align:center;padding:26px;border-top:1.5px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;background:var(--bg2);}
+footer b{color:var(--dk);}
+
+/* MOBILE FIRST */
+@media(max-width:640px){
+  .topbar{padding:7px 12px;}
+  .tb-brand{font-size:9px;}
+  .hero{padding:32px 14px 26px;}
+  h1{font-size:24px;}
+  main{padding:24px 14px 70px;}
+  .s-h2{font-size:19px;}
+  nav{top:44px;}
+  .nb{padding:9px 10px;font-size:9px;}
+  .card-hdr{grid-template-columns:42px 1fr;}
+  .proyecto-grid{grid-template-columns:1fr;}
+  .sensor-data{grid-template-columns:1fr 1fr;}
+  .demo-in{width:100px;font-size:13px;}
+  .if-kw{min-width:44px;font-size:11px;}
+  .if-cond,.if-res{font-size:11px;}
+}
+@media(min-width:641px){
+  .hero{padding:50px 24px 40px;}
+  main{padding:36px 24px 90px;}
+}
+
+@media print{
+  @page{margin:1.8cm 1.5cm;}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{background:#fff!important;color:#000!important;font-size:10.5pt;line-height:1.55;}
+  .topbar,nav,.prog-strip,.demo,.if-viz,.sensor-box,
+  .qopts,.qfb,.score,.retry-btn,.send-box,.nom-row,.tbtn{display:none!important;}
+  .hero{background:#0f2318!important;padding:14pt 0 10pt!important;border-bottom:2pt solid #000;}
+  .hero::before{display:none!important;}
+  .hero-eye,.hero-tags{display:none!important;}
+  h1{color:#fff!important;font-size:18pt;}
+  .h-gr,.h-or{color:#fff!important;}
+  .hero-desc{color:rgba(255,255,255,.75)!important;font-size:10pt;}
+  section{break-inside:avoid;margin-bottom:12pt;}
+  .s-eye{color:#000!important;font-size:8pt;}
+  .s-h2{font-size:13pt;color:#000!important;border-bottom:1pt solid #000;padding-bottom:2pt;margin-bottom:4pt;}
+  .s-sub{font-size:9.5pt;color:#444!important;}
+  .div{background:#000!important;height:.5pt;}
+  .div-or{background:#555!important;}
+  .card{border:1pt solid #ccc!important;background:#fff!important;margin-bottom:6pt;break-inside:avoid;}
+  .card-hdr{background:#f0f0f0!important;border-bottom:1pt solid #ccc!important;}
+  .card-ico{background:#fff!important;border-right:1pt solid #ccc!important;}
+  .card-tit{color:#000!important;font-size:11pt;}
+  .card-tag{color:#555!important;}
+  .card-body{display:block!important;border-top:1pt solid #eee!important;}
+  .card-body p{color:#000!important;}
+  .code{background:#f8f8f8!important;color:#000!important;border:1pt solid #ddd!important;border-left:3pt solid #555!important;font-size:8pt!important;padding:6pt!important;}
+  .cm{color:#666!important;font-style:italic!important;}
+  .kw,.st,.nm,.fn,.op{color:#000!important;font-weight:700!important;}
+  .anal{background:#f4f4f4!important;border-left:3pt solid #555!important;color:#000!important;}
+  .nota{background:#f8f8f8!important;border:1pt solid #ccc!important;border-left:3pt solid #555!important;color:#000!important;}
+  .nota b{color:#000!important;font-weight:700!important;}
+  .alerta{background:#f8f8f8!important;border:1pt solid #bbb!important;border-left:3pt solid #888!important;color:#000!important;}
+  .alerta b{color:#000!important;font-weight:700!important;}
+  .tip{background:#f4f4f4!important;border:1pt solid #aaa!important;border-left:3pt solid #555!important;color:#333!important;}
+  .mision{background:#f4f4f4!important;border:1pt solid #ccc!important;border-left:4pt solid #555!important;break-inside:avoid;}
+  .mision.am{border-left-color:#888!important;}
+  .mision.or{border-left-color:#666!important;}
+  .mision.cy{border-left-color:#444!important;}
+  .mision-num{background:#eee!important;color:#000!important;}
+  .mision-tit,.mision p{color:#000!important;}
+  .paso-n{background:#555!important;}
+  .paso-txt{color:#000!important;}
+  .tbl-wrap{border:1pt solid #ccc!important;}
+  .tbl th{background:#eee!important;color:#000!important;border-bottom:1pt solid #aaa!important;}
+  .tbl td{color:#000!important;border-bottom:.5pt solid #ddd!important;}
+  .ch{background:#eee!important;color:#000!important;border:1pt solid #aaa!important;}
+  .tl-dot{background:#eee!important;border-color:#555!important;}
+  .tl-badge,.tl-tit{color:#000!important;}
+  .tl-items{color:#333!important;}
+  .tl-items span::before{color:#000!important;}
+  .proyecto{border:1pt solid #ccc!important;break-inside:avoid;}
+  .proy-hdr{background:#1a1a1a!important;padding:10pt 12pt!important;}
+  .proy-tit,.proy-sub{color:#fff!important;}
+  .proy-body{color:#000!important;padding:10pt 12pt!important;}
+  .proy-item::before{color:#000!important;}
+  .proy-rec{background:#eee!important;color:#000!important;border:1pt solid #aaa!important;}
+  footer{border-top:1pt solid #ccc!important;font-size:8pt!important;color:#555!important;}
+  footer b{color:#000!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-brand">Esc. Industrial N&deg;9 &middot; <b>Programaci&oacute;n y Tecnolog&iacute;a de Control &middot; 2026</b></div>
+  <div class="tb-acts">
+    <button class="tbtn" id="themeBtn" onclick="toggleTheme()">&#9790; Oscuro</button>
+    <button class="tbtn" onclick="window.print()">&#128424; Imprimir</button>
+  </div>
+</div>
+
+<div class="prog-strip">
+  <div class="prog-in">
+    <div class="pbar"><div class="pbar-fill" id="pb" style="width:0%"></div></div>
+    <div class="pbar-lbl" id="pl">Quiz: 0 / 15 &middot; 0 correctas</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-eye"><span class="eye-dot"></span>Taller de Programaci&oacute;n y Dom&oacute;tica &middot; Ciclo Superior &middot; Ciclo 2026</div>
+    <h1><span class="h-gr">Python</span> &amp; <span class="h-or">Dom&oacute;tica</span></h1>
+    <p class="hero-desc">Proyecto: Red Clim&aacute;tica de la Maqueta. Programaci&oacute;n (Python y Arduino/C++) aplicada a dom&oacute;tica en la maqueta dise&ntilde;ada por 3&deg; MMO.</p>
+    <div class="hero-tags">
+      <span class="tag tag-gr">Variables &amp; Tipos</span>
+      <span class="tag tag-gr">Operadores</span>
+      <span class="tag tag-gr">input / print</span>
+      <span class="tag tag-gr">if / elif / else</span>
+      <span class="tag tag-gr">for</span>
+      <span class="tag tag-gr">while</span>
+      <span class="tag tag-or">Dom&oacute;tica</span>
+      <span class="tag tag-bl">DHT22 + ESP32</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-in">
+    <button class="nb on" onclick="ir('proyecto')">Proyecto</button>
+    <button class="nb" onclick="ir('recorrido')">Recorrido</button>
+    <button class="nb" onclick="ir('variables')">Variables</button>
+    <button class="nb" onclick="ir('tipos')">Tipos</button>
+    <button class="nb" onclick="ir('io')">Input/Print</button>
+    <button class="nb" onclick="ir('operadores')">Operadores</button>
+    <button class="nb" onclick="ir('if')">if/elif/else</button>
+    <button class="nb" onclick="ir('for')">for</button>
+    <button class="nb" onclick="ir('while')">while</button>
+    <button class="nb" onclick="ir('tcontrol')">Tec. Control</button>
+    <button class="nb" onclick="ir('quiz')">Quiz</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══ PROYECTO HILO CONDUCTOR ═══════════════════════════ -->
+<section id="proyecto">
+  <div class="s-eye">// Hilo conductor del a&ntilde;o</div>
+  <h2 class="s-h2">Red Clim&aacute;tica de la Maqueta</h2>
+  <p class="s-sub">El proyecto que conecta Programaci&oacute;n con Tecnolog&iacute;a de Control &mdash; en articulaci&oacute;n con 3&deg; MMO y estudiantes de 4&deg; y 5&deg; a&ntilde;o.</p>
+  <div class="div"></div>
+
+  <div class="mision" style="margin-bottom:16px;">
+    <div class="mision-hdr"><span class="mision-num">El desaf&iacute;o</span><span class="mision-tit">Dom&oacute;tica real en una maqueta real</span></div>
+    <p>Los alumnos de 3&deg; MMO van a construir la maqueta de la vivienda, mientras que los equipos de 4&deg; y 5&deg; dise&ntilde;an el sistema de dom&oacute;tica. <b>Ustedes son el equipo de control clim&aacute;tico:</b> sensores en cada habitaci&oacute;n, un programa (C++ en el ESP32 y Python en PC) que analiza los datos y activa alertas o actuadores seg&uacute;n las condiciones.</p>
+  </div>
+
+  <div class="proyecto-grid">
+    <!-- Proyecto A -->
+    <div class="proyecto" style="border-color:#166534;">
+      <div class="proy-hdr" style="background:#166534;">
+        <div class="proy-badge">T1 &mdash; Paradigma Imperativo</div>
+        <div class="proy-tit">&#127777;&#65039; Guardián de la Habitación</div>
+        <div class="proy-sub">Un sensor &rarr; una habitaci&oacute;n &rarr; decisiones simples</div>
+      </div>
+      <div class="proy-body" style="background:var(--gr4);color:var(--gr2);">
+        <div class="proy-item">DHT22 en el living de la maqueta</div>
+        <div class="proy-item">Python lee temperatura y humedad</div>
+        <div class="proy-item">if/elif/else clasifica: Fr&iacute;o / Confort / Calor / Alarma</div>
+        <div class="proy-item">LED rojo si temperatura > umbral</div>
+        <div class="proy-item">Dashboard en consola con f-strings</div>
+        <div class="proy-rec" style="background:var(--gr3);color:var(--gr2);">&#10003; Alcanzable en T1</div>
+      </div>
+    </div>
+    <!-- Proyecto B -->
+    <div class="proyecto" style="border-color:#b45309;">
+      <div class="proy-hdr" style="background:#b45309;">
+        <div class="proy-badge">T2 &mdash; Paradigma Funcional</div>
+        <div class="proy-tit">&#127968; Red Multi-Punto &#11088;</div>
+        <div class="proy-sub">Un sensor por zona &rarr; funciones &rarr; ESP32</div>
+      </div>
+      <div class="proy-body" style="background:var(--am4);color:var(--am2);">
+        <div class="proy-item">Sensor por zona: dormitorio, estar, cocina</div>
+        <div class="proy-item">Funci&oacute;n <code>analizar_zona(nombre, temp, hum)</code></div>
+        <div class="proy-item">Funci&oacute;n <code>zona_m&aacute;s_caliente(datos)</code></div>
+        <div class="proy-item">Python y ESP32 controlan ventilador/calefactor</div>
+        <div class="proy-item">Modularizaci&oacute;n por habitaciones</div>
+        <div class="proy-rec" style="background:var(--am3);color:var(--am2);">&#11088; Hilo conductor principal</div>
+      </div>
+    </div>
+    <!-- Proyecto C -->
+    <div class="proyecto" style="border-color:#1d4ed8;">
+      <div class="proy-hdr" style="background:#1d4ed8;">
+        <div class="proy-badge">T3 &mdash; Paradigma OO</div>
+        <div class="proy-tit">&#129302; Controlador Inteligente</div>
+        <div class="proy-sub">Clases &rarr; Herencia &rarr; Expot&eacute;cnica</div>
+      </div>
+      <div class="proy-body" style="background:var(--bl4);color:var(--bl);">
+        <div class="proy-item">Clase <code>Sensor(pin, zona)</code></div>
+        <div class="proy-item">Clase <code>Habitacion(nombre, sensor, umbral)</code></div>
+        <div class="proy-item">Clase <code>Maqueta([habitaciones])</code></div>
+        <div class="proy-item">Herencia: <code>SensorDHT22(Sensor)</code></div>
+        <div class="proy-item">Sistema completo para Expot&eacute;cnica</div>
+        <div class="proy-rec" style="background:var(--bl3);color:var(--bl);">T3 &mdash; cierre del a&ntilde;o</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sensor interactivo -->
+  <div class="sensor-box">
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);align-self:flex-start;">&#9654; Simul&aacute; el sensor DHT22</div>
+    <div class="sensor-controls">
+      <span class="sc-lbl">Temperatura:</span>
+      <input type="range" class="sc-slider" id="sliderTemp" min="10" max="45" value="22" oninput="updateSensor()">
+      <span class="sc-lbl">Humedad:</span>
+      <input type="range" class="sc-slider" id="sliderHum" min="20" max="95" value="55" oninput="updateSensor()">
+    </div>
+    <div class="sensor-data">
+      <div class="sensor-val">
+        <div class="sv-label">Temperatura</div>
+        <div class="sv-num" id="svTemp">22.0</div>
+        <div class="sv-unit">&deg;C</div>
+      </div>
+      <div class="sensor-val">
+        <div class="sv-label">Humedad</div>
+        <div class="sv-num" id="svHum">55.0</div>
+        <div class="sv-unit">%</div>
+      </div>
+    </div>
+    <div class="sensor-val" style="width:100%;background:rgba(255,255,255,.08);">
+      <div class="sv-label">Estado del sistema</div>
+      <div class="sv-estado" id="svEstado" style="color:#86efac;">&#128994; CONFORT</div>
+    </div>
+    <div class="demo-out" id="sensorCode" style="width:100%;font-size:12px;"></div>
+  </div>
+</section>
+
+<!-- ═══ RECORRIDO ════════════════════════════════════════ -->
+<section id="recorrido">
+  <div class="s-eye">// Programa oficial</div>
+  <h2 class="s-h2">Recorrido del a&ntilde;o</h2>
+  <p class="s-sub">El programa organiza los contenidos en cuatro grandes bloques. As&iacute; se distribuyen en los tres trimestres.</p>
+  <div class="div"></div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot dot-hecho">&#10003;</div>
+      <div class="tl-body">
+        <div class="tl-badge badge-hecho">&#9646; Primer trimestre &mdash; ya lo vimos</div>
+        <div class="tl-tit">Dise&ntilde;o de Algoritmos + Principios Imperativos</div>
+        <div class="tl-items">
+          <span>Algoritmo: concepto, especificaci&oacute;n, precondiciones</span>
+          <span>Tecnolog&iacute;as libres vs propietarias (Python, ESP32/Arduino)</span>
+          <span>Tipos, valores y expresiones</span>
+          <span>Estructuras de control: secuencia, selecci&oacute;n, iteraci&oacute;n</span>
+          <span>Variables y el tipo arreglo (listas)</span>
+          <span>Proyecto: Guard&iacute;an de la Habitaci&oacute;n</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot dot-prox">&#9658;</div>
+      <div class="tl-body">
+        <div class="tl-badge badge-prox">&#9655; Segundo trimestre &mdash; lo que viene</div>
+        <div class="tl-tit">Paradigma Funcional + Modularizaci&oacute;n + ESP32</div>
+        <div class="tl-items">
+          <span>Funciones y procedimientos: def, return, par&aacute;metros</span>
+          <span>Pasaje de par&aacute;metros, modularizaci&oacute;n</span>
+          <span>Funciones sobre listas, recursividad b&aacute;sica</span>
+          <span>Comunicaciones: conectar Python con ESP32</span>
+          <span>Proyecto: Red Multi-Punto de la Maqueta</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot dot-fut">&#9679;</div>
+      <div class="tl-body">
+        <div class="tl-badge badge-fut">Tercer trimestre &mdash; m&aacute;s adelante</div>
+        <div class="tl-tit">Paradigma Orientado a Objetos + Expot&eacute;cnica</div>
+        <div class="tl-items">
+          <span>Objetos, mensajes y m&eacute;todos</span>
+          <span>Clases, herencia y polimorfismo</span>
+          <span>Sistema integrado de dom&oacute;tica</span>
+          <span>Proyecto final para Expot&eacute;cnica</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mision am">
+    <div class="mision-hdr"><span class="mision-num">Concepto clave</span><span class="mision-tit">&iquest;Qu&eacute; es un algoritmo?</span></div>
+    <p>Un algoritmo es una secuencia <b>finita, ordenada y sin ambig&uuml;edades</b> de pasos para resolver un problema. Antes de escribir una sola l&iacute;nea de c&oacute;digo, hay que tener claro: &iquest;cu&aacute;l es la entrada? &iquest;cu&aacute;l es la precondici&oacute;n (qu&eacute; tiene que ser verdad antes de empezar)? &iquest;Cu&aacute;l es la postcondici&oacute;n (qu&eacute; garantiza el programa al terminar)?</p>
+  </div>
+  <div class="code"><span class="cm"># Ejemplo: algoritmo para clasificar temperatura</span>
+<span class="cm"># ENTRADA: temperatura (float)</span>
+<span class="cm"># PRECONDICIÓN: temperatura > -50 y temperatura < 100 (sensor válido)</span>
+<span class="cm"># POSTCONDICIÓN: el estado es exactamente uno de los cuatro posibles</span>
+
+<span class="kw">if</span> temperatura < <span class="nm">16</span>:
+    estado = <span class="st">"Frío"</span>
+<span class="kw">elif</span> temperatura <= <span class="nm">26</span>:
+    estado = <span class="st">"Confort"</span>
+<span class="kw">elif</span> temperatura <= <span class="nm">30</span>:
+    estado = <span class="st">"Calor"</span>
+<span class="kw">else</span>:
+    estado = <span class="st">"Alarma"</span></div>
+</section>
+
+<!-- ═══ VARIABLES ════════════════════════════════════════ -->
+<section id="variables">
+  <div class="s-eye">// M&oacute;dulo 01</div>
+  <h2 class="s-h2">Variables</h2>
+  <p class="s-sub">Una variable es una posici&oacute;n de memoria con nombre donde guard&aacute;s un valor para usarlo despu&eacute;s.</p>
+  <div class="div"></div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128230;</div><div class="card-inf"><div class="card-tag">Concepto base</div><div class="card-tit">Variables y estado del programa</div></div></div>
+    <div class="card-body">
+      <div class="anal"><div class="an-ico">&#127991;&#65039;</div><div>En el panel de control de la maqueta cada indicador tiene un nombre: TEMP_LIVING, HUM_COCINA, VENTILADOR_ON. Una variable en Python hace lo mismo: dale un nombre descriptivo a cada valor que necesit&eacute;s recordar.</div></div>
+      <div class="code"><span class="cm"># Variables de la maqueta</span>
+temp_living    = <span class="nm">22.5</span>   <span class="cm"># temperatura del living en °C</span>
+hum_living     = <span class="nm">58.0</span>   <span class="cm"># humedad relativa en %</span>
+zona           = <span class="st">"Living"</span>
+ventilador_on  = <span class="kw">False</span>  <span class="cm"># el ventilador está apagado</span>
+umbral_calor   = <span class="nm">26.0</span>   <span class="cm"># temperatura límite para activar ventilador</span>
+
+<span class="cm"># Usar y actualizar variables</span>
+<span class="fn">print</span>(temp_living)            <span class="cm"># → 22.5</span>
+temp_living += <span class="nm">0.5</span>           <span class="cm"># sube 0.5 °C</span>
+ventilador_on = <span class="kw">True</span>         <span class="cm"># encender el ventilador</span></div>
+      <div class="alerta"><b>Reglas para los nombres:</b> solo letras, n&uacute;meros y gui&oacute;n bajo. Sin espacios, sin tildes, sin empezar con n&uacute;mero. <code>temp_living</code> es correcto. <code>temperatura del living</code> es incorrecto.</div>
+      <div class="nota"><b>= no es "igual" &mdash; es "asignar":</b> <code>temp_living = 22.5</code> se lee "la variable temp_living ahora vale 22.5". Para comparar si dos cosas son iguales se usa <code>==</code>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIPOS ════════════════════════════════════════════ -->
+<section id="tipos">
+  <div class="s-eye">// M&oacute;dulo 02</div>
+  <h2 class="s-h2">Tipos de datos</h2>
+  <p class="s-sub">El tipo de dato determina qu&eacute; clase de informaci&oacute;n guarda la variable y qu&eacute; operaciones se pueden hacer con ella.</p>
+  <div class="div"></div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128290;</div><div class="card-inf"><div class="card-tag">Los 4 tipos esenciales</div><div class="card-tit">int, float, str, bool</div></div></div>
+    <div class="card-body">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Tipo</th><th>Nombre</th><th>Cu&aacute;ndo usarlo</th><th>Ejemplo en la maqueta</th></tr></thead><tbody>
+        <tr><td><span class="ch ch-bl">int</span></td><td>N&uacute;mero entero</td><td>Conteos, cantidades exactas</td><td><code>cantidad_sensores = 3</code></td></tr>
+        <tr><td><span class="ch ch-am">float</span></td><td>N&uacute;mero decimal</td><td>Mediciones continuas</td><td><code>temperatura = 22.5</code></td></tr>
+        <tr><td><span class="ch ch-re">str</span></td><td>Texto (string)</td><td>Nombres de zonas, mensajes</td><td><code>zona = "Living"</code></td></tr>
+        <tr><td><span class="ch ch-gr">bool</span></td><td>Verdadero/Falso</td><td>Estado on/off de un actuador</td><td><code>ventilador = True</code></td></tr>
+      </tbody></table></div>
+      <div class="alerta"><b>El error m&aacute;s com&uacute;n con input():</b> <code>"22.5"</code> con comillas es un str (texto), no un n&uacute;mero. El sensor podr&iacute;a mandar datos as&iacute;. Para convertirlo y poder operar: <code>float("22.5")</code> &rarr; 22.5</div>
+      <div class="code"><span class="cm"># Conversión de tipos — fundamental para trabajar con sensores</span>
+lectura_raw  = <span class="st">"22.5"</span>              <span class="cm"># viene del sensor como texto</span>
+temperatura  = <span class="fn">float</span>(lectura_raw)   <span class="cm"># → 22.5 (ahora es número)</span>
+
+<span class="cm"># float → int (pierde los decimales, NO redondea)</span>
+temp_entera  = <span class="fn">int</span>(temperatura)     <span class="cm"># → 22 (corta en 22, no 23)</span>
+
+<span class="cm"># número → str para armar mensajes</span>
+msg = <span class="st">f"Zona: Living | Temp: {temperatura}°C | Estado: Confort"</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INPUT / PRINT ════════════════════════════════════ -->
+<section id="io">
+  <div class="s-eye">// M&oacute;dulo 03</div>
+  <h2 class="s-h2">input() y print()</h2>
+  <p class="s-sub">Las puertas del programa: input() recibe datos del operador, print() muestra el dashboard en consola.</p>
+  <div class="div"></div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#9000;&#65039;</div><div class="card-inf"><div class="card-tag">Entrada y salida</div><div class="card-tit">input() siempre devuelve str &mdash; convert&iacute; antes de operar</div></div></div>
+    <div class="card-body">
+      <div class="anal"><div class="an-ico">&#127989;</div><div>input() es como cuando el operador ingresa manualmente la temperatura de una zona al cuaderno de registro. <b>Siempre lo recibe como texto</b>, aunque sea un n&uacute;mero. Tu trabajo es convertirlo.</div></div>
+      <div class="code"><span class="cm"># Dashboard de la maqueta — versión T1</span>
+zona        = <span class="fn">input</span>(<span class="st">"Nombre de la zona: "</span>)
+temperatura = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Temperatura (°C): "</span>))
+humedad     = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Humedad (%): "</span>))
+
+<span class="cm"># Mostrar resultados con f-strings</span>
+<span class="fn">print</span>(<span class="st">"=" * 40</span>)
+<span class="fn">print</span>(<span class="st">f"  ZONA: {zona.upper()}"</span>)
+<span class="fn">print</span>(<span class="st">f"  Temperatura: {temperatura:.1f} °C"</span>)  <span class="cm"># :.1f = 1 decimal</span>
+<span class="fn">print</span>(<span class="st">f"  Humedad:     {humedad:.1f} %"</span>)
+<span class="fn">print</span>(<span class="st">"=" * 40</span>)</div>
+      <div class="demo">
+        <div class="demo-lbl">&#9654; Prob&aacute; el dashboard en vivo</div>
+        <div class="demo-row">
+          <div class="demo-grp"><div class="demo-gl">Zona</div>
+            <select style="background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--mono);font-size:13px;padding:7px 10px;border-radius:6px;outline:none;" id="dZona">
+              <option>Living</option><option>Dormitorio</option><option>Cocina</option><option>Ba&ntilde;o</option>
+            </select>
+          </div>
+          <div class="demo-grp"><div class="demo-gl">Temp (°C)</div><input class="demo-in" id="dTemp" type="number" value="22.5" step="0.5"></div>
+          <div class="demo-grp"><div class="demo-gl">Humedad (%)</div><input class="demo-in" id="dHum" type="number" value="58" step="1" min="0" max="100"></div>
+          <button class="demo-btn" onclick="demoIO()">&#9654; Dashboard</button>
+        </div>
+        <div class="demo-out" id="ioOut">Complet&aacute; los campos y ejecut&aacute;.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OPERADORES ═══════════════════════════════════════ -->
+<section id="operadores">
+  <div class="s-eye">// M&oacute;dulo 04</div>
+  <h2 class="s-h2">Operadores</h2>
+  <p class="s-sub">Los s&iacute;mbolos que hacen c&aacute;lculos, comparan valores y combinan condiciones. Tres familias.</p>
+  <div class="div"></div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#10133;</div><div class="card-inf"><div class="card-tag">Familia 1</div><div class="card-tit">Operadores aritm&eacute;ticos</div></div></div>
+    <div class="card-body">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Op.</th><th>Nombre</th><th>Ejemplo dom&oacute;tica</th><th>Resultado</th></tr></thead><tbody>
+        <tr><td><code>+</code></td><td>Suma</td><td><code>22.5 + 0.5</code></td><td>23.0</td></tr>
+        <tr><td><code>-</code></td><td>Resta</td><td><code>temp - umbral</code></td><td>diferencia en °C</td></tr>
+        <tr><td><code>*</code></td><td>Multiplicaci&oacute;n</td><td><code>watts * horas</code></td><td>kWh consumidos</td></tr>
+        <tr><td><code>/</code></td><td>Divisi&oacute;n (float)</td><td><code>suma_temps / 3</code></td><td>promedio °C</td></tr>
+        <tr><td><code>//</code></td><td>Divisi&oacute;n entera</td><td><code>minutos // 60</code></td><td>horas completas</td></tr>
+        <tr><td><code>%</code></td><td>M&oacute;dulo (resto)</td><td><code>minutos % 60</code></td><td>minutos restantes</td></tr>
+        <tr><td><code>**</code></td><td>Potencia</td><td><code>3 ** 2</code></td><td>9</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#9878;&#65039;</div><div class="card-inf"><div class="card-tag">Familia 2 &amp; 3</div><div class="card-tit">Comparaci&oacute;n y l&oacute;gicos &mdash; la base de las decisiones</div></div></div>
+    <div class="card-body">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Op.</th><th>Significado</th><th>Ejemplo (temp=22.5)</th><th>Resultado</th></tr></thead><tbody>
+        <tr><td><code>==</code></td><td>&iquest;Iguales?</td><td><code>temp == 26.0</code></td><td><span class="ch ch-re">False</span></td></tr>
+        <tr><td><code>!=</code></td><td>&iquest;Distintos?</td><td><code>temp != 26.0</code></td><td><span class="ch ch-gr">True</span></td></tr>
+        <tr><td><code>&gt;</code></td><td>&iquest;Mayor?</td><td><code>temp > 20.0</code></td><td><span class="ch ch-gr">True</span></td></tr>
+        <tr><td><code>&lt;</code></td><td>&iquest;Menor?</td><td><code>temp < 30.0</code></td><td><span class="ch ch-gr">True</span></td></tr>
+        <tr><td><code>and</code></td><td>Ambas True</td><td><code>temp &gt; 16 and temp &lt;= 26</code></td><td><span class="ch ch-gr">True</span> (rango confort)</td></tr>
+        <tr><td><code>or</code></td><td>Al menos una True</td><td><code>temp &gt; 30 or hum &gt; 80</code></td><td>cualquier alarma</td></tr>
+        <tr><td><code>not</code></td><td>Invierte</td><td><code>not ventilador_on</code></td><td>el ventilador est&aacute; apagado</td></tr>
+      </tbody></table></div>
+      <div class="alerta"><b>= vs ==:</b> <code>ventilador_on = True</code> enciende el ventilador (asigna). <code>ventilador_on == True</code> pregunta si ya est&aacute; encendido (compara). Los confund&iacute;s &rarr; el programa no hace lo que esper&aacute;s.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IF / ELIF / ELSE ═════════════════════════════════ -->
+<section id="if">
+  <div class="s-eye">// M&oacute;dulo 05</div>
+  <h2 class="s-h2">if / elif / else</h2>
+  <p class="s-sub">La selecci&oacute;n: el programa eval&uacute;a una condici&oacute;n y toma un camino. Solo uno.</p>
+  <div class="div"></div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#127777;&#65039;</div><div class="card-inf"><div class="card-tag">Estructura de selecci&oacute;n</div><div class="card-tit">Clasificador de temperatura de la maqueta</div></div></div>
+    <div class="card-body">
+      <div class="anal"><div class="an-ico">&#128678;</div><div>El if eval&uacute;a de arriba hacia abajo y ejecuta <b>solo el primer bloque verdadero</b>. El resto se saltea. Es como un termostato que revisa rangos de temperatura en orden.</div></div>
+      <div class="code"><span class="cm"># Clasificador de temperatura para la maqueta</span>
+temperatura = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Temperatura (°C): "</span>))
+
+<span class="kw">if</span> temperatura > <span class="nm">30.0</span>:
+    <span class="fn">print</span>(<span class="st">"🔴 ALARMA — activar sistema de enfriamiento"</span>)
+    ventilador_on = <span class="kw">True</span>
+
+<span class="kw">elif</span> temperatura > <span class="nm">26.0</span>:
+    <span class="fn">print</span>(<span class="st">"🟡 CALOR — temperatura elevada"</span>)
+    ventilador_on = <span class="kw">True</span>
+
+<span class="kw">elif</span> temperatura >= <span class="nm">16.0</span>:
+    <span class="fn">print</span>(<span class="st">"🟢 CONFORT — temperatura ideal"</span>)
+    ventilador_on = <span class="kw">False</span>
+
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"🔵 FRÍO — activar calefacción"</span>)
+    ventilador_on = <span class="kw">False</span></div>
+      <div class="nota"><b>La indentaci&oacute;n (sangr&iacute;a) es obligatoria.</b> Todo el c&oacute;digo dentro de un bloque if lleva 4 espacios. En VS Code al escribir el <code>:</code> y presionar Enter, Python lo hace autom&aacute;tico.</div>
+
+      <div class="if-viz">
+        <div class="demo-lbl">&#9654; Traz&aacute; el if &mdash; cu&aacute;l bloque se ejecuta?</div>
+        <div class="if-block" id="ib1"><div class="if-kw">if</div><div class="if-cond">temperatura &gt; 30.0</div><div class="if-res" id="ir1">&rarr;</div></div>
+        <div class="if-block" id="ib2"><div class="if-kw">elif</div><div class="if-cond">temperatura &gt; 26.0</div><div class="if-res" id="ir2">&rarr;</div></div>
+        <div class="if-block" id="ib3"><div class="if-kw">elif</div><div class="if-cond">temperatura &gt;= 16.0</div><div class="if-res" id="ir3">&rarr;</div></div>
+        <div class="if-block" id="ib4"><div class="if-kw">else</div><div class="if-cond">cualquier otro caso</div><div class="if-res" id="ir4">&rarr;</div></div>
+        <div class="demo-row" style="margin-top:12px;">
+          <div class="demo-grp"><div class="demo-gl">Temperatura (°C)</div><input class="demo-in" id="ifVal" type="number" value="22" step="1"></div>
+          <button class="demo-btn" onclick="demoIf()">&#9654; Trazar</button>
+        </div>
+        <div class="demo-out" id="ifOut">Ingres&aacute; una temperatura y traz&aacute;.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOR ══════════════════════════════════════════════ -->
+<section id="for">
+  <div class="s-eye">// M&oacute;dulo 06</div>
+  <h2 class="s-h2">Bucle for &mdash; iteraci&oacute;n</h2>
+  <p class="s-sub">La iteraci&oacute;n determinada: repet&iacute; cuando sab&eacute;s exactamente cu&aacute;ntas veces.</p>
+  <div class="div"></div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128260;</div><div class="card-inf"><div class="card-tag">Iteraci&oacute;n determinada</div><div class="card-tit">for en la dom&oacute;tica &mdash; recorrer zonas y lecturas</div></div></div>
+    <div class="card-body">
+      <div class="anal"><div class="an-ico">&#128203;</div><div>En la maqueta queremos revisar <b>cada zona</b> en orden. El for es perfecto para eso: recorre una lista o un rango, una vez por elemento, en orden, y sabe cu&aacute;ndo terminó.</div></div>
+      <div class="code"><span class="cm"># Recorrer las zonas de la maqueta</span>
+zonas = [<span class="st">"Living"</span>, <span class="st">"Dormitorio"</span>, <span class="st">"Cocina"</span>, <span class="st">"Baño"</span>]
+
+<span class="kw">for</span> zona <span class="kw">in</span> zonas:
+    <span class="fn">print</span>(<span class="st">f"Revisando: {zona}"</span>)
+
+<span class="cm"># Con range() — las 3 formas</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">4</span>):           <span class="cm"># 0, 1, 2, 3</span>
+    <span class="fn">print</span>(<span class="st">f"Sensor {i}: OK"</span>)
+
+<span class="kw">for</span> hora <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">8</span>, <span class="nm">22</span>):     <span class="cm"># horas del día: 8 a 21</span>
+    <span class="fn">print</span>(<span class="st">f"Hora {hora}:00 — monitoreando"</span>)
+
+<span class="cm"># Acumulador — promedio de temperatura</span>
+lecturas = [<span class="nm">22.5</span>, <span class="nm">24.0</span>, <span class="nm">21.8</span>, <span class="nm">23.3</span>]
+total = <span class="nm">0</span>
+<span class="kw">for</span> t <span class="kw">in</span> lecturas:
+    total += t
+promedio = total / <span class="fn">len</span>(lecturas)
+<span class="fn">print</span>(<span class="st">f"Temperatura promedio: {promedio:.1f} °C"</span>)</div>
+
+      <div class="demo">
+        <div class="demo-lbl">&#9654; Simul&aacute; el monitoreo por horas</div>
+        <div class="demo-row">
+          <div class="demo-grp"><div class="demo-gl">Temp. inicial (°C)</div><input class="demo-in" id="fTemp" type="number" value="21.0" step="0.5"></div>
+          <div class="demo-grp"><div class="demo-gl">Sube por hora (°C)</div><input class="demo-in" id="fSube" type="number" value="0.8" step="0.1"></div>
+          <div class="demo-grp"><div class="demo-gl">Horas a simular</div><input class="demo-in" id="fHoras" type="number" value="8" step="1" min="1" max="24"></div>
+          <button class="demo-btn" onclick="demoFor()">&#9654; Simular</button>
+        </div>
+        <div class="demo-out" id="forOut">Configur&aacute; y simul&aacute;.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHILE ════════════════════════════════════════════ -->
+<section id="while">
+  <div class="s-eye">// M&oacute;dulo 07</div>
+  <h2 class="s-h2">Bucle while &mdash; iteraci&oacute;n indeterminada</h2>
+  <p class="s-sub">Repet&iacute; mientras se cumpla una condici&oacute;n. No sab&eacute;s de antemano cu&aacute;ntas veces.</p>
+  <div class="div"></div>
+
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#8987;</div><div class="card-inf"><div class="card-tag">Iteraci&oacute;n indeterminada</div><div class="card-tit">El coraz&oacute;n del sistema de monitoreo</div></div></div>
+    <div class="card-body">
+      <div class="anal"><div class="an-ico">&#128161;</div><div>Un sistema de dom&oacute;tica real nunca para. El <code>while True</code> es el latido: medir &rarr; decidir &rarr; actuar &rarr; esperar &rarr; repetir. En Python simulamos esto con un while que itera hasta que el usuario dice "salir".</div></div>
+      <div class="code"><span class="cm"># Simulación del bucle de monitoreo continuo</span>
+umbral = <span class="nm">26.0</span>
+
+<span class="kw">while</span> <span class="kw">True</span>:
+    zona        = <span class="fn">input</span>(<span class="st">"Zona (o 'salir'): "</span>)
+    <span class="kw">if</span> zona == <span class="st">"salir"</span>:
+        <span class="kw">break</span>                    <span class="cm"># sale del while</span>
+
+    temperatura = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Temperatura (°C): "</span>))
+
+    <span class="kw">if</span> temperatura > umbral:
+        <span class="fn">print</span>(<span class="st">f"🔴 {zona}: {temperatura}°C — ALERTA"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="st">f"🟢 {zona}: {temperatura}°C — OK"</span>)
+
+<span class="fn">print</span>(<span class="st">"Sistema de monitoreo cerrado."</span>)
+
+<span class="cm"># while con condición — esperar hasta alcanzar la temperatura</span>
+temp_actual = <span class="nm">12.0</span>
+<span class="kw">while</span> temp_actual < <span class="nm">20.0</span>:
+    <span class="fn">print</span>(<span class="st">f"Calentando... {temp_actual}°C"</span>)
+    temp_actual += <span class="nm">1.5</span>        <span class="cm"># simula el calefactor</span>
+<span class="fn">print</span>(<span class="st">"✓ Temperatura de confort alcanzada"</span>)</div>
+
+      <div class="demo">
+        <div class="demo-lbl">&#9654; Simul&aacute; el calentamiento hasta confort</div>
+        <div class="demo-row">
+          <div class="demo-grp"><div class="demo-gl">Temp. inicial (°C)</div><input class="demo-in" id="wTemp" type="number" value="10" step="1"></div>
+          <div class="demo-grp"><div class="demo-gl">Objetivo (°C)</div><input class="demo-in" id="wObj" type="number" value="20" step="1"></div>
+          <div class="demo-grp"><div class="demo-gl">Sube/ciclo (°C)</div><input class="demo-in" id="wSube" type="number" value="1.5" step="0.5" min="0.1"></div>
+          <button class="demo-btn" onclick="demoWhile()">&#9654; Simular</button>
+        </div>
+        <div class="demo-out" id="whileOut">Configur&aacute; y simul&aacute;.</div>
+      </div>
+
+      <div class="alerta"><b>Peligro: loop infinito.</b> Si la condici&oacute;n del while nunca se vuelve False y no hay un break, el programa se cuelga. En el simulador podemos parar con Ctrl+C. En un sistema real, siempre agreg&aacute; una condici&oacute;n de salida.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TECNOLOGÍA DE CONTROL ════════════════════════════ -->
+<section id="tcontrol">
+  <div class="s-eye" style="color:var(--or);">// Materia articulada</div>
+  <h2 class="s-h2">Tecnolog&iacute;a de Control</h2>
+  <p class="s-sub">La otra cara del proyecto: mientras programamos en Python, en Tecnolog&iacute;a de Control aprendemos el hardware que hace todo posible.</p>
+  <div class="div div-or"></div>
+
+  <div class="card card-or open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#128268;</div><div class="card-inf"><div class="card-tag">Fundamento</div><div class="card-tit">Sistemas de control &mdash; qu&eacute; son y c&oacute;mo se clasifican</div></div></div>
+    <div class="card-body">
+      <div class="anal or"><div class="an-ico">&#128260;</div><div>Un <b>sistema de control</b> toma una medida del mundo real (señal de entrada), la compara con un valor deseado (variable de referencia o setpoint) y genera una señal de salida hacia un actuador para modificar la <b>variable controlada</b> y reducir el error (señal de desviación).</div></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Concepto</th><th>Definici&oacute;n</th><th>Ejemplo en la maqueta</th></tr></thead><tbody>
+        <tr><td><span class="ch ch-or">Variable controlada</span></td><td>La condici&oacute;n f&iacute;sica que queremos mantener o cambiar</td><td>Temperatura de la habitaci&oacute;n</td></tr>
+        <tr><td><span class="ch ch-or">Se&ntilde;al de referencia</span></td><td>El valor deseado (setpoint) que fijamos</td><td>Termostato a 22&deg;C</td></tr>
+        <tr><td><span class="ch ch-gr">Accionamiento</span></td><td>C&oacute;mo operamos el sistema</td><td><b>Manual:</b> prender bot&oacute;n. <b>Autom&aacute;tico:</b> for/while en Python.</td></tr>
+      </tbody></table></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Tipo de Lazo</th><th>Caracter&iacute;stica</th><th>Ejemplo en la maqueta</th></tr></thead><tbody>
+        <tr><td><span class="ch ch-am">Lazo abierto</span></td><td>Act&uacute;a sin medir el resultado</td><td>Encender el calefactor por 15 minutos sin revisar temperatura.</td></tr>
+        <tr><td><span class="ch ch-gr">Lazo cerrado</span></td><td>Mide, compara y corrige autom&aacute;ticamente</td><td>Encender calefactor hasta llegar exactamente a 20&deg;C.</td></tr>
+        <tr><td><span class="ch ch-bl">Control ON/OFF</span></td><td>Solo dos estados: encendido o apagado</td><td>Ventilador: ON si temp&gt;26&deg;C, OFF si temp&lt;=26&deg;C</td></tr>
+      </tbody></table></div>
+      <div class="mision or">
+        <div class="mision-hdr"><span class="mision-num">Conexi&oacute;n con Programaci&oacute;n</span><span class="mision-tit">El control ON/OFF en Python</span></div>
+        <p>El if/elif/else que aprendimos en Programaci&oacute;n <b>es</b> el controlador ON/OFF. Cuando la temperatura supera el umbral &rarr; if activa el ventilador. Cuando baja &rarr; else lo apaga. Es lazo cerrado implementado en software.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-or open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#128267;</div><div class="card-inf"><div class="card-tag">Hardware</div><div class="card-tit">Sensores &mdash; c&oacute;mo mide el sistema</div></div></div>
+    <div class="card-body">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Sensor</th><th>Mide</th><th>Salida</th><th>Uso en la maqueta</th></tr></thead><tbody>
+        <tr><td><span class="ch ch-or">DHT22</span></td><td>Temperatura + Humedad</td><td>Digital</td><td>Sensor principal por habitaci&oacute;n</td></tr>
+        <tr><td><span class="ch ch-or">DS18B20</span></td><td>Temperatura en l&iacute;quidos</td><td>Digital</td><td>Control de agua de caldera</td></tr>
+        <tr><td><span class="ch ch-bl">HC-SR04 (Ultras&oacute;nico)</span></td><td>Distancia / Nivel / Posici&oacute;n</td><td>Digital</td><td>Medir nivel del tanque de agua</td></tr>
+        <tr><td><span class="ch ch-bl">PIR e Infrarrojos</span></td><td>Movimiento / Proximidad</td><td>Digital (0 o 1)</td><td>Detectar personas en la habitaci&oacute;n</td></tr>
+        <tr><td><span class="ch ch-am">Inductivo / Capacitivo</span></td><td>Proximidad materiales</td><td>Digital industrial</td><td>Detecci&oacute;n de metales / puertas</td></tr>
+        <tr><td><span class="ch ch-gr">LDR</span></td><td>Luz (Luminosidad)</td><td>Anal&oacute;gica</td><td>Automatizaci&oacute;n de persianas exterior</td></tr>
+        <tr><td><span class="ch ch-gr">Presi&oacute;n y Caudal</span></td><td>Caudal / Presi&oacute;n</td><td>Anal&oacute;gica/Digital</td><td>Flujo en ca&ntilde;er&iacute;as de calefacci&oacute;n</td></tr>
+      </tbody></table></div>
+      <div class="nota"><b>Sensor anal&oacute;gico vs digital:</b> un sensor anal&oacute;gico devuelve un rango continuo de voltaje (ej: 0 a 3.3V). El ESP32 lo convierte a un n&uacute;mero del 0 al 4095 con su ADC (convertidor anal&oacute;gico-digital). Un sensor digital ya env&iacute;a el valor num&eacute;rico directamente.</div>
+    </div>
+  </div>
+
+  <div class="card card-or open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#9889;</div><div class="card-inf"><div class="card-tag">Hardware</div><div class="card-tit">Actuadores &mdash; c&oacute;mo act&uacute;a el sistema</div></div></div>
+    <div class="card-body">
+      <div class="anal or"><div class="an-ico">&#129302;</div><div>El actuador es el "m&uacute;sculo" del sistema: ejecuta la decisi&oacute;n que tom&oacute; el programa. El sensor lee temperatura, el programa decide, el actuador (ventilador, rel&eacute;) act&uacute;a.</div></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Actuador</th><th>Tipo</th><th>C&oacute;mo se controla</th><th>Uso en la maqueta</th></tr></thead><tbody>
+        <tr><td><span class="ch ch-or">LED</span></td><td>Indicador visual</td><td>Pin digital: HIGH (enciende), LOW (apaga)</td><td>Alarma visual de temperatura</td></tr>
+        <tr><td><span class="ch ch-or">Buzzer</span></td><td>Indicador sonoro</td><td>Pin digital o PWM</td><td>Alarma ac&uacute;stica</td></tr>
+        <tr><td><span class="ch ch-am">Rel&eacute;</span></td><td>Interruptor electr&oacute;nico</td><td>Pin digital: activa cargas de 220V</td><td>Controlar ventilador real o calefactor</td></tr>
+        <tr><td><span class="ch ch-am">Motor DC</span></td><td>Movimiento rotativo</td><td>PWM + puente H (L298N)</td><td>Ventilador, persiana motorizada</td></tr>
+        <tr><td><span class="ch ch-bl">Servo</span></td><td>Posici&oacute;n angular</td><td>PWM (0&deg; a 180&deg;)</td><td>Apertura de ventana, persiana</td></tr>
+      </tbody></table></div>
+    </div>
+  </div>
+
+  <div class="card card-or">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#128268;</div><div class="card-inf"><div class="card-tag">ESP32</div><div class="card-tit">La plataforma que conecta todo</div></div></div>
+    <div class="card-body">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Caracter&iacute;stica</th><th>ESP32</th></tr></thead><tbody>
+        <tr><td>Microcontrolador</td><td>Doble n&uacute;cleo a 240 MHz, WiFi / Bluetooth integrados.</td></tr>
+        <tr><td>Pines (GPIO)</td><td>M&aacute;s de 30 pines configurables como entrada/salida.</td></tr>
+        <tr><td>Pines anal&oacute;gicos</td><td>M&uacute;ltiples canales ADC de 12-bit (0-4095).</td></tr>
+        <tr><td>Tensi&oacute;n de trabajo</td><td>3.3V (pines y sensores).</td></tr>
+        <tr><td>Lenguaje</td><td>C++ (Arduino IDE) / Python (MicroPython)</td></tr>
+        <tr><td>Conexi&oacute;n con Python</td><td>Wi-Fi o Serie &rarr; Python en la PC.</td></tr>
+      </tbody></table></div>
+      <div class="code"><span class="cm">// C&oacute;digo C++ para ESP32 &mdash; referencia b&aacute;sica</span>
+<span class="cm">// setup() se ejecuta UNA VEZ al encender</span>
+<span class="kw">void</span> setup() {
+  <span class="fn">pinMode</span>(<span class="nm">2</span>, OUTPUT);     <span class="cm">// pin 2 = LED integrado ESP32</span>
+  Serial.<span class="fn">begin</span>(<span class="nm">115200</span>);   <span class="cm">// comunicaci&oacute;n serie</span>
+}
+
+<span class="cm">// loop() se repite PARA SIEMPRE (como while True en Python)</span>
+<span class="kw">void</span> loop() {
+  <span class="kw">float</span> temperatura = dht.<span class="fn">readTemperature</span>();
+  <span class="kw">if</span> (temperatura > <span class="nm">26.0</span>) {
+    <span class="fn">digitalWrite</span>(<span class="nm">2</span>, HIGH);   <span class="cm">// enciende LED</span>
+  } <span class="kw">else</span> {
+    <span class="fn">digitalWrite</span>(<span class="nm">2</span>, LOW);    <span class="cm">// apaga LED</span>
+  }
+}</div>
+      <div class="tip">&#128161; El puente de mando: El ESP32 interact&uacute;a directamente con los sensores haciendo uso de C++, mientras que nuestra estaci&oacute;n base en Python funciona en la PC y procesa los datos enviando &oacute;rdenes por red o cable a este ESP32. Ambas l&oacute;gicas (if, while) son id&eacute;nticas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUIZ ══════════════════════════════════════════════ -->
+<section id="quiz">
+  <div class="s-eye">// Autoevaluaci&oacute;n</div>
+  <h2 class="s-h2">Quiz &mdash; preparaci&oacute;n para la evaluaci&oacute;n</h2>
+  <p class="s-sub">15 preguntas sobre todo el T1, contextualizadas en el proyecto de dom&oacute;tica. Feedback inmediato.</p>
+  <div class="div"></div>
+  <div class="nom-row">
+    <span class="nom-lbl">Tu nombre:</span>
+    <input class="nom-in" id="nomQuiz" type="text" placeholder="Apellido, Nombre" autocomplete="name">
+  </div>
+  <div id="qContainer"></div>
+  <div class="score" id="scoreBox">
+    <div class="sc-n" id="scN">0/15</div>
+    <div class="sc-msg" id="scMsg">&mdash;</div>
+    <div class="sc-sub" id="scSub">&mdash;</div>
+    <div class="send-box" id="sendBox">
+      <div class="send-txt">Hac&eacute; clic para enviarle el resumen al profe. Incluye tu nombre, puntaje y detalle de cada respuesta.</div>
+      <button class="send-btn" id="sendBtn" onclick="enviarQuiz()">&#128231; Enviar al Profesor</button>
+      <div class="send-ok" id="sendOk"></div>
+    </div>
+    <button class="retry-btn" onclick="resetQuiz()">&#8634; Intentar de nuevo</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Taller de Programaci&oacute;n y Dom&oacute;tica &middot; Ciclo Superior &middot; <b>Escuela Industrial N&deg;9 "15 de Noviembre" &middot; El Calafate</b><br>
+  <b>Prof. Pablo Limardo &middot; Departamento ACPI &middot; Ciclo 2026</b>
+</footer>
+
+<script>
+const SECS=['proyecto','recorrido','variables','tipos','io','operadores','if','for','while','tcontrol','quiz'];
+function ir(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
+function tog(hdr){hdr.closest('.card').classList.toggle('open');}
+window.addEventListener('scroll',()=>{
+  for(const id of [...SECS].reverse()){
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<=110){
+      document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+      const btn=document.querySelector(`.nb[onclick="ir('${id}')"]`);
+      if(btn)btn.classList.add('on');
+      break;
+    }
+  }
+});
+
+// SENSOR SIMULADOR
+function updateSensor(){
+  const t=parseFloat(document.getElementById('sliderTemp').value);
+  const h=parseFloat(document.getElementById('sliderHum').value);
+  document.getElementById('svTemp').textContent=t.toFixed(1);
+  document.getElementById('svHum').textContent=h.toFixed(1);
+  let estado,color;
+  if(t>30){estado='ALARMA';color='#ef4444';}
+  else if(t>26){estado='CALOR';color='#f59e0b';}
+  else if(t>=16){estado='CONFORT';color='#22d3a0';}
+  else{estado='FRIO';color='#60a5fa';}
+  const el=document.getElementById('svEstado');
+  el.textContent=(estado==='CONFORT'?'🟢':estado==='CALOR'?'🟡':estado==='ALARMA'?'🔴':'🔵')+' '+estado;
+  el.style.color=color;
+  document.getElementById('sensorCode').textContent=
+    'temperatura = '+t.toFixed(1)+'\n'+
+    'humedad     = '+h.toFixed(1)+'\n\n'+
+    (t>30?'if temperatura > 30.0:\n    estado = "ALARMA"  # ← EJECUTA':
+    t>26?'elif temperatura > 26.0:\n    estado = "CALOR"   # ← EJECUTA':
+    t>=16?'elif temperatura >= 16.0:\n    estado = "CONFORT" # ← EJECUTA':
+    'else:\n    estado = "FRIO"    # ← EJECUTA');
+}
+updateSensor();
+
+// DEMOS
+function demoIO(){
+  const z=document.getElementById('dZona').value;
+  const t=parseFloat(document.getElementById('dTemp').value)||0;
+  const h=parseFloat(document.getElementById('dHum').value)||0;
+  let estado=t>30?'ALARMA':t>26?'CALOR':t>=16?'CONFORT':'FRIO';
+  document.getElementById('ioOut').textContent=
+    '========================================\n'+
+    '  ZONA: '+z.toUpperCase()+'\n'+
+    '  Temperatura: '+t.toFixed(1)+' °C\n'+
+    '  Humedad:     '+h.toFixed(1)+' %\n'+
+    '  Estado:      '+estado+'\n'+
+    '========================================';
+}
+
+function demoIf(){
+  const t=parseFloat(document.getElementById('ifVal').value)||0;
+  const b1=document.getElementById('ib1'),b2=document.getElementById('ib2');
+  const b3=document.getElementById('ib3'),b4=document.getElementById('ib4');
+  const r1=document.getElementById('ir1'),r2=document.getElementById('ir2');
+  const r3=document.getElementById('ir3'),r4=document.getElementById('ir4');
+  [b1,b2,b3,b4].forEach(b=>b.classList.remove('activo','skip'));
+  let out='',col='';
+  if(t>30){
+    b1.classList.add('activo');[b2,b3,b4].forEach(b=>b.classList.add('skip'));
+    r1.textContent='EJECUTA';r2.textContent='saltea';r3.textContent='saltea';r4.textContent='saltea';
+    out='ALARMA — activar sistema de enfriamiento';col='#ef4444';
+  }else if(t>26){
+    b1.classList.add('skip');b2.classList.add('activo');[b3,b4].forEach(b=>b.classList.add('skip'));
+    r1.textContent='False';r2.textContent='EJECUTA';r3.textContent='saltea';r4.textContent='saltea';
+    out='CALOR — temperatura elevada';col='#f59e0b';
+  }else if(t>=16){
+    [b1,b2].forEach(b=>b.classList.add('skip'));b3.classList.add('activo');b4.classList.add('skip');
+    r1.textContent='False';r2.textContent='False';r3.textContent='EJECUTA';r4.textContent='saltea';
+    out='CONFORT — temperatura ideal';col='var(--gr)';
+  }else{
+    [b1,b2,b3].forEach(b=>b.classList.add('skip'));b4.classList.add('activo');
+    r1.textContent='False';r2.textContent='False';r3.textContent='False';r4.textContent='EJECUTA';
+    out='FRIO — activar calefaccion';col='#60a5fa';
+  }
+  const el=document.getElementById('ifOut');el.style.color=col;el.textContent=out;
+}
+
+function demoFor(){
+  const h=Math.min(parseInt(document.getElementById('fHoras').value)||8,24);
+  const s=parseFloat(document.getElementById('fSube').value)||0.8;
+  const ti=parseFloat(document.getElementById('fTemp').value)||21;
+  let t=ti,lines=[],sum=0;
+  for(let hora=1;hora<=h;hora++){
+    t+=s;sum+=t;
+    const est=t>30?'ALARMA':t>26?'CALOR':t>=16?'CONFORT':'FRIO';
+    lines.push('Hora '+String(hora).padStart(2,' ')+': '+t.toFixed(1)+' °C  ['+est+']');
+  }
+  lines.push('');
+  lines.push('Promedio: '+(sum/h).toFixed(1)+' °C');
+  document.getElementById('forOut').textContent=lines.join('\n');
+}
+
+function demoWhile(){
+  let t=parseFloat(document.getElementById('wTemp').value)||10;
+  const obj=parseFloat(document.getElementById('wObj').value)||20;
+  const s=parseFloat(document.getElementById('wSube').value)||1.5;
+  if(t>=obj){document.getElementById('whileOut').textContent='La temperatura ya alcanzó el objetivo.';return;}
+  let ciclos=0,lines=[];
+  while(t<obj&&ciclos<60){t=Math.min(t+s,obj);ciclos++;lines.push('Ciclo '+ciclos+': '+t.toFixed(1)+' °C');}
+  lines.push('✓ Objetivo '+obj+' °C alcanzado en '+ciclos+' ciclo(s).');
+  document.getElementById('whileOut').textContent=lines.join('\n');
+}
+
+// QUIZ
+const Qs=[
+  {t:'Variables',q:'¿Qué hace esta línea?',c:'ventilador_on = True',
+   o:['Compara ventilador_on con True','Guarda el valor True en la variable ventilador_on','Muestra True en pantalla','Crea una constante'],
+   r:1,fb:'El = en Python ASIGNA. Guarda True en la variable. Para comparar si ya vale True se usa ==.'},
+  {t:'Tipos',q:'El sensor DHT22 devuelve "22.5" como texto. ¿Qué hacemos para operar con ese valor?',c:null,
+   o:['Nada, Python lo entiende solo','temperatura = float("22.5")','temperatura = int("22.5")','Es imposible convertirlo'],
+   r:1,fb:'float("22.5") convierte el string al número decimal 22.5. Sin esa conversión no podemos compararlo con el umbral.'},
+  {t:'Tipos',q:'¿Cuál es el tipo correcto para la variable zona = "Living"?',c:null,
+   o:['int','float','str','bool'],
+   r:2,fb:'str (string) es el tipo para texto. Las comillas simples o dobles indican que es un string.'},
+  {t:'Input/Print',q:'¿Qué imprime este código?',c:'zona = "cocina"\nprint(f"Zona: {zona.upper()}")',
+   o:['Zona: {zona.upper()}','Zona: cocina','Zona: COCINA','Error'],
+   r:2,fb:'El f-string reemplaza {zona.upper()} por el resultado: "cocina".upper() → "COCINA". La f antes de las comillas activa esa sustitución.'},
+  {t:'Input/Print',q:'¿Por qué necesitamos float() al usar input()?',c:'temp = float(input("Temperatura: "))',
+   o:['Para agregar decimales','Porque input() siempre devuelve str y no podemos compararlo como número','Para que funcione en todos los SO','No es necesario'],
+   r:1,fb:'input() SIEMPRE devuelve str. Si el usuario escribe 22.5, obtenemos "22.5" (texto). float() lo convierte al número 22.5 para poder compararlo con el umbral.'},
+  {t:'Operadores',q:'¿Qué devuelve esta expresión si temperatura = 22.5?',c:'temperatura > 16.0 and temperatura <= 26.0',
+   o:['False','True','Error','None'],
+   r:1,fb:'22.5 > 16.0 → True. 22.5 <= 26.0 → True. True and True = True. El and necesita que AMBAS condiciones sean True.'},
+  {t:'Operadores',q:'¿Cuál es la diferencia entre = y == en este contexto?',c:'ventilador_on = True    # línea A\nventilador_on == True   # línea B',
+   o:['Son lo mismo','Línea A enciende el ventilador (asigna). Línea B pregunta si está encendido (compara).','= solo se usa en matemáticas','== no existe en Python'],
+   r:1,fb:'= asigna un valor a la variable. == compara dos valores y devuelve True o False. Confundirlos es uno de los errores más frecuentes.'},
+  {t:'if/elif/else',q:'temperatura = 27.5. ¿Qué imprime este código?',c:'if temperatura > 30.0:\n    print("ALARMA")\nelif temperatura > 26.0:\n    print("CALOR")\nelif temperatura >= 16.0:\n    print("CONFORT")\nelse:\n    print("FRIO")',
+   o:['ALARMA','CALOR','CONFORT','ALARMA y CALOR'],
+   r:1,fb:'27.5 > 30.0 → False (no entra). 27.5 > 26.0 → True → imprime CALOR y sale. El if/elif evalúa de arriba hacia abajo y ejecuta solo el primer bloque verdadero.'},
+  {t:'if/elif/else',q:'¿Qué pasa si ningún if ni elif es verdadero y no hay else?',c:'if temperatura > 30.0:\n    print("ALARMA")\nelif temperatura > 26.0:\n    print("CALOR")',
+   o:['Error de Python','El programa se cuelga','No imprime nada y continúa normalmente','Imprime None'],
+   r:2,fb:'El else es opcional. Si no hay ninguna condición verdadera y no hay else, simplemente no se ejecuta nada y el programa sigue adelante.'},
+  {t:'for',q:'¿Qué imprime este código?',c:'zonas = ["Living", "Cocina", "Baño"]\nfor z in zonas:\n    print(z)',
+   o:['Imprime los índices 0 1 2','Imprime Living, Cocina, Baño en líneas separadas','Imprime ["Living", "Cocina", "Baño"]','Error'],
+   r:1,fb:'El for itera sobre cada elemento de la lista. En cada vuelta z vale el siguiente elemento y print(z) lo muestra.'},
+  {t:'for',q:'¿Para qué sirve el acumulador total = 0 antes del for?',c:'lecturas = [22.5, 24.0, 21.8]\ntotal = 0\nfor t in lecturas:\n    total += t\npromedio = total / len(lecturas)',
+   o:['Para reiniciar el for','Para ir sumando cada lectura y calcular el promedio al final','Para contar cuántas zonas hay','Para detener el loop'],
+   r:1,fb:'El acumulador empieza en 0 y con += suma cada valor en cada vuelta. Al final total = 22.5 + 24.0 + 21.8 = 68.3. Dividido 3 da el promedio.'},
+  {t:'while',q:'¿Cuándo se detiene este while?',c:'temp = 10.0\nwhile temp < 20.0:\n    temp += 1.5',
+   o:['Nunca, es infinito','Cuando temp llega a 20.0 o más','Cuando llega exactamente a 20.0','Después de 10 ciclos siempre'],
+   r:1,fb:'El while revisa la condición ANTES de cada ciclo. Cuando temp >= 20.0, la condición es False y el loop termina.'},
+  {t:'while',q:'¿Qué hace break dentro de un while True?',c:'while True:\n    zona = input("Zona (o salir): ")\n    if zona == "salir":\n        break',
+   o:['Rompe el programa con error','Sale del while inmediatamente sin importar la condición','Salta al próximo ciclo','Reinicia el programa'],
+   r:1,fb:'break termina el loop inmediatamente. En el monitoreo de la maqueta lo usamos para que el operador pueda salir del sistema escribiendo "salir".'},
+  {t:'Tecnología de Control',q:'¿Qué tipo de control implementa este código Python?',c:'if temperatura > 26.0:\n    ventilador_on = True\nelse:\n    ventilador_on = False',
+   o:['Control PID','Control ON/OFF (lazo cerrado)','Control en lazo abierto','No es un sistema de control'],
+   r:1,fb:'Es control ON/OFF en lazo cerrado: mide la temperatura, la compara con el umbral (26°C) y actúa (enciende o apaga el ventilador). Tiene retroalimentación.'},
+  {t:'General',q:'¿Cuál es el código correcto para leer temperatura, clasificarla y mostrar el resultado?',c:null,
+   o:[
+     `temp = input("Temp: ")\nif temp > 26: print("Calor")`,
+     `temp = float(input("Temp (°C): "))\nif temp > 30.0: print("Alarma")\nelif temp > 26.0: print("Calor")\nelif temp >= 16.0: print("Confort")\nelse: print("Frío")`,
+     `temp = int(input("Temp (°C): "))\nif temp > 26: print("Calor")`,
+     `temp = float("Temp (°C): ")\nif temp > 26: print("Calor")`
+   ],
+   r:1,fb:'float(input()) convierte la entrada a número decimal. El if/elif/else cubre los cuatro estados posibles con condiciones en orden descendente. Esta es la estructura del Guardián de la Habitación.'},
+];
+
+let resp=0,corr=0,sels=[];
+function buildQuiz(){
+  const c=document.getElementById('qContainer');
+  c.innerHTML='';resp=0;corr=0;sels=[];updProg();
+  document.getElementById('sendBox').classList.remove('show');
+  document.getElementById('sendOk').classList.remove('show');
+  const sb=document.getElementById('sendBtn');sb.disabled=false;sb.textContent='Enviar al Profesor';
+  Qs.forEach((q,i)=>{
+    const codeHtml=q.c?'<div class="qcode">'+q.c+'</div>':'';
+    const d=document.createElement('div');d.className='qcard';d.id='qc'+i;
+    d.innerHTML='<div class="qnum">// Q'+String(i+1).padStart(2,'0')+' · '+q.t+'</div>'
+      +'<div class="qq">'+q.q+'</div>'+codeHtml
+      +'<div class="qopts" id="qopts'+i+'"></div>'
+      +'<div class="qfb" id="qf'+i+'"></div>';
+    c.appendChild(d);
+    const optsDiv=document.getElementById('qopts'+i);
+    q.o.forEach((op,j)=>{
+      const btn=document.createElement('button');
+      btn.className='qopt';
+      btn.textContent=String.fromCharCode(65+j)+') '+op;
+      btn.addEventListener('click',()=>ans(i,j));
+      btn.id='qo'+i+'_'+j;
+      optsDiv.appendChild(btn);
+    });
+  });
+}
+function ans(qi,oi){
+  const q=Qs[qi];const ok=oi===q.r;
+  Qs[qi].o.forEach((_,j)=>{
+    const b=document.getElementById('qo'+qi+'_'+j);b.disabled=true;
+    if(j===q.r)b.classList.add('ca');
+    if(j===oi&&!ok)b.classList.add('in');
+  });
+  document.getElementById('qc'+qi).classList.add(ok?'ok':'mal');
+  const fb=document.getElementById('qf'+qi);
+  fb.className='qfb show '+(ok?'qfb-ok':'qfb-mal');
+  fb.textContent=(ok?'Correcto: ':'Incorrecto: ')+q.fb;
+  resp++;if(ok)corr++;sels[qi]=oi;updProg();
+  if(resp===Qs.length)setTimeout(showScore,600);
+}
+function updProg(){
+  const pct=Math.round((resp/Qs.length)*100);
+  document.getElementById('pb').style.width=pct+'%';
+  document.getElementById('pl').textContent='Quiz: '+resp+' / '+Qs.length+' · '+corr+' correctas';
+}
+function showScore(){
+  const p=corr/Qs.length;
+  const [msg,sub]=p>=.93?['Todo claro — el Guardián funciona','El proyecto del T1 va a salir perfecto.']:
+    p>=.73?['Muy bien — buen nivel','Revisá los conceptos donde erraste y volvé.']:
+    p>=.5?['Vas bien — seguí','La base está. Repasá los módulos donde erraste.']:
+    ['Repasá desde Variables','Empezá por el módulo 01 y avanzá de a uno.'];
+  document.getElementById('scN').textContent=corr+'/'+Qs.length;
+  document.getElementById('scMsg').textContent=msg;
+  document.getElementById('scSub').textContent=sub;
+  document.getElementById('scoreBox').classList.add('show');
+  document.getElementById('sendBox').classList.add('show');
+  document.getElementById('scoreBox').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function resetQuiz(){
+  document.getElementById('scoreBox').classList.remove('show');
+  buildQuiz();window.scrollTo({top:document.getElementById('quiz').offsetTop-80,behavior:'smooth'});
+}
+
+const ENDPOINT='TU_ENDPOINT_FORMSPREE';
+const MAIL='plimardo@gmail.com';
+function enviarQuiz(){
+  const nombre=document.getElementById('nomQuiz').value.trim();
+  if(!nombre){alert('Ingresá tu nombre antes de enviar.');document.getElementById('nomQuiz').focus();return;}
+  const resultado=corr+'/'+Qs.length;
+  const fecha=new Date().toLocaleString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  let det='';
+  Qs.forEach((q,i)=>{
+    const s=sels[i];const ok=s===q.r;
+    const sL=s!==undefined?String.fromCharCode(65+s):'?';
+    const oL=String.fromCharCode(65+q.r);
+    const qc=q.q.length>55?q.q.substring(0,55)+'...':q.q;
+    det+='Q'+String(i+1).padStart(2,'0')+' '+(ok?'OK':'XX')+' '+qc+'\n';
+    if(!ok)det+='     Eligio: '+sL+')  Correcta: '+oL+')\n';
+  });
+  const btn=document.getElementById('sendBtn');
+  const okEl=document.getElementById('sendOk');
+  btn.disabled=true;btn.textContent='Enviando...';
+  const asunto=encodeURIComponent('[Quiz Prog3] '+nombre+' - '+resultado);
+  const cuerpo=encodeURIComponent('Taller de Programacion 3\nAlumno: '+nombre+'\nFecha: '+fecha+'\nResultado: '+resultado+'\n\nDETALLE:\n'+det);
+  if(ENDPOINT==='TU_ENDPOINT_FORMSPREE'){
+    window.open('mailto:'+MAIL+'?subject='+asunto+'&body='+cuerpo,'_blank');
+    btn.textContent='Mail abierto';okEl.textContent='Se abrio el correo. Envia a '+MAIL+'.';okEl.classList.add('show');return;
+  }
+  fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'[Quiz Prog3] '+nombre+' - '+resultado,nombre,resultado,fecha,det})})
+  .then(r=>{if(r.ok){btn.textContent='Enviado';okEl.textContent='El prof. Limardo recibio el resumen de '+nombre+'.';}
+    else{window.open('mailto:'+MAIL+'?subject='+asunto+'&body='+cuerpo,'_blank');btn.textContent='Mail abierto';okEl.textContent='Abri el correo y envia a '+MAIL+'.';}
+    okEl.classList.add('show');})
+  .catch(()=>{window.open('mailto:'+MAIL+'?subject='+asunto+'&body='+cuerpo,'_blank');btn.textContent='Mail abierto';okEl.textContent='Abri el correo y envia a '+MAIL+'.';okEl.classList.add('show');});
+}
+
+function toggleTheme(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  if(dark){document.documentElement.removeAttribute('data-theme');document.getElementById('themeBtn').textContent='🌙 Oscuro';localStorage.setItem('tP3','light');}
+  else{document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ Claro';localStorage.setItem('tP3','dark');}
+}
+if(localStorage.getItem('tP3')==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ Claro';}
+
+buildQuiz();
+</script>
+</body>
+</html>
