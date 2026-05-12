@@ -45,72 +45,206 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);font-size:16p
 .pbar-lbl{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;}
 
 .hero{background:#0f2318;padding:44px 16px 36px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,.04);pointer-events:none;}
 .hero-in{max-width:900px;margin:0 auto;position:relative;z-index:2;}
-.hero-eye{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.eye-dot{width:6px;height:6px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);animation:pulse 2s ease infinite;}
+.hero-eye{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.eye-dot{width:6px;height:6px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);animation:pulse 2s ease infinite;flex-shrink:0;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 h1{font-size:clamp(24px,6vw,46px);font-weight:800;color:#fff;line-height:1.05;margin-bottom:10px;letter-spacing:-.5px;}
 .h-gr{color:#86efac;}.h-or{color:#fdba74;}
 .hero-desc{color:rgba(255,255,255,.5);font-size:14px;max-width:540px;margin-bottom:20px;}
 .hero-tags{display:flex;flex-wrap:wrap;gap:6px;}
-.tag{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);}
+.tag{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);}
+.tag-gr{border-color:rgba(134,239,172,.35);color:rgba(134,239,172,.85);}
+.tag-or{border-color:rgba(253,186,116,.3);color:rgba(253,186,116,.8);}
+.tag-bl{border-color:rgba(96,165,250,.3);color:rgba(96,165,250,.8);}
 
 nav{background:var(--card);border-bottom:2px solid var(--border);position:sticky;top:45px;z-index:90;}
 .nav-in{max-width:900px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;}
-.nb{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:10px 11px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
-.nb.on{color:var(--gr);border-bottom-color:var(--gr);}
+.nav-in::-webkit-scrollbar{height:0;}
+.nb{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:10px 11px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;}
+.nb:hover,.nb.on{color:var(--gr);border-bottom-color:var(--gr);}
 
 main{max-width:900px;margin:0 auto;padding:30px 16px 80px;}
 section{margin-bottom:60px;}
 .s-eye{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gr);margin-bottom:8px;}
 .s-h2{font-size:clamp(19px,3.5vw,27px);font-weight:800;color:var(--dk);margin-bottom:6px;}
-.s-sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
-.div{height:2px;background:linear-gradient(90deg,var(--gr),transparent);margin-bottom:22px;}
+.s-sub{color:var(--muted);font-size:14px;margin-bottom:20px;max-width:560px;}
+.div{height:2px;background:linear-gradient(90deg,var(--gr),transparent);border-radius:2px;margin-bottom:22px;}
+.div-or{background:linear-gradient(90deg,var(--or),transparent);}
 
-.card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:box-shadow .2s;}
+.card:hover{box-shadow:0 4px 14px rgba(22,101,52,.1);}
+.card.card-or:hover{box-shadow:0 4px 14px rgba(194,65,12,.1);}
 .card-hdr{display:grid;grid-template-columns:48px 1fr;cursor:pointer;min-height:54px;}
 .card-ico{display:flex;align-items:center;justify-content:center;font-size:18px;border-right:1.5px solid var(--border);}
+.ico-gr{background:var(--gr4);}
+.ico-am{background:var(--am4);}
+.ico-or{background:var(--or4);}
+.ico-bl{background:var(--bl4);}
+.ico-cy{background:var(--cy4);}
 .card-inf{padding:11px 15px;}
+.card-tag{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
 .card-tit{font-size:14px;font-weight:700;color:var(--dk);}
 .card-body{padding:2px 15px 16px;border-top:1.5px solid var(--border);display:none;}
 .card.open .card-body{display:block;}
+.card-body p{font-size:14px;color:var(--txt);margin:11px 0 5px;}
 
-.code{background:#0d1117;color:#e6edf3;border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:14px;margin:12px 0;white-space:pre-wrap;overflow-x:auto;border:1px solid rgba(255,255,255,0.1);}
-.cm{color:#8b949e;font-style:italic;}
+.code{background:#0d1117;color:#e6edf3;border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:14px;margin:12px 0;line-height:1.6;white-space:pre-wrap;overflow-x:auto;border:1px solid rgba(255,255,255,0.1);box-shadow:inset 0 1px 4px rgba(0,0,0,0.2);}
+.cm{color:#8b949e;font-style:italic;} 
 .kw{color:#ff7b72;font-weight:600;}
-.st{color:#a5d6ff;}.nm{color:#79c0ff;}.fn{color:#d2a8ff;}.op{color:#e6edf3;}
+.st{color:#a5d6ff;}.nm{color:#79c0ff;}.fn{color:#d2a8ff;font-weight:600;}.op{color:#e6edf3;}
 
-.anal{border-radius:8px;padding:12px 15px;margin:10px 0;display:flex;gap:10px;font-size:14px;background:var(--gr4);border-left:4px solid var(--gr);}
-.alerta{background:var(--am4);border-left:4px solid var(--am);padding:12px 15px;margin:10px 0;font-size:14px;}
-.tbl-wrap{width:100%;overflow-x:auto;margin:10px 0;border-radius:8px;border:1px solid var(--border);}
+.tbl-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;border-radius:8px;border:1px solid var(--border);}
 .tbl{width:100%;border-collapse:collapse;font-size:13px;}
-.tbl th{background:var(--bg2);padding:9px 12px;text-align:left;font-family:var(--mono);font-size:10px;}
+.tbl th{background:var(--bg2);color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 12px;text-align:left;border-bottom:1.5px solid var(--border);white-space:nowrap;}
 .tbl td{padding:9px 12px;border-bottom:1px solid var(--dim);}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--bg2);}
+.ch{display:inline-block;padding:2px 8px;border-radius:8px;font-family:var(--mono);font-size:10px;font-weight:600;}
+.ch-gr{background:var(--gr3);color:var(--gr2);}
+.ch-am{background:var(--am3);color:var(--am);}
+.ch-bl{background:var(--bl3);color:var(--bl);}
+.ch-re{background:var(--re3);color:var(--re);}
+.ch-or{background:var(--or3);color:var(--or);}
+.ch-cy{background:var(--cy3);color:var(--cy);}
 
-.mision{background:var(--gr4);border-left:5px solid var(--gr);border-radius:10px;padding:14px 17px;margin:12px 0;}
+.anal{border-radius:8px;padding:12px 15px;margin:10px 0;display:flex;gap:10px;font-size:14px;align-items:flex-start;background:var(--gr4);border-left:4px solid var(--gr);}
+.anal.or{background:var(--or4);border-left-color:var(--or);}
+.anal.bl{background:var(--bl4);border-left-color:var(--bl);}
+.an-ico{font-size:20px;flex-shrink:0;}
+
+.nota{background:var(--bl4);border:1.5px solid var(--bl3);border-left:4px solid var(--bl);border-radius:8px;padding:12px 15px;margin:10px 0;font-size:14px;}
+.nota b{color:var(--bl);}
+.alerta{background:var(--am4);border:1.5px solid var(--am3);border-left:4px solid var(--am);border-radius:8px;padding:12px 15px;margin:10px 0;font-size:14px;}
+.alerta b{color:var(--am);}
+.tip{background:var(--gr4);border:1.5px solid var(--gr3);border-left:4px solid var(--gr2);border-radius:7px;padding:10px 14px;margin:10px 0;font-size:13px;color:var(--gr2);}
+
+.mision{background:var(--gr4);border:1.5px solid var(--gr3);border-left:5px solid var(--gr);border-radius:10px;padding:14px 17px;margin:12px 0;}
+.mision.am{background:var(--am4);border-color:var(--am3);border-left-color:var(--am);}
+.mision.or{background:var(--or4);border-color:var(--or3);border-left-color:var(--or);}
+.mision.cy{background:var(--cy4);border-color:var(--cy3);border-left-color:var(--cy);}
 .mision-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.mision-num{font-family:var(--mono);font-size:9px;background:var(--gr3);color:var(--gr2);padding:2px 10px;border-radius:12px;}
-.mision-tit{font-size:15px;font-weight:700;}
+.mision-num{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;background:var(--gr3);color:var(--gr2);padding:2px 10px;border-radius:12px;}
+.mision.am .mision-num{background:var(--am3);color:var(--am);}
+.mision.or .mision-num{background:var(--or3);color:var(--or);}
+.mision.cy .mision-num{background:var(--cy3);color:var(--cy);}
+.mision-tit{font-size:15px;font-weight:700;color:var(--dk);}
+.mision p{font-size:14px;color:var(--txt);margin:4px 0;}
 
-.if-viz{background:var(--bg2);border-radius:10px;padding:16px;margin:14px 0;}
-.if-block{display:flex;border:1.5px solid var(--border);margin-bottom:5px;background:var(--card);}
-.if-block.activo{border-color:var(--gr);box-shadow:0 0 0 3px rgba(22,101,52,0.1);}
-.if-block.skip{opacity:0.4;}
-.if-kw{background:#0d1117;color:#ff7b72;padding:10px 12px;font-family:var(--mono);}
-.if-cond{flex:1;padding:10px 12px;font-family:var(--mono);font-size:12px;}
+.proyecto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0;}
+.proyecto{border-radius:12px;overflow:hidden;border:2px solid;transition:box-shadow .2s;}
+.proyecto:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);}
+.proy-hdr{padding:16px 18px;}
+.proy-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px;}
+.proy-tit{font-size:16px;font-weight:800;color:#fff;margin-bottom:3px;}
+.proy-sub{font-size:12px;color:rgba(255,255,255,.6);}
+.proy-body{padding:14px 18px;font-size:13px;line-height:1.65;}
+.proy-item{padding:2px 0;display:flex;align-items:flex-start;gap:6px;}
+.proy-item::before{content:"›";font-weight:700;flex-shrink:0;}
+.proy-rec{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:6px;margin-top:10px;display:inline-block;font-weight:700;}
 
-.sensor-box{background:#0f2318;border-radius:12px;padding:20px;color:white;margin:14px 0;}
-.sensor-data{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px;}
-.sensor-val{background:rgba(255,255,255,0.06);padding:12px;border-radius:8px;text-align:center;}
-.sv-num{font-size:22px;font-family:var(--mono);color:#86efac;}
+.timeline{display:flex;flex-direction:column;gap:0;margin:14px 0;}
+.tl-item{display:flex;gap:14px;align-items:flex-start;padding-bottom:20px;position:relative;}
+.tl-item::before{content:'';position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--dim);}
+.tl-item:last-child::before{display:none;}
+.tl-dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:2px solid;}
+.dot-hecho{background:var(--gr3);border-color:var(--gr);}
+.dot-prox{background:var(--am3);border-color:var(--am);}
+.dot-fut{background:var(--bg3);border-color:var(--dim);}
+.tl-body{flex:1;padding-top:4px;}
+.tl-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.badge-hecho{color:var(--gr2);}.badge-prox{color:var(--am);}.badge-fut{color:var(--muted);}
+.tl-tit{font-size:15px;font-weight:700;color:var(--dk);margin-bottom:4px;}
+.tl-items{font-size:13px;color:var(--muted);line-height:1.9;}
+.tl-items span{display:block;}
+.tl-items span::before{content:'› ';color:var(--gr);font-weight:700;}
 
-.proyecto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;}
-.proyecto{border-radius:12px;overflow:hidden;border:2px solid var(--gr);}
-.proy-hdr{padding:15px;background:var(--gr);color:white;}
-.proy-body{padding:15px;font-size:13px;}
+.if-viz{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin:14px 0;}
+.if-block{display:flex;align-items:stretch;border-radius:7px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:5px;transition:all .3s;}
+.if-block.activo{border-color:var(--gr);box-shadow:0 0 0 3px rgba(22,101,52,.1);}
+.if-block.skip{opacity:.35;}
+.if-kw{background:#0d1117;color:#ff7b72;font-family:var(--mono);font-size:13px;padding:10px 12px;font-weight:600;display:flex;align-items:center;min-width:50px;}
+.if-cond{flex:1;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:12px;color:var(--muted);}
+.if-res{background:var(--bg3);padding:10px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);min-width:80px;text-align:right;}
+.if-block.activo .if-cond{color:var(--dk);font-weight:600;}
+.if-block.activo .if-res{background:var(--gr3);color:var(--gr2);font-weight:700;}
 
-.nom-row{display:flex;align-items:center;gap:12px;padding:15px;background:var(--gr4);border-radius:10px;margin-bottom:20px;}
-.nom-in{flex:1;padding:8px;border-radius:6px;border:1.5px solid var(--border);}
+.demo{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:16px;margin:14px 0;}
+.demo-lbl{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:12px;font-weight:600;}
+.demo-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px;}
+.demo-grp{display:flex;flex-direction:column;gap:4px;}
+.demo-gl{font-size:12px;color:var(--muted);font-weight:500;}
+.demo-in{background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--mono);font-size:14px;padding:7px 10px;border-radius:6px;width:120px;outline:none;transition:border-color .2s;}
+.demo-in:focus{border-color:var(--gr);}
+.demo-btn{background:var(--gr);color:#fff;border:none;font-family:var(--sans);font-size:13px;font-weight:700;padding:8px 16px;border-radius:6px;cursor:pointer;transition:background .2s;}
+.demo-btn:hover{background:var(--gr2);}
+.demo-out{background:#0d1117;color:#e6edf3;border-radius:8px;padding:12px 14px;font-family:var(--mono);font-size:13px;min-height:50px;white-space:pre-wrap;line-height:1.7;margin-top:10px;border:1px solid rgba(255,255,255,0.1);}
+
+.sensor-box{background:#0f2318;border-radius:12px;padding:20px;margin:14px 0;display:flex;flex-direction:column;align-items:center;gap:12px;border:1px solid rgba(255,255,255,0.05);}
+.sensor-data{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;}
+.sensor-val{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px;text-align:center;}
+.sv-label{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.sv-num{font-family:var(--mono);font-size:22px;font-weight:600;color:#86efac;}
+.sv-unit{font-size:12px;color:rgba(255,255,255,.4);}
+.sv-estado{font-family:var(--mono);font-size:12px;margin-top:6px;}
+.sensor-controls{display:flex;gap:8px;align-items:center;}
+.sc-lbl{color:rgba(255,255,255,.5);font-size:13px;}
+.sc-slider{width:160px;accent-color:var(--gr);}
+
+.qcard{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:18px;margin-bottom:10px;transition:all .3s;}
+.qcard.ok{border-color:var(--gr)!important;background:var(--gr4);}
+.qcard.mal{border-color:#fca5a5!important;background:var(--re3);}
+.qnum{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:8px;}
+.qq{font-size:15px;font-weight:700;color:var(--dk);margin-bottom:8px;}
+.qcode{background:#0d1117;border-radius:8px;padding:10px 14px;font-family:var(--mono);font-size:13px;color:#e6edf3;margin-bottom:12px;white-space:pre-wrap;line-height:1.7;border:1px solid rgba(255,255,255,0.1);}
+.qopts{display:flex;flex-direction:column;gap:6px;}
+.qopt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:500;padding:9px 14px;border-radius:7px;cursor:pointer;text-align:left;transition:all .2s;}
+.qopt:hover:not(:disabled){background:var(--gr4);border-color:var(--gr3);}
+.qopt.ca{background:var(--gr4)!important;border-color:var(--gr)!important;color:var(--gr2)!important;font-weight:700;}
+.qopt.in{background:var(--re3)!important;border-color:#fca5a5!important;color:var(--re)!important;}
+.qopt:disabled{cursor:default;}
+.qfb{display:none;margin-top:9px;padding:10px 13px;border-radius:7px;font-size:13px;line-height:1.5;}
+.qfb.show{display:block;}
+.qfb-ok{background:var(--gr4);color:var(--gr2);border:1.5px solid var(--gr3);}
+.qfb-mal{background:var(--re3);color:var(--re);border:1.5px solid #fca5a5;}
+.score{display:none;border-radius:12px;padding:28px;text-align:center;margin-top:14px;background:var(--gr4);border:2px solid var(--gr3);}
+.score.show{display:block;animation:pop .4s ease;}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.sc-n{font-size:56px;font-weight:800;color:var(--gr2);line-height:1;margin-bottom:8px;}
+.sc-msg{font-size:17px;font-weight:700;color:var(--dk);margin-bottom:4px;}
+.sc-sub{font-size:14px;color:var(--muted);}
+.send-box{margin-top:14px;padding:16px 18px;border-radius:9px;display:none;background:var(--card);border:1.5px solid var(--border);}
+.send-box.show{display:block;}
+.send-txt{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5;}
+.send-btn{background:var(--gr);color:#fff;border:none;font-family:var(--sans);font-size:15px;font-weight:700;padding:11px 20px;border-radius:7px;cursor:pointer;width:100%;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.send-btn:hover{background:var(--gr2);}
+.send-btn:disabled{opacity:.5;cursor:not-allowed;}
+.send-ok{display:none;text-align:center;padding:10px;margin-top:10px;border-radius:7px;font-size:14px;font-weight:600;background:var(--gr4);color:var(--gr2);border:1.5px solid var(--gr3);}
+.send-ok.show{display:block;}
+.retry-btn{margin-top:12px;border:1.5px solid var(--border);background:var(--card);font-family:var(--sans);font-weight:600;font-size:14px;padding:9px 20px;border-radius:7px;cursor:pointer;color:var(--muted);transition:all .2s;}
+.retry-btn:hover{border-color:var(--gr);color:var(--gr);}
+
+footer{text-align:center;padding:26px;border-top:1.5px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;background:var(--bg2);}
+footer b{color:var(--dk);}
+
+@media(max-width:640px){
+  .topbar{padding:7px 12px;}
+  .tb-brand{font-size:9px;}
+  .hero{padding:32px 14px 26px;}
+  h1{font-size:24px;}
+  main{padding:24px 14px 70px;}
+  .s-h2{font-size:19px;}
+  nav{top:44px;}
+  .nb{padding:9px 10px;font-size:9px;}
+  .card-hdr{grid-template-columns:42px 1fr;}
+  .proyecto-grid{grid-template-columns:1fr;}
+  .sensor-data{grid-template-columns:1fr 1fr;}
+}
+@media(min-width:641px){
+  .hero{padding:50px 24px 40px;}
+  main{padding:36px 24px 90px;}
+}
 </style>
 </head>
 <body>
@@ -123,11 +257,24 @@ section{margin-bottom:60px;}
   </div>
 </div>
 
+<div class="prog-strip">
+  <div class="prog-in">
+    <div class="pbar"><div class="pbar-fill" id="pb" style="width:0%"></div></div>
+    <div class="pbar-lbl" id="pl">Quiz: 0 / 15 &middot; 0 correctas</div>
+  </div>
+</div>
+
 <header class="hero">
   <div class="hero-in">
-    <div class="hero-eye"><span class="eye-dot"></span>Taller de Programaci&oacute;n y Dom&oacute;tica &middot; 2026</div>
+    <div class="hero-eye"><span class="eye-dot"></span>Taller de Programaci&oacute;n y Dom&oacute;tica &middot; Ciclo Superior &middot; Ciclo 2026</div>
     <h1><span class="h-gr">Python</span> &amp; <span class="h-or">Dom&oacute;tica</span></h1>
-    <p class="hero-desc">Proyecto: Red Clim&aacute;tica de la Maqueta. Programaci&oacute;n aplicada a la maqueta dise&ntilde;ada por 3&deg; MMO.</p>
+    <p class="hero-desc">Proyecto: Red Clim&aacute;tica de la Maqueta. Programaci&oacute;n aplicada a dom&oacute;tica en la maqueta dise&ntilde;ada por 3&deg; MMO.</p>
+    <div class="hero-tags">
+      <span class="tag">Variables</span>
+      <span class="tag">Estructuras</span>
+      <span class="tag">Dom&oacute;tica</span>
+      <span class="tag">ESP32</span>
+    </div>
   </div>
 </header>
 
@@ -135,8 +282,9 @@ section{margin-bottom:60px;}
   <div class="nav-in">
     <button class="nb on" onclick="ir('proyecto')">Proyecto</button>
     <button class="nb" onclick="ir('variables')">Variables</button>
-    <button class="nb" onclick="ir('if')">if/elif/else</button>
+    <button class="nb" onclick="ir('if')">if/else</button>
     <button class="nb" onclick="ir('for')">for/continue</button>
+    <button class="nb" onclick="ir('while')">while</button>
     <button class="nb" onclick="ir('funciones')">Funciones</button>
     <button class="nb" onclick="ir('tcontrol')">Tec. Control</button>
     <button class="nb" onclick="ir('quiz')">Quiz</button>
@@ -149,30 +297,29 @@ section{margin-bottom:60px;}
   <div class="s-eye">// Hilo conductor</div>
   <h2 class="s-h2">Red Clim&aacute;tica de la Maqueta</h2>
   <div class="div"></div>
-  <div class="mision">
-    <div class="mision-hdr"><span class="mision-num">Objetivo</span><span class="mision-tit">Dom&oacute;tica Real</span></div>
-    <p>Automatizar el clima de la maqueta usando sensores DHT22 y controlando actuadores seg&uacute;n los datos procesados en Python.</p>
-  </div>
 
-  <div class="proyecto-grid">
-    <div class="proyecto">
-      <div class="proy-hdr">T1: Guardi&aacute;n de Habitaci&oacute;n</div>
-      <div class="proy-body">L&oacute;gica imperativa básica: leer, comparar y avisar.</div>
-    </div>
-    <div class="proyecto" style="border-color:var(--am);">
-      <div class="proy-hdr" style="background:var(--am);">T2: Red Multi-Punto</div>
-      <div class="proy-body">Modularizaci&oacute;n con funciones y comunicaci&oacute;n con ESP32.</div>
-    </div>
+  <div class="mision">
+    <div class="mision-hdr"><span class="mision-num">El desaf&iacute;o</span><span class="mision-tit">Dom&oacute;tica real en escala</span></div>
+    <p>Ustedes son el equipo de control clim&aacute;tico: sensores en cada habitaci&oacute;n, un programa que analiza datos y activa actuadores seg&uacute;n las condiciones.</p>
   </div>
 
   <div class="sensor-box">
-    <div style="font-family:var(--mono); font-size:12px; margin-bottom:10px;">SIMULADOR DHT22</div>
-    <input type="range" id="sliderTemp" min="10" max="45" value="22" oninput="updateSensor()" style="width:100%;">
-    <div class="sensor-data">
-      <div class="sensor-val"><div>Temp</div><div class="sv-num" id="svTemp">22.0</div><div>&deg;C</div></div>
-      <div class="sensor-val"><div>Estado</div><div class="sv-num" id="svEstado" style="font-size:16px;">CONFORT</div></div>
+    <div style="font-family:var(--mono);font-size:10px;text-transform:uppercase;color:rgba(255,255,255,.4);">Simul&aacute; el sensor DHT22</div>
+    <div class="sensor-controls" style="margin-top:10px;">
+      <input type="range" class="sc-slider" id="sliderTemp" min="10" max="45" value="22" oninput="updateSensor()">
     </div>
-    <div class="code" id="sensorCode" style="font-size:12px;"></div>
+    <div class="sensor-data">
+      <div class="sensor-val">
+        <div class="sv-label">Temperatura</div>
+        <div class="sv-num" id="svTemp">22.0</div>
+        <div class="sv-unit">&deg;C</div>
+      </div>
+      <div class="sensor-val">
+        <div class="sv-label">Estado</div>
+        <div class="sv-num" id="svEstado" style="font-size:16px;">CONFORT</div>
+      </div>
+    </div>
+    <div class="code" id="sensorCode" style="font-size:12px;margin-top:15px;"></div>
   </div>
 </section>
 
@@ -181,75 +328,90 @@ section{margin-bottom:60px;}
   <h2 class="s-h2">Variables y Tipos</h2>
   <div class="div"></div>
   <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico">&#128230;</div><div class="card-inf"><div class="card-tit">Guardar informaci&oacute;n</div></div></div>
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128230;</div><div class="card-inf"><div class="card-tit">Guardar datos en memoria</div></div></div>
     <div class="card-body">
-      <div class="code">temp_living = <span class="nm">24.5</span>  <span class="cm"># float</span>
-zona = <span class="st">"Cocina"</span>      <span class="cm"># str</span>
-alarma = <span class="kw">False</span>       <span class="cm"># bool</span></div>
+      <div class="code">temp_living = <span class="nm">22.5</span>   <span class="cm"># float</span>
+zona = <span class="st">"Living"</span>      <span class="cm"># str</span>
+ventilador = <span class="kw">False</span>   <span class="cm"># bool</span></div>
     </div>
   </div>
 </section>
 
 <section id="if">
   <div class="s-eye">// M&oacute;dulo 02</div>
-  <h2 class="s-h2">Estructuras de Selecci&oacute;n</h2>
+  <h2 class="s-h2">Selecci&oacute;n: if/elif/else</h2>
   <div class="div"></div>
   <div class="if-viz">
-    <div class="if-block" id="ib1"><div class="if-kw">if</div><div class="if-cond">temp > 30.0 (Alarma)</div></div>
-    <div class="if-block" id="ib2"><div class="if-kw">elif</div><div class="if-cond">temp > 26.0 (Calor)</div></div>
-    <div class="if-block" id="ib3"><div class="if-kw">else</div><div class="if-cond">Confort</div></div>
-    <input type="number" id="ifVal" value="22" oninput="demoIf()" style="margin-top:10px; padding:5px;">
-    <div id="ifOut" style="margin-top:10px; font-weight:700;"></div>
+    <div class="if-block" id="ib1"><div class="if-kw">if</div><div class="if-cond">temp > 30.0</div><div class="if-res" id="ir1">&rarr;</div></div>
+    <div class="if-block" id="ib2"><div class="if-kw">elif</div><div class="if-cond">temp > 26.0</div><div class="if-res" id="ir2">&rarr;</div></div>
+    <div class="if-block" id="ib3"><div class="if-kw">else</div><div class="if-cond">Confort</div><div class="if-res" id="ir3">&rarr;</div></div>
+    <div class="demo-row" style="margin-top:12px;">
+      <input class="demo-in" id="ifVal" type="number" value="22" oninput="demoIf()">
+      <div id="ifOut" style="font-weight:700;margin-left:10px;"></div>
+    </div>
   </div>
 </section>
 
 <section id="for">
   <div class="s-eye">// M&oacute;dulo 03</div>
-  <h2 class="s-h2">Bucles y Continue</h2>
+  <h2 class="s-h2">Bucle for y continue</h2>
   <div class="div"></div>
+  
   <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico">&#128260;</div><div class="card-inf"><div class="card-tit">Uso de continue</div></div></div>
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128260;</div><div class="card-inf"><div class="card-tit">Recorrer elementos</div></div></div>
     <div class="card-body">
-      <div class="anal">El <b>continue</b> salta el resto del código en la vuelta actual y pasa directamente a la siguiente. Útil para ignorar datos inválidos.</div>
-      <div class="code"><span class="cm"># Ignorar sensores desconectados (valor 0)</span>
-lecturas = [<span class="nm">22</span>, <span class="nm">0</span>, <span class="nm">25</span>, <span class="nm">0</span>, <span class="nm">21</span>]
+      <div class="code"><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">5</span>):
+    <span class="fn">print</span>(<span class="st">f"Vuelta {i}"</span>)</div>
+    </div>
+  </div>
+
+  <div class="card open" style="border-left:5px solid var(--am);">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-am">&#9888;</div><div class="card-inf"><div class="card-tit">Saltear vueltas: continue</div></div></div>
+    <div class="card-body">
+      <div class="anal">El <b>continue</b> se usa para ignorar un elemento y pasar r&aacute;pido al siguiente sin salir del bucle.</div>
+      <div class="code"><span class="cm"># Ignorar sensores que tiran error (valor 0)</span>
+lecturas = [<span class="nm">22.5</span>, <span class="nm">0</span>, <span class="nm">24.1</span>, <span class="nm">0</span>, <span class="nm">21.8</span>]
+
 <span class="kw">for</span> t <span class="kw">in</span> lecturas:
     <span class="kw">if</span> t == <span class="nm">0</span>:
-        <span class="kw">continue</span> <span class="cm"># Salta el print</span>
-    <span class="fn">print</span>(<span class="st">f"Procesando: {t}°C"</span>)</div>
+        <span class="kw">continue</span>  <span class="cm"># Salta el print y sigue con el siguiente</span>
+    <span class="fn">print</span>(<span class="st">f"Lectura válida: {t}°C"</span>)</div>
+    </div>
+  </div>
+</section>
+
+<section id="while">
+  <div class="s-eye">// M&oacute;dulo 04</div>
+  <h2 class="s-h2">Bucle while</h2>
+  <div class="div"></div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#8987;</div><div class="card-inf"><div class="card-tit">Repetici&oacute;n por condici&oacute;n</div></div></div>
+    <div class="card-body">
+      <div class="code"><span class="kw">while</span> temp < <span class="nm">20</span>:
+    <span class="fn">print</span>(<span class="st">"Calentando..."</span>)
+    temp += <span class="nm">1</span></div>
     </div>
   </div>
 </section>
 
 <section id="funciones">
-  <div class="s-eye">// M&oacute;dulo 04</div>
-  <h2 class="s-h2">Funciones: Reutilizar C&oacute;digo</h2>
-  <p class="s-sub">Una funci&oacute;n es un bloque de c&oacute;digo con nombre que realiza una tarea específica.</p>
+  <div class="s-eye">// M&oacute;dulo 05</div>
+  <h2 class="s-h2">Funciones: Reutilizar c&oacute;digo</h2>
   <div class="div"></div>
-
   <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico">&#128230;</div><div class="card-inf"><div class="card-tit">&iquest;Qu&eacute; son las funciones?</div></div></div>
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-bl">&#128230;</div><div class="card-inf"><div class="card-tit">&iquest;Qu&eacute; es una funci&oacute;n?</div></div></div>
     <div class="card-body">
-      <div class="anal">Imaginen que tienen 10 habitaciones en la maqueta. En lugar de escribir el <code>if/else</code> de temperatura 10 veces, crean una <b>funci&oacute;n</b> una sola vez y la "llaman" cada vez que la necesitan.</div>
-      
-      <div class="code"><span class="cm"># 1. Definimos la función (La receta)</span>
-<span class="kw">def</span> <span class="fn">analizar_clima</span>(habitacion, temp):
+      <div class="anal">Es un bloque de c&oacute;digo con nombre que realiza una tarea. En la maqueta, en vez de repetir el <b>if</b> para cada habitaci&oacute;n, creamos una funci&oacute;n.</div>
+      <div class="code"><span class="cm"># Definimos la función</span>
+<span class="kw">def</span> <span class="fn">analizar_clima</span>(nombre, temp):
     <span class="kw">if</span> temp > <span class="nm">26</span>:
-        res = <span class="st">"Calor"</span>
-    <span class="kw">else</span>:
-        res = <span class="st">"OK"</span>
-    <span class="kw">return</span> <span class="st">f"{habitacion}: {res}"</span>
+        <span class="kw">return</span> <span class="st">f"{nombre}: CALOR"</span>
+    <span class="kw">return</span> <span class="st">f"{nombre}: OK"</span>
 
-<span class="cm"># 2. Llamamos a la función (Cocinamos)</span>
-<span class="fn">print</span>( <span class="fn">analizar_clima</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>) )
-<span class="fn">print</span>( <span class="fn">analizar_clima</span>(<span class="st">"Cocina"</span>, <span class="nm">31.0</span>) )</div>
-
-      <div class="alerta">
-        <b>Partes de una funci&oacute;n:</b><br>
-        * <b>def:</b> Palabra para empezar.<br>
-        * <b>Par&aacute;metros:</b> Los datos que recibe (entre par&eacute;ntesis).<br>
-        * <b>return:</b> El resultado que la funci&oacute;n nos devuelve.
-      </div>
+<span class="cm"># La usamos en distintas partes</span>
+<span class="fn">print</span>(<span class="fn">analizar_clima</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>))
+<span class="fn">print</span>(<span class="fn">analizar_clima</span>(<span class="st">"Cocina"</span>, <span class="nm">30.1</span>))</div>
+      <div class="nota"><b>def:</b> Define la funci&oacute;n. <b>return:</b> Devuelve el resultado al programa principal.</div>
     </div>
   </div>
 </section>
@@ -257,87 +419,118 @@ lecturas = [<span class="nm">22</span>, <span class="nm">0</span>, <span class="
 <section id="tcontrol">
   <div class="s-eye" style="color:var(--or);">// Articulaci&oacute;n</div>
   <h2 class="s-h2">Tecnolog&iacute;a de Control</h2>
-  <div class="div" style="background:var(--or);"></div>
+  <div class="div div-or"></div>
   <div class="card card-or open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico">&#128268;</div><div class="card-inf"><div class="card-tit">Lazo Cerrado</div></div></div>
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#128268;</div><div class="card-inf"><div class="card-tit">Lazo Cerrado y Hardware</div></div></div>
     <div class="card-body">
-      <div class="anal" style="background:var(--or4); border-color:var(--or);">Cuando el programa lee el sensor y decide prender un ventilador, estamos cerrando el lazo de control. El sensor es la realimentaci&oacute;n.</div>
+      <div class="anal or">Cuando Python toma una decisi&oacute;n basada en el sensor y act&uacute;a sobre el ventilador, estamos cerrando el lazo de control.</div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Sensor</th><th>Mide</th><th>Actuador</th></tr></thead>
+          <tbody>
+            <tr><td>DHT22</td><td>Temperatura</td><td>Rel&eacute; / Ventilador</td></tr>
+            <tr><td>LDR</td><td>Luz</td><td>LED / Foco</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="quiz">
-  <div class="s-eye">// Evaluaci&oacute;n</div>
+  <div class="s-eye">// Autoevaluaci&oacute;n</div>
   <h2 class="s-h2">Quiz de Repaso</h2>
   <div class="div"></div>
   <div class="nom-row">
-    <span>Alumno:</span>
-    <input class="nom-in" id="nomQuiz" type="text" placeholder="Tu nombre">
+    <span class="nom-lbl">Tu nombre:</span>
+    <input class="nom-in" id="nomQuiz" type="text" placeholder="Apellido, Nombre">
   </div>
   <div id="qContainer"></div>
-  <div class="score" id="scoreBox" style="display:none; text-align:center; padding:20px; background:var(--gr3); border-radius:10px;">
-    <div style="font-size:30px; font-weight:800;" id="scN">0/15</div>
-    <button class="tbtn" onclick="resetQuiz()">Reintentar</button>
+  <div class="score" id="scoreBox">
+    <div class="sc-n" id="scN">0/15</div>
+    <div class="sc-msg" id="scMsg"></div>
+    <div class="send-box" id="sendBox">
+      <button class="send-btn" id="sendBtn" onclick="enviarQuiz()">&#128231; Enviar al Profesor</button>
+      <div class="send-ok" id="sendOk"></div>
+    </div>
+    <button class="retry-btn" onclick="resetQuiz()">Intentar de nuevo</button>
   </div>
 </section>
 
 </main>
 
 <footer>
-  Taller de Programaci&oacute;n &middot; Escuela Industrial N&deg;9 &middot; <b>Prof. Pablo Limardo</b>
+  Taller de Programaci&oacute;n 2026 &middot; <b>Escuela Industrial N&deg;9</b> &middot; Prof. Pablo Limardo
 </footer>
 
 <script>
+const SECS=['proyecto','variables','if','for','while','funciones','tcontrol','quiz'];
 function ir(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
 function tog(hdr){hdr.closest('.card').classList.toggle('open');}
 
 function updateSensor(){
   const t=parseFloat(document.getElementById('sliderTemp').value);
   document.getElementById('svTemp').textContent=t.toFixed(1);
-  let est='CONFORT', col='#22d3a0';
+  let est='CONFORT',col='#22d3a0';
   if(t>30){est='ALARMA';col='#ef4444';}
   else if(t>26){est='CALOR';col='#f59e0b';}
-  document.getElementById('svEstado').textContent=est;
-  document.getElementById('svEstado').style.color=col;
-  document.getElementById('sensorCode').innerHTML=`<span class="kw">if</span> temp > <span class="nm">30</span>: estado = <span class="st">"ALARMA"</span>\n<span class="kw">elif</span> temp > <span class="nm">26</span>: estado = <span class="st">"CALOR"</span>\n<span class="kw">else</span>: estado = <span class="st">"CONFORT"</span>`;
+  const el=document.getElementById('svEstado');el.textContent=est;el.style.color=col;
+  document.getElementById('sensorCode').innerHTML=`<span class="kw">if</span> temp > <span class="nm">30</span>: estado = <span class="st">"ALARMA"</span>\n<span class="kw">else</span>: estado = <span class="st">"CONFORT"</span>`;
 }
 
 function demoIf(){
-  const t=parseFloat(document.getElementById('ifVal').value);
-  const b1=document.getElementById('ib1'), b2=document.getElementById('ib2'), b3=document.getElementById('ib3');
+  const t=parseFloat(document.getElementById('ifVal').value)||0;
+  const b1=document.getElementById('ib1'),b2=document.getElementById('ib2'),b3=document.getElementById('ib3');
   [b1,b2,b3].forEach(b=>b.classList.remove('activo','skip'));
-  if(t>30){b1.classList.add('activo'); b2.classList.add('skip'); b3.classList.add('skip');}
-  else if(t>26){b1.classList.add('skip'); b2.classList.add('activo'); b3.classList.add('skip');}
-  else {b1.classList.add('skip'); b2.classList.add('skip'); b3.classList.add('activo');}
+  if(t>30){b1.classList.add('activo');b2.classList.add('skip');b3.classList.add('skip');}
+  else if(t>26){b1.classList.add('skip');b2.classList.add('activo');b3.classList.add('skip');}
+  else {b1.classList.add('skip');b2.classList.add('skip');b3.classList.add('activo');}
 }
 
+// ── QUIZ LOGIC (MANTENIENDO TU SISTEMA AVANZADO) ────────────────
 const Qs=[
-  {q:'¿Para qué sirve "def"?', o:['Para borrar','Para definir una función','Para comparar'], r:1},
-  {q:'¿Qué hace "continue"?', o:['Sale del bucle','Salta a la siguiente vuelta','Reinicia el programa'], r:1}
+  {t:'Variables',q:'¿Qué hace "ventilador = True"?',o:['Compara','Asigna valor','Suma','Borra'],r:1,fb:'El "=" asigna. Guarda True en la variable.'},
+  {t:'Tipos',q:'¿Cuál es el tipo de "Living"?',o:['int','float','str','bool'],r:2,fb:'Es texto, por lo tanto es str (string).'},
+  {t:'Estructuras',q:'¿Para qué sirve continue?',o:['Salir del bucle','Saltear la vuelta actual','Apagar sensor','Error'],r:1,fb:'continue salta directamente a la siguiente iteración.'},
+  {t:'Funciones',q:'¿Qué palabra define una función?',o:['func','def','void','start'],r:1,fb:'Usamos "def" seguido del nombre de la función.'},
+  {t:'Control',q:'¿Qué lazo mide y corrige?',o:['Abierto','Cerrado','Libre','Manual'],r:1,fb:'El lazo cerrado usa sensores para corregir errores.'}
 ];
 
+let resp=0,corr=0,seleccionadas=[],qMap=[];
+const SK='quiz_taller2026';
+
 function buildQuiz(){
-  const c=document.getElementById('qContainer'); c.innerHTML='';
+  const c=document.getElementById('qContainer');c.innerHTML='';resp=0;corr=0;seleccionadas=[];
   Qs.forEach((q,i)=>{
-    const d=document.createElement('div'); d.className='card open'; d.style.padding="15px";
-    d.innerHTML=`<b>${q.q}</b><div id="opts${i}" style="margin-top:10px;"></div>`;
+    const d=document.createElement('div');d.className='qcard';
+    d.innerHTML=`<div class="qnum">Q${i+1}</div><div class="qq">${q.q}</div><div class="qopts" id="opts${i}"></div><div class="qfb" id="fb${i}"></div>`;
     c.appendChild(d);
     q.o.forEach((opt,j)=>{
-      const b=document.createElement('button'); b.className='tbtn'; b.style.margin="5px"; b.textContent=opt;
+      const b=document.createElement('button');b.className='qopt';b.textContent=opt;
       b.onclick=()=>{
-        alert(j===q.r?'¡Correcto!':'Incorrecto');
-        Array.from(document.getElementById('opts'+i).children).forEach(btn=>btn.disabled=true);
+        if(seleccionadas[i]!=null)return;
+        seleccionadas[i]=j;
+        const ok=j===q.r; if(ok)corr++; resp++;
+        document.getElementById('fb'+i).className='qfb show '+(ok?'qfb-ok':'qfb-mal');
+        document.getElementById('fb'+i).textContent=q.fb;
+        if(resp===Qs.length)showScore();
       };
       document.getElementById('opts'+i).appendChild(b);
     });
   });
 }
 
+function showScore(){
+  document.getElementById('scN').textContent=corr+'/'+Qs.length;
+  document.getElementById('scoreBox').classList.add('show');
+}
+
+function resetQuiz(){localStorage.removeItem(SK); location.reload();}
+
 function toggleTheme(){
   const d=document.documentElement;
-  const isDark = d.getAttribute('data-theme')==='dark';
-  if(isDark) d.removeAttribute('data-theme');
-  else d.setAttribute('data-theme','dark');
+  if(d.getAttribute('data-theme')==='dark'){d.removeAttribute('data-theme');}
+  else{d.setAttribute('data-theme','dark');}
 }
 
 updateSensor();
