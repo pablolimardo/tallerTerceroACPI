@@ -7,405 +7,221 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f2f6f3;--bg2:#e6ede8;--bg3:#d8e4db;--card:#fff;
-  --gr:#166534;--gr2:#14532d;--gr3:#dcfce7;--gr4:#f0fdf4;
-  --dk:#0f2318;--muted:#5a7a62;--border:#c6dbc9;--dim:#dde8df;--txt:#0f2318;
-  --am:#b45309;--am2:#78350f;--am3:#fef3c7;--am4:#fffbeb;
-  --bl:#1d4ed8;--bl2:#1e3a8a;--bl3:#dbeafe;--bl4:#eff6ff;
-  --or:#c2410c;--or3:#ffedd5;--or4:#fff7ed;
-  --re:#b91c1c;--re3:#fee2e2;
-  --cy:#0e7490;--cy3:#cffafe;--cy4:#f0fdff;
-  --pu:#7c3aed;--pu3:#ede9fe;--pu4:#f5f3ff;
+  --bg:#f0f4f1;--bg2:#e2ebe4;--bg3:#d2e0d5;--card:#ffffff;
+  --gr:#059669;--gr2:#047857;--gr3:#d1fae5;--gr4:#ecfdf5;
+  --dk:#064e3b;--muted:#4b6354;--border:#bbf7d0;--dim:#d1fae5;--txt:#0f291e;
+  --am:#d97706;--am2:#b45309;--am3:#fef3c7;--am4:#fffbeb;
+  --bl:#2563eb;--bl2:#1d4ed8;--bl3:#dbeafe;--bl4:#eff6ff;
+  --or:#ea580c;--or3:#ffedd5;--or4:#fff7ed;
+  --re:#dc2626;--re3:#fee2e2;
+  --cy:#0891b2;--cy3:#cffafe;--cy4:#f0fdff;
+  --pu:#7c3aed;--pu2:#6d28d9;--pu3:#ede9fe;--pu4:#f5f3ff;
   --xp:#f59e0b;--xp2:#d97706;
   --mono:"IBM Plex Mono",monospace;--disp:"Space Grotesk",sans-serif;--sans:"Plus Jakarta Sans",sans-serif;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md:0 6px 20px rgba(5,150,105,0.08);
+  --shadow-lg:0 12px 32px rgba(5,150,105,0.12);
 }
+
 [data-theme="dark"]{
-  --bg:#0a140d;--bg2:#0f1c12;--bg3:#152418;--card:#0c1810;
-  --gr:#22d3a0;--gr2:#16a87e;--gr3:#062414;--gr4:#041008;
-  --dk:#e8f5ec;--muted:#5f8168;--border:#1a3020;--dim:#152418;--txt:#d0e8d4;
-  --am:#f0a030;--am2:#d4820a;--am3:#2a1a06;--am4:#1c1208;
-  --bl:#60a5fa;--bl2:#93c5fd;--bl3:#1e3a5f;--bl4:#0f1f40;
-  --or:#fb923c;--or3:#431407;--or4:#2c0e04;
-  --re:#fca5a5;--re3:#1f0a0a;
-  --cy:#22d3ee;--cy3:#0a3040;--cy4:#061820;
-  --pu:#a78bfa;--pu3:#2e1065;--pu4:#1a0b3d;
+  --bg:#07120a;--bg2:#0d1a10;--bg3:#132418;--card:#0a170e;
+  --gr:#10b981;--gr2:#059669;--gr3:#022c22;--gr4:#011710;
+  --dk:#ecfdf5;--muted:#6b8e78;--border:#133320;--dim:#0f291b;--txt:#d1fae5;
+  --am:#f59e0b;--am2:#d97706;--am3:#2d1b02;--am4:#1c1001;
+  --bl:#3b82f6;--bl2:#2563eb;--bl3:#172554;--bl4:#0c132c;
+  --or:#f97316;--or3:#331102;--or4:#1f0901;
+  --re:#f87171;--re3:#2a0808;
+  --cy:#06b6d4;--cy3:#083344;--cy4:#031822;
+  --pu:#a855f7;--pu2:#9333ea;--pu3:#2e1065;--pu4:#1a083c;
   --xp:#fbbf24;--xp2:#f59e0b;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.4);
+  --shadow-md:0 6px 20px rgba(0,0,0,0.5);
+  --shadow-lg:0 12px 32px rgba(0,0,0,0.7);
 }
+
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:var(--sans);background:var(--bg);color:var(--txt);font-size:16px;line-height:1.7;overflow-x:hidden;}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}html{scroll-behavior:auto;}}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);font-size:16px;line-height:1.7;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
 
-/* ══ HUD SUPERIOR (barra de estado del jugador) ══ */
-.hud{position:sticky;top:0;z-index:300;background:var(--card);border-bottom:2px solid var(--border);}
-.hud-top{display:flex;justify-content:space-between;align-items:center;padding:7px 14px;gap:10px;}
-.hud-brand{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:7px;}
-.hud-brand b{color:var(--dk);}
-.hud-live{width:7px;height:7px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);animation:blink 2s ease infinite;flex-shrink:0;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.hud-acts{display:flex;gap:6px;flex-shrink:0;}
-.hbtn{background:var(--bg2);border:1.5px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap;}
-.hbtn:hover{border-color:var(--gr);color:var(--gr);}
-.hbtn:focus-visible{outline:2px solid var(--gr);outline-offset:2px;}
+/* ══ HUD ══ */
+.hud{position:sticky;top:0;z-index:300;background:var(--card);border-bottom:2px solid var(--border);box-shadow:var(--shadow-sm);backdrop-filter:blur(8px);}
+.hud-top{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;gap:12px;}
+.hud-brand{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:8px;}
+.hud-brand b{color:var(--dk);font-weight:600;}
+.hud-live{width:8px;height:8px;border-radius:50%;background:var(--gr);box-shadow:0 0 10px var(--gr);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.85);}}
+.hud-acts{display:flex;gap:8px;flex-shrink:0;}
+.hbtn{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.hbtn:hover{border-color:var(--gr);color:var(--gr);transform:translateY(-1px);}
 
-/* barra XP */
-.xp-strip{padding:6px 14px 8px;display:flex;align-items:center;gap:11px;border-top:1px solid var(--dim);}
-.rank-badge{display:flex;align-items:center;gap:7px;flex-shrink:0;}
-.rank-ico{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--xp),var(--xp2));display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 6px rgba(245,158,11,.35);}
-.rank-txt{line-height:1.15;}
+.xp-strip{padding:8px 16px 10px;display:flex;align-items:center;gap:14px;border-top:1px solid var(--dim);}
+.rank-badge{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.rank-ico{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--xp),var(--xp2));display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 8px rgba(245,158,11,.35);}
 .rank-lvl{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
-.rank-name{font-family:var(--disp);font-size:13px;font-weight:700;color:var(--dk);}
+.rank-name{font-family:var(--disp);font-size:14px;font-weight:700;color:var(--dk);}
 .xp-bar-wrap{flex:1;min-width:0;}
-.xp-nums{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:3px;}
+.xp-nums{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px;}
 .xp-nums b{color:var(--xp2);}
-.xp-bar{height:8px;background:var(--dim);border-radius:5px;overflow:hidden;position:relative;}
-.xp-fill{height:100%;background:linear-gradient(90deg,var(--xp2),var(--xp));border-radius:5px;width:0%;transition:width .7s cubic-bezier(.34,1.56,.64,1);position:relative;}
-.xp-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shine 2.5s linear infinite;}
-@keyframes shine{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
-
-/* toast XP */
-.xp-toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--dk);color:#fff;padding:11px 20px;border-radius:30px;font-family:var(--disp);font-weight:700;font-size:14px;z-index:500;box-shadow:0 8px 28px rgba(0,0,0,.3);display:flex;align-items:center;gap:9px;opacity:0;transition:all .45s cubic-bezier(.34,1.56,.64,1);pointer-events:none;border:1.5px solid var(--gr);}
-.xp-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-.xp-toast .xpt-amt{color:var(--xp);font-family:var(--mono);}
+.xp-bar{height:9px;background:var(--dim);border-radius:6px;overflow:hidden;position:relative;}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--xp2),var(--xp));border-radius:6px;width:0%;transition:width .7s cubic-bezier(.34,1.56,.64,1);position:relative;}
 
 /* ══ HERO ══ */
-.hero{background:#0f2318;padding:46px 16px 40px;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(134,239,172,.09) 1px,transparent 0);background-size:26px 26px;pointer-events:none;}
-.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(134,239,172,.08);pointer-events:none;}
-.hero-in{max-width:900px;margin:0 auto;position:relative;z-index:2;}
-.hero-eye{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(134,239,172,.6);margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.eye-dot{width:6px;height:6px;border-radius:50%;background:var(--gr);box-shadow:0 0 8px var(--gr);animation:blink 2s ease infinite;flex-shrink:0;}
-h1{font-family:var(--disp);font-size:clamp(30px,8vw,60px);font-weight:700;color:#fff;line-height:1;margin-bottom:14px;letter-spacing:-1.5px;}
-.h-gr{color:#86efac;}.h-or{color:#fdba74;}
-.hero-desc{color:rgba(255,255,255,.55);font-size:15px;max-width:560px;margin-bottom:24px;}
-.hero-tags{display:flex;flex-wrap:wrap;gap:6px;}
-.tag{font-family:var(--mono);font-size:10px;padding:4px 11px;border-radius:12px;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);}
-.tag-gr{border-color:rgba(134,239,172,.35);color:rgba(134,239,172,.9);}
-.tag-or{border-color:rgba(253,186,116,.3);color:rgba(253,186,116,.85);}
-.tag-bl{border-color:rgba(96,165,250,.3);color:rgba(96,165,250,.85);}
-.tag-pu{border-color:rgba(167,139,250,.35);color:rgba(167,139,250,.9);}
+.hero{background:linear-gradient(160deg,#061a10 0%,#0f2e1e 100%);padding:52px 20px 44px;position:relative;overflow:hidden;color:#fff;}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(16,185,129,.15) 1px,transparent 0);background-size:28px 28px;pointer-events:none;}
+.hero-in{max-width:960px;margin:0 auto;position:relative;z-index:2;}
+.hero-eye{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(16,185,129,.9);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+h1{font-family:var(--disp);font-size:clamp(32px,7vw,58px);font-weight:800;line-height:1.05;margin-bottom:16px;letter-spacing:-1.5px;}
+.h-gr{color:#34d399;text-shadow:0 0 20px rgba(52,211,153,0.3);}
+.h-or{color:#fbbf24;}
+.hero-desc{color:rgba(255,255,255,.75);font-size:16px;max-width:620px;margin-bottom:28px;line-height:1.6;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-family:var(--mono);font-size:10.5px;padding:5px 13px;border-radius:16px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);background:rgba(255,255,255,.05);}
+.tag-gr{border-color:rgba(52,211,153,.4);color:#6ee7b7;}
+.tag-or{border-color:rgba(251,191,36,.4);color:#fde047;}
+.tag-pu{border-color:rgba(168,85,247,.4);color:#c084fc;}
 
-/* ══ MAPA DE MISIONES (nav como niveles) ══ */
-nav{background:var(--card);border-bottom:2px solid var(--border);position:sticky;top:44px;z-index:90;}
-.nav-in{max-width:900px;margin:0 auto;display:flex;overflow-x:auto;padding:0 10px;-webkit-overflow-scrolling:touch;}
-.nav-in::-webkit-scrollbar{height:0;}
-.nb{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding:11px 11px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:5px;}
+/* ══ NAV MAP ══ */
+nav{background:var(--card);border-bottom:2px solid var(--border);position:sticky;top:51px;z-index:290;box-shadow:var(--shadow-sm);}
+.nav-in{max-width:960px;margin:0 auto;display:flex;overflow-x:auto;padding:0 12px;-webkit-overflow-scrolling:touch;}
+.nav-in::-webkit-scrollbar{height:3px;}
+.nav-in::-webkit-scrollbar-thumb{background:var(--border);}
+.nb{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:12px 14px;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px;}
 .nb:hover,.nb.on{color:var(--gr);border-bottom-color:var(--gr);}
 .nb-check{color:var(--gr);font-size:11px;}
 
-main{max-width:900px;margin:0 auto;padding:32px 16px 90px;}
-section{margin-bottom:64px;scroll-margin-top:96px;}
-.s-eye{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gr);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
-.s-lvl{background:var(--gr3);color:var(--gr2);padding:2px 8px;border-radius:10px;font-size:9px;}
-.s-h2{font-family:var(--disp);font-size:clamp(22px,4.5vw,32px);font-weight:700;color:var(--dk);margin-bottom:6px;letter-spacing:-.5px;}
-.s-sub{color:var(--muted);font-size:14px;margin-bottom:20px;max-width:580px;}
-.div{height:2px;background:linear-gradient(90deg,var(--gr),transparent);border-radius:2px;margin-bottom:24px;}
+main{max-width:960px;margin:0 auto;padding:36px 20px 100px;}
+section{margin-bottom:72px;scroll-margin-top:100px;}
+.s-eye{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gr);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.s-lvl{background:var(--gr3);color:var(--gr2);padding:2px 8px;border-radius:10px;font-size:9.5px;}
+.s-h2{font-family:var(--disp);font-size:clamp(24px,4vw,34px);font-weight:700;color:var(--dk);margin-bottom:8px;letter-spacing:-.5px;}
+.s-sub{color:var(--muted);font-size:15px;margin-bottom:24px;max-width:640px;}
+.div{height:3px;background:linear-gradient(90deg,var(--gr),transparent);border-radius:3px;margin-bottom:28px;}
 .div-or{background:linear-gradient(90deg,var(--or),transparent);}
 .div-pu{background:linear-gradient(90deg,var(--pu),transparent);}
-.div-cy{background:linear-gradient(90deg,var(--cy),transparent);}
+.div-bl{background:linear-gradient(90deg,var(--bl),transparent);}
 
-/* ══ CARDS ══ */
-.card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s,transform .2s;}
-.card:hover{box-shadow:0 6px 18px rgba(22,101,52,.09);}
-.card-hdr{display:grid;grid-template-columns:52px 1fr;cursor:pointer;min-height:56px;align-items:stretch;}
-.card-ico{display:flex;align-items:center;justify-content:center;font-size:19px;border-right:1.5px solid var(--border);}
-.ico-gr{background:var(--gr4);}.ico-am{background:var(--am4);}.ico-or{background:var(--or4);}
-.ico-bl{background:var(--bl4);}.ico-cy{background:var(--cy4);}.ico-pu{background:var(--pu4);}
-.card-inf{padding:11px 15px;display:flex;flex-direction:column;justify-content:center;}
-.card-tag{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
-.card-tit{font-family:var(--disp);font-size:15px;font-weight:600;color:var(--dk);line-height:1.25;}
-.card-chev{margin-left:auto;color:var(--muted);font-size:12px;align-self:center;transition:transform .25s;}
+/* ══ CARDS & CODE ══ */
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow-sm);transition:all .25s ease;}
+.card:hover{box-shadow:var(--shadow-md);border-color:var(--gr2);}
+.card-hdr{display:grid;grid-template-columns:56px 1fr 36px;cursor:pointer;min-height:60px;align-items:center;}
+.card-ico{display:flex;align-items:center;justify-content:center;font-size:20px;height:100%;border-right:1.5px solid var(--border);}
+.ico-gr{background:var(--gr4);color:var(--gr2);}
+.ico-am{background:var(--am4);color:var(--am2);}
+.ico-or{background:var(--or4);color:var(--or);}
+.ico-bl{background:var(--bl4);color:var(--bl);}
+.ico-pu{background:var(--pu4);color:var(--pu);}
+.card-inf{padding:12px 18px;}
+.card-tag{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.card-tit{font-family:var(--disp);font-size:16px;font-weight:700;color:var(--dk);}
+.card-chev{color:var(--muted);font-size:12px;transition:transform .25s;}
 .card.open .card-chev{transform:rotate(90deg);}
-.card-body{padding:2px 16px 18px;border-top:1.5px solid var(--border);display:none;}
-.card.open .card-body{display:block;animation:slideDown .3s ease;}
-@keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.card-body p{font-size:14px;color:var(--txt);margin:12px 0 5px;}
-.card-body h4{font-family:var(--disp);font-size:14px;font-weight:600;color:var(--dk);margin:16px 0 4px;}
+.card-body{padding:16px 20px 24px;border-top:1.5px solid var(--border);display:none;}
+.card.open .card-body{display:block;animation:fadeIn 0.3s ease-out;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
 
-/* ══ CÓDIGO ══ */
-.code{background:#0d1117;color:#e6edf3;border-radius:10px;padding:15px 17px;font-family:var(--mono);font-size:13.5px;margin:13px 0;line-height:1.65;white-space:pre;overflow-x:auto;border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px 6px rgba(0,0,0,.25);position:relative;}
-.code::-webkit-scrollbar{height:8px;}
-.code::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:4px;}
-.code-lbl{position:absolute;top:0;right:0;font-size:9px;font-family:var(--mono);letter-spacing:1.5px;color:rgba(255,255,255,.3);background:rgba(255,255,255,.05);padding:3px 9px;border-radius:0 9px 0 8px;text-transform:uppercase;}
-.cm{color:#8b949e;font-style:italic;}
-.kw{color:#ff7b72;font-weight:500;}
-.st{color:#a5d6ff;}.nm{color:#79c0ff;}.fn{color:#d2a8ff;font-weight:500;}
-.op{color:#e6edf3;}.cls{color:#ffa657;font-weight:600;}.slf{color:#7ee787;font-style:italic;}
-.bad{opacity:.55;}
+.code-wrap{position:relative;margin:16px 0;}
+.code{background:#0b131e;color:#e2e8f0;border-radius:12px;padding:16px 18px;font-family:var(--mono);font-size:13.5px;line-height:1.65;white-space:pre;overflow-x:auto;border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 2px 8px rgba(0,0,0,0.4);}
+.code-lbl{position:absolute;top:0;right:0;font-size:9px;font-family:var(--mono);font-weight:600;letter-spacing:1px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.08);padding:4px 10px;border-radius:0 12px 0 10px;text-transform:uppercase;}
+.copy-btn{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
+.copy-btn:hover{background:var(--gr);border-color:var(--gr);}
 
-/* ══ TABLAS ══ */
-.tbl-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border-radius:9px;border:1px solid var(--border);}
-.tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:420px;}
-.tbl th{background:var(--bg2);color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 13px;text-align:left;border-bottom:1.5px solid var(--border);white-space:nowrap;}
-.tbl td{padding:10px 13px;border-bottom:1px solid var(--dim);vertical-align:top;}
-.tbl tr:last-child td{border-bottom:none;}
-.tbl tr:hover td{background:var(--bg2);}
-.tbl code{font-size:12px;}
-.ch{display:inline-block;padding:2px 9px;border-radius:8px;font-family:var(--mono);font-size:10px;font-weight:600;}
-.ch-gr{background:var(--gr3);color:var(--gr2);}.ch-am{background:var(--am3);color:var(--am);}
-.ch-bl{background:var(--bl3);color:var(--bl);}.ch-re{background:var(--re3);color:var(--re);}
-.ch-or{background:var(--or3);color:var(--or);}.ch-cy{background:var(--cy3);color:var(--cy);}
-.ch-pu{background:var(--pu3);color:var(--pu);}
-code{font-family:var(--mono);font-size:.9em;background:var(--bg3);padding:1px 5px;border-radius:4px;color:var(--dk);}
-.card-body p code,.tbl code,.anal code,.nota code,.alerta code,.tip code{background:var(--bg3);}
+/* Syntax Highlight Simulated Tokens */
+.cm{color:#64748b;font-style:italic;}
+.kw{color:#f43f5e;font-weight:600;}
+.st{color:#38bdf8;}
+.nm{color:#fbbf24;}
+.fn{color:#c084fc;font-weight:600;}
+.cls{color:#f97316;font-weight:700;}
+.slf{color:#4ade80;font-style:italic;}
 
-/* ══ CALLOUTS ══ */
-.anal{border-radius:9px;padding:12px 15px;margin:11px 0;display:flex;gap:11px;font-size:14px;align-items:flex-start;background:var(--gr4);border-left:4px solid var(--gr);}
+/* ══ CALLOUTS & INTERACTIVE PLAYGROUNDS ══ */
+.anal{border-radius:12px;padding:14px 18px;margin:14px 0;display:flex;gap:14px;font-size:14.5px;align-items:flex-start;background:var(--gr4);border-left:5px solid var(--gr);box-shadow:var(--shadow-sm);}
 .anal.or{background:var(--or4);border-left-color:var(--or);}
 .anal.bl{background:var(--bl4);border-left-color:var(--bl);}
 .anal.pu{background:var(--pu4);border-left-color:var(--pu);}
-.anal.cy{background:var(--cy4);border-left-color:var(--cy);}
-.an-ico{font-size:21px;flex-shrink:0;line-height:1.3;}
-.nota{background:var(--bl4);border:1.5px solid var(--bl3);border-left:4px solid var(--bl);border-radius:9px;padding:12px 15px;margin:11px 0;font-size:14px;}
-.nota b{color:var(--bl);}
-.alerta{background:var(--am4);border:1.5px solid var(--am3);border-left:4px solid var(--am);border-radius:9px;padding:12px 15px;margin:11px 0;font-size:14px;}
-.alerta b{color:var(--am);}
-.tip{background:var(--gr4);border:1.5px solid var(--gr3);border-left:4px solid var(--gr2);border-radius:8px;padding:11px 15px;margin:11px 0;font-size:13px;color:var(--gr2);}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
-.duo-col h5{font-family:var(--disp);font-size:13px;font-weight:700;margin-bottom:7px;}
-.duo-col.good h5{color:var(--gr2);}.duo-col.bad-h h5{color:var(--re);}
-@media(max-width:600px){.duo{grid-template-columns:1fr;}}
+.an-ico{font-size:22px;flex-shrink:0;line-height:1;}
 
-/* ══ MISIONES ══ */
-.mision{background:var(--gr4);border:1.5px solid var(--gr3);border-left:5px solid var(--gr);border-radius:11px;padding:15px 18px;margin:13px 0;}
-.mision.am{background:var(--am4);border-color:var(--am3);border-left-color:var(--am);}
-.mision.or{background:var(--or4);border-color:var(--or3);border-left-color:var(--or);}
-.mision.cy{background:var(--cy4);border-color:var(--cy3);border-left-color:var(--cy);}
-.mision.pu{background:var(--pu4);border-color:var(--pu3);border-left-color:var(--pu);}
-.mision.bl{background:var(--bl4);border-color:var(--bl3);border-left-color:var(--bl);}
-.mision-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
-.mision-num{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;background:var(--gr3);color:var(--gr2);padding:3px 10px;border-radius:12px;}
-.mision.am .mision-num{background:var(--am3);color:var(--am);}
-.mision.or .mision-num{background:var(--or3);color:var(--or);}
-.mision.cy .mision-num{background:var(--cy3);color:var(--cy);}
-.mision.pu .mision-num{background:var(--pu3);color:var(--pu);}
-.mision.bl .mision-num{background:var(--bl3);color:var(--bl);}
-.mision-tit{font-family:var(--disp);font-size:15px;font-weight:600;color:var(--dk);}
-.mision p{font-size:14px;color:var(--txt);margin:5px 0;}
+.interactive-box{background:var(--bg2);border:2px solid var(--border);border-radius:14px;padding:18px;margin:18px 0;box-shadow:var(--shadow-sm);}
+.box-lbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gr2);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.box-lbl.pu{color:var(--pu);}
+.box-lbl.bl{color:var(--bl);}
+.box-lbl.or{color:var(--or);}
 
-/* ══ PROYECTO CARDS ══ */
-.proyecto-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0;}
-.proyecto{border-radius:14px;overflow:hidden;border:2px solid;transition:box-shadow .2s,transform .2s;}
-.proyecto:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);transform:translateY(-2px);}
-.proy-hdr{padding:16px 18px;}
-.proy-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:6px;}
-.proy-tit{font-family:var(--disp);font-size:17px;font-weight:700;color:#fff;margin-bottom:3px;}
-.proy-sub{font-size:12px;color:rgba(255,255,255,.65);}
-.proy-body{padding:14px 18px;font-size:13px;line-height:1.65;}
-.proy-item{padding:2px 0;display:flex;align-items:flex-start;gap:6px;}
-.proy-item::before{content:"›";font-weight:700;flex-shrink:0;}
-.proy-rec{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:6px;margin-top:11px;display:inline-block;font-weight:700;}
+.controls-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:14px;}
+.ctl-group{display:flex;flex-direction:column;gap:5px;}
+.ctl-label{font-size:12px;font-weight:600;color:var(--muted);font-family:var(--mono);}
+.ctl-input,.ctl-select{background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--mono);font-size:13.5px;padding:8px 12px;border-radius:8px;outline:none;transition:all .2s;}
+.ctl-input:focus,.ctl-select:focus{border-color:var(--gr);box-shadow:0 0 0 3px rgba(16,185,129,0.15);}
+.ctl-btn{background:var(--gr);color:#fff;border:none;font-family:var(--sans);font-size:13.5px;font-weight:700;padding:10px 20px;border-radius:8px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;justify-content:center;}
+.ctl-btn:hover{background:var(--gr2);transform:translateY(-1px);}
+.ctl-btn.pu{background:var(--pu);}
+.ctl-btn.pu:hover{background:var(--pu2);}
+.ctl-btn.or{background:var(--or);}
 
-/* ══ TIMELINE ══ */
-.timeline{display:flex;flex-direction:column;gap:0;margin:16px 0;}
-.tl-item{display:flex;gap:14px;align-items:flex-start;padding-bottom:22px;position:relative;}
-.tl-item::before{content:'';position:absolute;left:16px;top:36px;bottom:0;width:2px;background:var(--dim);}
-.tl-item:last-child::before{display:none;}
-.tl-dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;border:2px solid;z-index:1;}
-.dot-hecho{background:var(--gr3);border-color:var(--gr);}
-.dot-prox{background:var(--am3);border-color:var(--am);}
-.dot-fut{background:var(--bg3);border-color:var(--dim);}
-.tl-body{flex:1;padding-top:4px;}
-.tl-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
-.badge-hecho{color:var(--gr2);}.badge-prox{color:var(--am);}.badge-fut{color:var(--muted);}
-.tl-tit{font-family:var(--disp);font-size:15px;font-weight:600;color:var(--dk);margin-bottom:4px;}
-.tl-items{font-size:13px;color:var(--muted);line-height:1.9;}
-.tl-items span{display:block;}
-.tl-items span::before{content:'› ';color:var(--gr);font-weight:700;}
+.out-terminal{background:#081017;color:#38bdf8;border-radius:10px;padding:14px 16px;font-family:var(--mono);font-size:13px;line-height:1.65;white-space:pre-wrap;min-height:60px;border:1px solid rgba(255,255,255,0.1);margin-top:10px;}
 
-/* ══ IF VISUALIZER ══ */
-.if-viz{background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:16px;margin:14px 0;}
-.if-block{display:flex;align-items:stretch;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:5px;transition:all .3s;}
-.if-block.activo{border-color:var(--gr);box-shadow:0 0 0 3px rgba(22,101,52,.1);}
-.if-block.skip{opacity:.35;}
-.if-kw{background:#0d1117;color:#ff7b72;font-family:var(--mono);font-size:13px;padding:10px 12px;font-weight:600;display:flex;align-items:center;min-width:50px;}
-.if-cond{flex:1;background:var(--card);padding:10px 12px;font-family:var(--mono);font-size:12px;color:var(--muted);}
-.if-res{background:var(--bg3);padding:10px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);min-width:80px;text-align:right;}
-.if-block.activo .if-cond{color:var(--dk);font-weight:600;}
-.if-block.activo .if-res{background:var(--gr3);color:var(--gr2);font-weight:700;}
+/* ══ TABLES & CHALLENGES ══ */
+.tbl-wrap{width:100%;overflow-x:auto;margin:14px 0;border-radius:12px;border:1.5px solid var(--border);box-shadow:var(--shadow-sm);}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px;}
+.tbl th{background:var(--bg2);color:var(--muted);font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:12px 16px;text-align:left;border-bottom:1.5px solid var(--border);}
+.tbl td{padding:12px 16px;border-bottom:1px solid var(--dim);vertical-align:top;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--bg2);}
 
-/* ══ DEMO ══ */
-.demo{background:var(--bg2);border:1.5px solid var(--border);border-radius:11px;padding:16px;margin:14px 0;}
-.demo-lbl{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:12px;font-weight:600;}
-.demo-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-bottom:10px;}
-.demo-grp{display:flex;flex-direction:column;gap:4px;}
-.demo-gl{font-size:12px;color:var(--muted);font-weight:500;}
-.demo-in,.demo-sel{background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--mono);font-size:14px;padding:8px 10px;border-radius:7px;width:120px;outline:none;transition:border-color .2s;}
-.demo-in:focus,.demo-sel:focus{border-color:var(--gr);}
-.demo-btn{background:var(--gr);color:#fff;border:none;font-family:var(--sans);font-size:13px;font-weight:700;padding:9px 17px;border-radius:7px;cursor:pointer;transition:background .2s,transform .1s;}
-.demo-btn:hover{background:var(--gr2);}
-.demo-btn:active{transform:scale(.96);}
-.demo-out{background:#0d1117;color:#e6edf3;border-radius:9px;padding:13px 15px;font-family:var(--mono);font-size:13px;min-height:50px;white-space:pre-wrap;line-height:1.7;margin-top:10px;border:1px solid rgba(255,255,255,.08);}
-
-/* ══ SENSOR VISUAL ══ */
-.sensor-box{background:#0f2318;border-radius:14px;padding:20px;margin:16px 0;display:flex;flex-direction:column;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
-.sensor-box::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(134,239,172,.06) 1px,transparent 0);background-size:22px 22px;pointer-events:none;}
-.sensor-data{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;position:relative;z-index:1;}
-.sensor-val{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:12px;text-align:center;}
-.sv-label{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
-.sv-num{font-family:var(--mono);font-size:23px;font-weight:600;color:#86efac;}
-.sv-unit{font-size:12px;color:rgba(255,255,255,.4);}
-.sv-estado{font-family:var(--mono);font-size:13px;margin-top:6px;font-weight:600;}
-.sensor-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;}
-.sc-lbl{color:rgba(255,255,255,.5);font-size:13px;}
-.sc-slider{width:150px;accent-color:var(--gr);}
-
-/* ══ DESAFÍO GAMIFICADO (traza el código) ══ */
-.chall{background:var(--card);border:2px solid var(--pu3);border-radius:14px;padding:0;margin:16px 0;overflow:hidden;}
-.chall-hdr{background:linear-gradient(135deg,var(--pu),var(--bl));padding:12px 17px;display:flex;align-items:center;gap:10px;}
-.chall-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);}
-.chall-tit{font-family:var(--disp);font-size:15px;font-weight:700;color:#fff;flex:1;}
-.chall-xp{font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;white-space:nowrap;}
-.chall-body{padding:16px 17px;}
-.chall-q{font-size:14px;font-weight:600;color:var(--dk);margin-bottom:10px;}
-.chall-opts{display:flex;flex-direction:column;gap:7px;margin-top:10px;}
-.chall-opt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 14px;border-radius:9px;cursor:pointer;text-align:left;transition:all .18s;}
-.chall-opt:hover:not(:disabled){background:var(--pu4);border-color:var(--pu3);transform:translateX(3px);}
-.chall-opt:focus-visible{outline:2px solid var(--pu);outline-offset:2px;}
-.chall-opt.ok{background:var(--gr4)!important;border-color:var(--gr)!important;color:var(--gr2)!important;font-weight:700;}
-.chall-opt.no{background:var(--re3)!important;border-color:#fca5a5!important;color:var(--re)!important;}
-.chall-opt:disabled{cursor:default;}
-.chall-fb{display:none;margin-top:11px;padding:11px 14px;border-radius:9px;font-size:13px;line-height:1.55;}
-.chall-fb.show{display:block;animation:slideDown .3s ease;}
+.chall{background:var(--card);border:2px solid var(--pu3);border-radius:16px;margin:20px 0;overflow:hidden;box-shadow:var(--shadow-sm);}
+.chall-hdr{background:linear-gradient(135deg,var(--pu),var(--bl));padding:14px 20px;display:flex;align-items:center;gap:12px;color:#fff;}
+.chall-badge{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.8);}
+.chall-tit{font-family:var(--disp);font-size:16px;font-weight:700;flex:1;}
+.chall-xp{font-family:var(--mono);font-size:11px;font-weight:700;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:12px;}
+.chall-body{padding:18px 20px;}
+.chall-opts{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+.chall-opt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:600;padding:12px 16px;border-radius:10px;cursor:pointer;text-align:left;transition:all .2s;}
+.chall-opt:hover:not(:disabled){background:var(--pu4);border-color:var(--pu);transform:translateX(4px);}
+.chall-opt.ok{background:var(--gr4)!important;border-color:var(--gr)!important;color:var(--gr2)!important;}
+.chall-opt.no{background:var(--re3)!important;border-color:var(--re)!important;color:var(--re)!important;}
+.chall-fb{display:none;margin-top:14px;padding:12px 16px;border-radius:10px;font-size:14px;line-height:1.5;}
+.chall-fb.show{display:block;animation:fadeIn 0.3s ease;}
 .chall-fb.win{background:var(--gr4);color:var(--gr2);border:1.5px solid var(--gr3);}
-.chall-fb.lose{background:var(--re3);color:var(--re);border:1.5px solid #fca5a5;}
-.chall.done{border-color:var(--gr3);}
-.chall.done .chall-hdr{background:linear-gradient(135deg,var(--gr),var(--gr2));}
+.chall-fb.lose{background:var(--re3);color:var(--re);border:1.5px solid var(--re3);}
 
-/* ══ QUIZ ══ */
-.nom-row{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:11px;margin-bottom:14px;background:var(--gr4);border:1.5px solid var(--gr3);flex-wrap:wrap;}
-.nom-lbl{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
-.nom-in{flex:1;min-width:180px;background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:15px;font-weight:500;padding:9px 13px;border-radius:7px;outline:none;transition:border-color .2s;}
-.nom-in:focus{border-color:var(--gr);}
-.qcard{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:18px;margin-bottom:11px;transition:all .3s;}
-.qcard.ok{border-color:var(--gr)!important;background:var(--gr4);}
-.qcard.mal{border-color:#fca5a5!important;background:var(--re3);}
-.qnum{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:8px;}
-.qq{font-family:var(--disp);font-size:15px;font-weight:600;color:var(--dk);margin-bottom:8px;}
-.qcode{background:#0d1117;border-radius:9px;padding:11px 15px;font-family:var(--mono);font-size:13px;color:#e6edf3;margin-bottom:12px;white-space:pre;overflow-x:auto;line-height:1.65;border:1px solid rgba(255,255,255,.08);}
-.qopts{display:flex;flex-direction:column;gap:6px;}
-.qopt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 14px;border-radius:8px;cursor:pointer;text-align:left;transition:all .2s;}
-.qopt:hover:not(:disabled){background:var(--gr4);border-color:var(--gr3);}
-.qopt:focus-visible{outline:2px solid var(--gr);outline-offset:2px;}
+/* Quiz Styling */
+.qcard{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;transition:all .25s;}
+.qcard.ok{border-color:var(--gr);background:var(--gr4);}
+.qcard.mal{border-color:var(--re);background:var(--re3);}
+.qnum{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:8px;}
+.qq{font-family:var(--disp);font-size:16px;font-weight:700;color:var(--dk);margin-bottom:10px;}
+.qopts{display:flex;flex-direction:column;gap:8px;}
+.qopt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:500;padding:11px 15px;border-radius:9px;cursor:pointer;text-align:left;transition:all .2s;}
+.qopt:hover:not(:disabled){background:var(--gr4);border-color:var(--gr);}
 .qopt.ca{background:var(--gr4)!important;border-color:var(--gr)!important;color:var(--gr2)!important;font-weight:700;}
-.qopt.in{background:var(--re3)!important;border-color:#fca5a5!important;color:var(--re)!important;}
-.qopt:disabled{cursor:default;}
-.qfb{display:none;margin-top:9px;padding:11px 14px;border-radius:8px;font-size:13px;line-height:1.5;}
-.qfb.show{display:block;}
-.qfb-ok{background:var(--gr4);color:var(--gr2);border:1.5px solid var(--gr3);}
-.qfb-mal{background:var(--re3);color:var(--re);border:1.5px solid #fca5a5;}
-.score{display:none;border-radius:14px;padding:30px;text-align:center;margin-top:14px;background:var(--gr4);border:2px solid var(--gr3);}
-.score.show{display:block;animation:pop .4s ease;}
-@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
-.sc-n{font-family:var(--disp);font-size:58px;font-weight:700;color:var(--gr2);line-height:1;margin-bottom:8px;}
-.sc-msg{font-family:var(--disp);font-size:18px;font-weight:700;color:var(--dk);margin-bottom:4px;}
-.sc-sub{font-size:14px;color:var(--muted);}
-.send-box{margin-top:16px;padding:16px 18px;border-radius:10px;display:none;background:var(--card);border:1.5px solid var(--border);}
-.send-box.show{display:block;}
-.send-txt{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5;}
-.send-btn{background:var(--gr);color:#fff;border:none;font-family:var(--sans);font-size:15px;font-weight:700;padding:12px 20px;border-radius:8px;cursor:pointer;width:100%;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.send-btn:hover{background:var(--gr2);}
-.send-btn:disabled{opacity:.5;cursor:not-allowed;}
-.send-ok{display:none;text-align:center;padding:10px;margin-top:10px;border-radius:8px;font-size:14px;font-weight:600;background:var(--gr4);color:var(--gr2);border:1.5px solid var(--gr3);}
-.send-ok.show{display:block;}
-.retry-btn{margin-top:12px;border:1.5px solid var(--border);background:var(--card);font-family:var(--sans);font-weight:600;font-size:14px;padding:9px 20px;border-radius:8px;cursor:pointer;color:var(--muted);transition:all .2s;}
-.retry-btn:hover{border-color:var(--gr);color:var(--gr);}
+.qopt.in{background:var(--re3)!important;border-color:var(--re)!important;color:var(--re)!important;}
 
-/* ══ LOGROS ══ */
-.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:16px 0;}
-.ach{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:all .3s;position:relative;opacity:.5;filter:grayscale(1);}
-.ach.unlocked{opacity:1;filter:none;border-color:var(--xp);box-shadow:0 3px 12px rgba(245,158,11,.15);}
-.ach-ico{font-size:30px;margin-bottom:7px;}
-.ach-name{font-family:var(--disp);font-size:13px;font-weight:700;color:var(--dk);margin-bottom:2px;}
-.ach-desc{font-size:11px;color:var(--muted);line-height:1.35;}
-.ach.unlocked::after{content:'✓';position:absolute;top:8px;right:9px;color:var(--xp2);font-weight:700;font-size:13px;}
+/* Toast Notification */
+.xp-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dk);color:#fff;padding:12px 24px;border-radius:30px;font-family:var(--disp);font-weight:700;font-size:15px;z-index:500;box-shadow:0 10px 30px rgba(0,0,0,0.4);display:flex;align-items:center;gap:10px;opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;border:2px solid var(--gr);}
+.xp-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
 
-footer{text-align:center;padding:28px;border-top:1.5px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;background:var(--bg2);}
-footer b{color:var(--dk);}
-
-/* ══ MOBILE ══ */
 @media(max-width:640px){
-  .hud-top{padding:6px 12px;}.hud-brand{font-size:9px;}
-  .xp-strip{padding:5px 12px 7px;gap:8px;}
-  .rank-name{font-size:12px;}
-  .hero{padding:34px 14px 30px;}
-  main{padding:26px 14px 80px;}
-  nav{top:43px;}
-  .nb{padding:10px 9px;font-size:9px;}
-  .card-hdr{grid-template-columns:44px 1fr;}
-  .proyecto-grid{grid-template-columns:1fr;}
-  .demo-in,.demo-sel{width:100px;font-size:13px;}
-  .code{font-size:12px;padding:13px;}
-  .qcode,.chall .code{font-size:11.5px;}
-}
-@media(min-width:641px){.hero{padding:54px 24px 44px;}main{padding:38px 24px 96px;}}
-
-/* ══ PRINT ══ */
-@media print{
-  @page{margin:1.8cm 1.5cm;}
-  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  body{background:#fff!important;color:#000!important;font-size:10.5pt;line-height:1.5;}
-  .hud,nav,.demo,.if-viz,.sensor-box,.chall-opts,.chall-fb,.chall-xp,
-  .qopts,.qfb,.score,.retry-btn,.send-box,.nom-row,.hbtn,.xp-toast,.card-chev{display:none!important;}
-  .hero{background:#0f2318!important;padding:14pt 0 10pt!important;border-bottom:2pt solid #000;}
-  .hero::before,.hero::after{display:none!important;}
-  .hero-eye,.hero-tags{display:none!important;}
-  h1{color:#fff!important;font-size:19pt;}
-  .h-gr,.h-or{color:#fff!important;}
-  .hero-desc{color:rgba(255,255,255,.75)!important;font-size:10pt;}
-  section{break-inside:avoid;margin-bottom:12pt;}
-  .s-eye{color:#000!important;font-size:8pt;}.s-lvl{background:#eee!important;color:#000!important;}
-  .s-h2{font-size:14pt;color:#000!important;border-bottom:1pt solid #000;padding-bottom:2pt;margin-bottom:4pt;}
-  .s-sub{font-size:9.5pt;color:#444!important;}
-  .div{background:#000!important;height:.5pt;}
-  .card{border:1pt solid #ccc!important;background:#fff!important;margin-bottom:6pt;break-inside:avoid;}
-  .card-hdr{background:#f0f0f0!important;border-bottom:1pt solid #ccc!important;}
-  .card-ico{background:#fff!important;border-right:1pt solid #ccc!important;}
-  .card-tit{color:#000!important;font-size:11pt;}.card-tag{color:#555!important;}
-  .card-body{display:block!important;border-top:1pt solid #eee!important;}
-  .card-body p{color:#000!important;}
-  .code{background:#f8f8f8!important;color:#000!important;border:1pt solid #ddd!important;border-left:3pt solid #555!important;font-size:8pt!important;padding:6pt!important;white-space:pre-wrap!important;}
-  .code-lbl{display:none!important;}
-  .cm{color:#666!important;font-style:italic!important;}
-  .kw,.st,.nm,.fn,.op,.cls,.slf{color:#000!important;font-weight:700!important;}
-  .anal{background:#f4f4f4!important;border-left:3pt solid #555!important;color:#000!important;}
-  .nota,.alerta,.tip{background:#f8f8f8!important;border:1pt solid #ccc!important;border-left:3pt solid #555!important;color:#000!important;}
-  .nota b,.alerta b{color:#000!important;font-weight:700!important;}
-  .mision{background:#f4f4f4!important;border:1pt solid #ccc!important;border-left:4pt solid #555!important;break-inside:avoid;}
-  .mision-num{background:#eee!important;color:#000!important;}
-  .mision-tit,.mision p{color:#000!important;}
-  .chall{border:1pt solid #ccc!important;break-inside:avoid;}
-  .chall-hdr{background:#1a1a1a!important;}.chall-tit,.chall-badge{color:#fff!important;}
-  .chall-q{color:#000!important;}
-  .tbl-wrap{border:1pt solid #ccc!important;}
-  .tbl th{background:#eee!important;color:#000!important;border-bottom:1pt solid #aaa!important;}
-  .tbl td{color:#000!important;border-bottom:.5pt solid #ddd!important;}
-  .ch{background:#eee!important;color:#000!important;border:1pt solid #aaa!important;}
-  .tl-dot{background:#eee!important;border-color:#555!important;}
-  .tl-badge,.tl-tit{color:#000!important;}.tl-items{color:#333!important;}
-  .proyecto{border:1pt solid #ccc!important;break-inside:avoid;}
-  .proy-hdr{background:#1a1a1a!important;padding:10pt 12pt!important;}
-  .proy-tit,.proy-sub{color:#fff!important;}.proy-body{color:#000!important;}
-  .ach{opacity:1!important;filter:none!important;border:1pt solid #ccc!important;}
-  footer{border-top:1pt solid #ccc!important;font-size:8pt!important;color:#555!important;}
-  footer b{color:#000!important;}
+  main{padding:20px 14px 80px;}
+  .controls-grid{grid-template-columns:1fr;}
+  .card-hdr{grid-template-columns:48px 1fr 30px;}
+  .code{font-size:12px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══════ HUD: barra de estado del jugador ══════ -->
+<!-- ══════ HUD: Barra de Estado ══════ -->
 <div class="hud">
   <div class="hud-top">
-    <div class="hud-brand"><span class="hud-live"></span>Esc. Industrial N&deg;9 &middot; <b>Consola de Control ACPI &middot; 2026</b></div>
+    <div class="hud-brand"><span class="hud-live"></span>Esc. Industrial N°9 · <b>Consola ACPI · 2026</b></div>
     <div class="hud-acts">
-      <button class="hbtn" id="themeBtn" onclick="toggleTheme()">&#9790; Oscuro</button>
-      <button class="hbtn" onclick="window.print()">&#128424; PDF</button>
+      <button class="hbtn" id="themeBtn" onclick="toggleTheme()">🌙 Oscuro</button>
+      <button class="hbtn" onclick="window.print()">🖨️ PDF</button>
     </div>
   </div>
   <div class="xp-strip">
     <div class="rank-badge">
-      <div class="rank-ico" id="rankIco">&#127793;</div>
+      <div class="rank-ico" id="rankIco">🌱</div>
       <div class="rank-txt">
         <div class="rank-lvl">Rango</div>
         <div class="rank-name" id="rankName">Aprendiz</div>
@@ -418,29 +234,29 @@ footer b{color:var(--dk);}
   </div>
 </div>
 
-<div class="xp-toast" id="xpToast"><span id="xpToastIco">&#9889;</span><span id="xpToastTxt">+10 XP</span></div>
+<div class="xp-toast" id="xpToast"><span id="xpToastIco">⚡</span><span id="xpToastTxt">+10 XP</span></div>
 
 <!-- ══════ HERO ══════ -->
 <header class="hero">
   <div class="hero-in">
-    <div class="hero-eye"><span class="eye-dot"></span>Taller de Programaci&oacute;n &middot; Ciclo Superior &middot; Misi&oacute;n 2026</div>
-    <h1>Program&aacute; la <span class="h-gr">maqueta</span>.<br>Domin&aacute; el <span class="h-or">c&oacute;digo</span>.</h1>
-    <p class="hero-desc">Sos parte del equipo de control clim&aacute;tico de la casa dom&oacute;tica. Sensores, decisiones, actuadores. Cada m&oacute;dulo que domines suma XP y te acerca al rango de <b style="color:#c4b5fd;">Arquitecto de Sistemas</b>. Aprend&eacute;s programando algo que existe de verdad.</p>
+    <div class="hero-eye"><span class="hud-live"></span>Taller de Programación · Ciclo Superior · Misión 2026</div>
+    <h1>Programá la <span class="h-gr">maqueta</span>.<br>Dominá el <span class="h-or">código</span>.</h1>
+    <p class="hero-desc">Sos parte del equipo de control climático de la casa domótica. Sensores, decisiones, funciones y objetos. Cada módulo que domines suma XP y te acerca al rango de <b style="color:#c084fc;">Arquitecto de Sistemas</b>.</p>
     <div class="hero-tags">
       <span class="tag tag-gr">Variables</span>
       <span class="tag tag-gr">if / for / while</span>
-      <span class="tag tag-or">Funciones</span>
-      <span class="tag tag-bl">Diccionarios</span>
-      <span class="tag tag-pu">Objetos (POO)</span>
-      <span class="tag tag-gr">DHT22 + ESP32</span>
+      <span class="tag tag-or">Funciones Avanzadas</span>
+      <span class="tag tag-or">Diccionarios</span>
+      <span class="tag tag-pu">Objetos & Herencia</span>
+      <span class="tag tag-gr">ESP32 + Control</span>
     </div>
   </div>
 </header>
 
-<!-- ══════ MAPA DE MISIONES ══════ -->
+<!-- ══════ NAV MAP ══════ -->
 <nav>
   <div class="nav-in" id="navIn">
-    <button class="nb on" data-sec="proyecto" onclick="ir('proyecto')">Misi&oacute;n</button>
+    <button class="nb on" data-sec="proyecto" onclick="ir('proyecto')">Misión</button>
     <button class="nb" data-sec="recorrido" onclick="ir('recorrido')">Mapa</button>
     <button class="nb" data-sec="variables" onclick="ir('variables')">Variables</button>
     <button class="nb" data-sec="tipos" onclick="ir('tipos')">Tipos</button>
@@ -460,1391 +276,833 @@ footer b{color:var(--dk);}
 
 <main>
 
-<!-- ═══ PROYECTO / MISIÓN ═══════════════════════════════ -->
+<!-- ═══ PROYECTO ═══ -->
 <section id="proyecto">
-  <div class="s-eye">// Briefing de la misi&oacute;n <span class="s-lvl">Nivel 0</span></div>
-  <h2 class="s-h2">Red Clim&aacute;tica de la Maqueta</h2>
-  <p class="s-sub">Este es el hilo conductor del a&ntilde;o. Todo lo que aprend&eacute;s ac&aacute; termina corriendo en una casa dom&oacute;tica de verdad, construida con 3&deg; MMO y los equipos de 4&deg; y 5&deg;.</p>
+  <div class="s-eye">// Briefing de la Misión <span class="s-lvl">Nivel 0</span></div>
+  <h2 class="s-h2">Red Climática de la Maqueta Domótica</h2>
+  <p class="s-sub">El hilo conductor del año: el código corre en una vivienda a escala real con sensores de temperatura, humedad y actuadores inteligentes.</p>
   <div class="div"></div>
-
-  <div class="mision" style="margin-bottom:16px;">
-    <div class="mision-hdr"><span class="mision-num">Tu rol</span><span class="mision-tit">Equipo de control clim&aacute;tico</span></div>
-    <p>3&deg; MMO construye la maqueta de la vivienda. Los equipos de 4&deg; y 5&deg; dise&ntilde;an la dom&oacute;tica. <b>Ustedes ponen el cerebro:</b> sensores en cada habitaci&oacute;n, un programa que lee los datos y activa alertas o actuadores seg&uacute;n las condiciones. El c&oacute;digo lo escriben en Python (PC) y en C++ (ESP32).</p>
-  </div>
-
-  <div class="proyecto-grid">
-    <div class="proyecto" style="border-color:#166534;">
-      <div class="proy-hdr" style="background:#166534;">
-        <div class="proy-badge">T1 &mdash; Imperativo</div>
-        <div class="proy-tit">&#127777;&#65039; Guardián de la Habitación</div>
-        <div class="proy-sub">Un sensor &rarr; una habitaci&oacute;n &rarr; decisiones simples</div>
-      </div>
-      <div class="proy-body" style="background:var(--gr4);color:var(--gr2);">
-        <div class="proy-item">DHT22 en el living de la maqueta</div>
-        <div class="proy-item">Python lee temperatura y humedad</div>
-        <div class="proy-item">if/elif/else clasifica el estado</div>
-        <div class="proy-item">LED rojo si la temperatura pasa el umbral</div>
-        <div class="proy-rec" style="background:var(--gr3);color:var(--gr2);">&#10003; Trimestre 1</div>
-      </div>
-    </div>
-    <div class="proyecto" style="border-color:#b45309;">
-      <div class="proy-hdr" style="background:#b45309;">
-        <div class="proy-badge">T2 &mdash; Funcional</div>
-        <div class="proy-tit">&#127968; Red Multi-Punto &#11088;</div>
-        <div class="proy-sub">Un sensor por zona &rarr; funciones &rarr; ESP32</div>
-      </div>
-      <div class="proy-body" style="background:var(--am4);color:var(--am2);">
-        <div class="proy-item">Sensor por zona: dormitorio, estar, cocina</div>
-        <div class="proy-item">Funciones que analizan cada zona</div>
-        <div class="proy-item">Un diccionario guarda toda la casa</div>
-        <div class="proy-item">Python y ESP32 controlan ventilador y calefactor</div>
-        <div class="proy-rec" style="background:var(--am3);color:var(--am2);">&#11088; Hilo conductor</div>
-      </div>
-    </div>
-    <div class="proyecto" style="border-color:#7c3aed;">
-      <div class="proy-hdr" style="background:#7c3aed;">
-        <div class="proy-badge">T3 &mdash; Objetos</div>
-        <div class="proy-tit">&#129302; Controlador Inteligente</div>
-        <div class="proy-sub">Clases &rarr; Herencia &rarr; Expot&eacute;cnica</div>
-      </div>
-      <div class="proy-body" style="background:var(--pu4);color:var(--pu);">
-        <div class="proy-item">Clase <code>Sensor</code> y clase <code>Habitacion</code></div>
-        <div class="proy-item">Clase <code>Maqueta</code> que gestiona todo</div>
-        <div class="proy-item">Herencia: sensores especializados</div>
-        <div class="proy-item">Sistema completo para Expot&eacute;cnica</div>
-        <div class="proy-rec" style="background:var(--pu3);color:var(--pu);">Cierre del a&ntilde;o</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sensor-box">
-    <div style="font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);align-self:flex-start;position:relative;z-index:1;">&#9654; Consola en vivo &mdash; mové los sensores</div>
-    <div class="sensor-controls">
-      <span class="sc-lbl">Temp:</span>
-      <input type="range" class="sc-slider" id="sliderTemp" min="10" max="45" value="22" oninput="updateSensor()" aria-label="Temperatura simulada">
-      <span class="sc-lbl">Humedad:</span>
-      <input type="range" class="sc-slider" id="sliderHum" min="20" max="95" value="55" oninput="updateSensor()" aria-label="Humedad simulada">
-    </div>
-    <div class="sensor-data">
-      <div class="sensor-val"><div class="sv-label">Temperatura</div><div class="sv-num" id="svTemp">22.0</div><div class="sv-unit">&deg;C</div></div>
-      <div class="sensor-val"><div class="sv-label">Humedad</div><div class="sv-num" id="svHum">55.0</div><div class="sv-unit">%</div></div>
-    </div>
-    <div class="sensor-val" style="width:100%;background:rgba(255,255,255,.08);position:relative;z-index:1;">
-      <div class="sv-label">Estado del sistema</div>
-      <div class="sv-estado" id="svEstado" style="color:#86efac;">&#128994; CONFORT</div>
-    </div>
-    <div class="demo-out" id="sensorCode" style="width:100%;font-size:12px;position:relative;z-index:1;"></div>
-  </div>
 </section>
 
-<!-- ═══ RECORRIDO / MAPA ════════════════════════════════ -->
+<!-- ═══ RECORRIDO ═══ -->
 <section id="recorrido">
-  <div class="s-eye">// Mapa de progreso</div>
-  <h2 class="s-h2">El recorrido del a&ntilde;o</h2>
-  <p class="s-sub">Tres trimestres, tres paradigmas, un proyecto que crece con vos. Ac&aacute; est&aacute; el camino completo.</p>
+  <div class="s-eye">// Ruta de Aprendizaje</div>
+  <h2 class="s-h2">El Camino hacia Arquitecto</h2>
+  <p class="s-sub">Tres trimestres para dominar desde la lógica imperativa básica hasta el diseño de software orientado a objetos y sistemas embebidos.</p>
   <div class="div"></div>
-
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot dot-hecho">&#10003;</div>
-      <div class="tl-body">
-        <div class="tl-badge badge-hecho">&#9646; Primer trimestre &mdash; base imperativa</div>
-        <div class="tl-tit">Algoritmos + control de flujo</div>
-        <div class="tl-items">
-          <span>Variables, tipos, expresiones</span>
-          <span>Operadores y decisiones (if/elif/else)</span>
-          <span>Repetici&oacute;n: for y while</span>
-          <span>Proyecto: Guard&iacute;an de la Habitaci&oacute;n</span>
-        </div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot dot-prox">&#9658;</div>
-      <div class="tl-body">
-        <div class="tl-badge badge-prox">&#9655; Segundo trimestre &mdash; ac&aacute; estamos</div>
-        <div class="tl-tit">Funciones + Diccionarios + ESP32</div>
-        <div class="tl-items">
-          <span>Funciones: def, return, par&aacute;metros, scope</span>
-          <span>Diccionarios: la casa entera en una estructura</span>
-          <span>Modularizaci&oacute;n y conexi&oacute;n con ESP32</span>
-          <span>Proyecto: Red Multi-Punto</span>
-        </div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot dot-fut">&#129302;</div>
-      <div class="tl-body">
-        <div class="tl-badge badge-fut">Tercer trimestre &mdash; lo que viene</div>
-        <div class="tl-tit">Programaci&oacute;n Orientada a Objetos</div>
-        <div class="tl-items">
-          <span>Objetos, clases, atributos y m&eacute;todos</span>
-          <span>__init__, self y encapsulamiento</span>
-          <span>Herencia y polimorfismo</span>
-          <span>Sistema integrado para Expot&eacute;cnica</span>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- ═══ VARIABLES ═══════════════════════════════════════ -->
+<!-- ═══ VARIABLES / TIPOS / IO / OPERADORES / CONTROL FLOW (Shortened summary blocks for context) ═══ -->
 <section id="variables" data-xp="10">
-  <div class="s-eye">// M&oacute;dulo 01 <span class="s-lvl">+10 XP</span></div>
-  <h2 class="s-h2">Variables</h2>
-  <p class="s-sub">Una caja con nombre donde el programa guarda un valor para usarlo despu&eacute;s.</p>
+  <div class="s-eye">// Módulo 01 <span class="s-lvl">+10 XP</span></div>
+  <h2 class="s-h2">Variables y Estado</h2>
+  <p class="s-sub">Cajas con nombre para almacenar lecturas de sensores y banderas de estado.</p>
   <div class="div"></div>
   <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128230;</div><div class="card-inf"><div class="card-tag">Concepto base</div><div class="card-tit">Variables y estado del programa</div></div><span class="card-chev">&#9654;</span></div>
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">📦</div><div class="card-inf"><div class="card-tag">Concepto Base</div><div class="card-tit">Asignación y Nombres</div></div><span class="card-chev">▶</span></div>
     <div class="card-body">
-      <div class="anal"><div class="an-ico">&#127991;&#65039;</div><div>En el panel de la maqueta cada indicador tiene nombre: TEMP_LIVING, HUM_COCINA, VENTILADOR_ON. Una variable hace lo mismo: le pon&eacute;s nombre a cada valor que necesit&aacute;s recordar.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># Variables de la maqueta</span>
-temp_living    = <span class="nm">22.5</span>   <span class="cm"># temperatura del living en °C</span>
-hum_living     = <span class="nm">58.0</span>   <span class="cm"># humedad relativa en %</span>
-zona           = <span class="st">"Living"</span>
-ventilador_on  = <span class="kw">False</span>  <span class="cm"># el ventilador está apagado</span>
-umbral_calor   = <span class="nm">26.0</span>   <span class="cm"># límite para activar ventilador</span>
-
-<span class="fn">print</span>(temp_living)            <span class="cm"># → 22.5</span>
-temp_living += <span class="nm">0.5</span>           <span class="cm"># sube 0.5 °C</span>
-ventilador_on = <span class="kw">True</span>         <span class="cm"># enciende el ventilador</span></div>
-      <div class="alerta"><b>Reglas para los nombres:</b> solo letras, n&uacute;meros y gui&oacute;n bajo. Sin espacios, sin tildes, sin empezar con n&uacute;mero. <code>temp_living</code> vale. <code>temperatura del living</code> no.</div>
-      <div class="nota"><b>= no es "igual", es "asignar":</b> <code>temp_living = 22.5</code> se lee "temp_living ahora vale 22.5". Para comparar si dos cosas son iguales se usa <code>==</code>.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TIPOS ═══════════════════════════════════════════ -->
-<section id="tipos" data-xp="10">
-  <div class="s-eye">// M&oacute;dulo 02 <span class="s-lvl">+10 XP</span></div>
-  <h2 class="s-h2">Tipos de datos</h2>
-  <p class="s-sub">El tipo decide qu&eacute; guarda la variable y qu&eacute; se puede hacer con ella.</p>
-  <div class="div"></div>
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128290;</div><div class="card-inf"><div class="card-tag">Los 4 esenciales</div><div class="card-tit">int, float, str, bool</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Tipo</th><th>Qu&eacute; es</th><th>Cu&aacute;ndo</th><th>Ejemplo</th></tr></thead><tbody>
-        <tr><td><span class="ch ch-bl">int</span></td><td>Entero</td><td>Conteos exactos</td><td><code>cant_sensores = 3</code></td></tr>
-        <tr><td><span class="ch ch-am">float</span></td><td>Decimal</td><td>Mediciones</td><td><code>temperatura = 22.5</code></td></tr>
-        <tr><td><span class="ch ch-re">str</span></td><td>Texto</td><td>Nombres, mensajes</td><td><code>zona = "Living"</code></td></tr>
-        <tr><td><span class="ch ch-gr">bool</span></td><td>V/F</td><td>Estado on/off</td><td><code>ventilador = True</code></td></tr>
-      </tbody></table></div>
-      <div class="alerta"><b>El error cl&aacute;sico con input():</b> <code>"22.5"</code> con comillas es texto, no n&uacute;mero. Para operar hay que convertir: <code>float("22.5")</code> &rarr; 22.5</div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># Conversión de tipos — clave para trabajar con sensores</span>
-lectura_raw  = <span class="st">"22.5"</span>              <span class="cm"># viene del sensor como texto</span>
-temperatura  = <span class="fn">float</span>(lectura_raw)   <span class="cm"># → 22.5 (ahora es número)</span>
-temp_entera  = <span class="fn">int</span>(temperatura)     <span class="cm"># → 22 (corta, NO redondea)</span>
-msg = <span class="st">f"Living: {temperatura}°C — Confort"</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ I/O ═════════════════════════════════════════════ -->
-<section id="io" data-xp="10">
-  <div class="s-eye">// M&oacute;dulo 03 <span class="s-lvl">+10 XP</span></div>
-  <h2 class="s-h2">input() y print()</h2>
-  <p class="s-sub">Las puertas del programa: input() recibe datos, print() arma el dashboard.</p>
-  <div class="div"></div>
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#9000;&#65039;</div><div class="card-inf"><div class="card-tag">Entrada y salida</div><div class="card-tit">input() siempre devuelve texto</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal"><div class="an-ico">&#127989;</div><div>input() es como cuando el operador anota a mano la temperatura en el cuaderno. <b>Siempre lo recibe como texto</b>, aunque sea un n&uacute;mero. Tu trabajo es convertirlo.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># Dashboard de la maqueta — versión T1</span>
-zona        = <span class="fn">input</span>(<span class="st">"Nombre de la zona: "</span>)
-temperatura = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Temperatura (°C): "</span>))
-humedad     = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Humedad (%): "</span>))
-
-<span class="fn">print</span>(<span class="st">"=" * 40</span>)
-<span class="fn">print</span>(<span class="st">f"  ZONA: {zona.upper()}"</span>)
-<span class="fn">print</span>(<span class="st">f"  Temperatura: {temperatura:.1f} °C"</span>)  <span class="cm"># :.1f = 1 decimal</span>
-<span class="fn">print</span>(<span class="st">f"  Humedad:     {humedad:.1f} %"</span>)
-<span class="fn">print</span>(<span class="st">"=" * 40</span>)</div>
-      <div class="demo">
-        <div class="demo-lbl">&#9654; Prob&aacute; el dashboard en vivo</div>
-        <div class="demo-row">
-          <div class="demo-grp"><div class="demo-gl">Zona</div>
-            <select class="demo-sel" id="dZona"><option>Living</option><option>Dormitorio</option><option>Cocina</option><option>Ba&ntilde;o</option></select></div>
-          <div class="demo-grp"><div class="demo-gl">Temp (°C)</div><input class="demo-in" id="dTemp" type="number" value="22.5" step="0.5"></div>
-          <div class="demo-grp"><div class="demo-gl">Humedad (%)</div><input class="demo-in" id="dHum" type="number" value="58" step="1" min="0" max="100"></div>
-          <button class="demo-btn" onclick="demoIO()">&#9654; Dashboard</button>
-        </div>
-        <div class="demo-out" id="ioOut">Complet&aacute; los campos y ejecut&aacute;.</div>
+      <div class="code-wrap">
+        <pre class="code"><span class="cm"># Variables del sistema domótico</span>
+temp_living = <span class="nm">22.5</span>
+hum_living = <span class="nm">58.0</span>
+zona = <span class="st">"Living"</span>
+ventilador_on = <span class="kw">False</span></pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ OPERADORES ══════════════════════════════════════ -->
-<section id="operadores" data-xp="10">
-  <div class="s-eye">// M&oacute;dulo 04 <span class="s-lvl">+10 XP</span></div>
-  <h2 class="s-h2">Operadores</h2>
-  <p class="s-sub">Los s&iacute;mbolos que calculan, comparan y combinan condiciones.</p>
-  <div class="div"></div>
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#10133;</div><div class="card-inf"><div class="card-tag">Familia 1</div><div class="card-tit">Aritm&eacute;ticos</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Op.</th><th>Nombre</th><th>Ejemplo</th><th>Resultado</th></tr></thead><tbody>
-        <tr><td><code>+</code></td><td>Suma</td><td><code>22.5 + 0.5</code></td><td>23.0</td></tr>
-        <tr><td><code>-</code></td><td>Resta</td><td><code>temp - umbral</code></td><td>diferencia</td></tr>
-        <tr><td><code>*</code></td><td>Multiplica</td><td><code>watts * horas</code></td><td>kWh</td></tr>
-        <tr><td><code>/</code></td><td>Divide</td><td><code>suma / 3</code></td><td>promedio</td></tr>
-        <tr><td><code>//</code></td><td>Divisi&oacute;n entera</td><td><code>min // 60</code></td><td>horas</td></tr>
-        <tr><td><code>%</code></td><td>Resto</td><td><code>min % 60</code></td><td>minutos</td></tr>
-        <tr><td><code>**</code></td><td>Potencia</td><td><code>3 ** 2</code></td><td>9</td></tr>
-      </tbody></table></div>
-    </div>
-  </div>
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#9878;&#65039;</div><div class="card-inf"><div class="card-tag">Familia 2 &amp; 3</div><div class="card-tit">Comparaci&oacute;n y l&oacute;gicos</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Op.</th><th>Significado</th><th>Ejemplo (temp=22.5)</th><th>Da</th></tr></thead><tbody>
-        <tr><td><code>==</code></td><td>&iquest;Iguales?</td><td><code>temp == 26.0</code></td><td><span class="ch ch-re">False</span></td></tr>
-        <tr><td><code>!=</code></td><td>&iquest;Distintos?</td><td><code>temp != 26.0</code></td><td><span class="ch ch-gr">True</span></td></tr>
-        <tr><td><code>&gt;</code></td><td>&iquest;Mayor?</td><td><code>temp &gt; 20.0</code></td><td><span class="ch ch-gr">True</span></td></tr>
-        <tr><td><code>and</code></td><td>Ambas True</td><td><code>temp&gt;16 and temp&lt;=26</code></td><td><span class="ch ch-gr">True</span></td></tr>
-        <tr><td><code>or</code></td><td>Al menos una</td><td><code>temp&gt;30 or hum&gt;80</code></td><td>alarma</td></tr>
-        <tr><td><code>not</code></td><td>Invierte</td><td><code>not ventilador_on</code></td><td>apagado</td></tr>
-      </tbody></table></div>
-      <div class="alerta"><b>= vs ==:</b> <code>ventilador_on = True</code> enciende (asigna). <code>ventilador_on == True</code> pregunta si ya est&aacute; encendido (compara). Los confund&iacute;s &rarr; el programa no hace lo que esper&aacute;s.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ IF ══════════════════════════════════════════════ -->
-<section id="if" data-xp="15">
-  <div class="s-eye">// M&oacute;dulo 05 <span class="s-lvl">+15 XP</span></div>
-  <h2 class="s-h2">if / elif / else</h2>
-  <p class="s-sub">El programa eval&uacute;a una condici&oacute;n y toma un camino. Solo uno.</p>
-  <div class="div"></div>
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#127777;&#65039;</div><div class="card-inf"><div class="card-tag">Selecci&oacute;n</div><div class="card-tit">Clasificador de temperatura</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal"><div class="an-ico">&#128678;</div><div>El if eval&uacute;a de arriba hacia abajo y ejecuta <b>solo el primer bloque verdadero</b>. El resto se saltea. Es un termostato que revisa rangos en orden.</div></div>
-      <div class="code"><span class="code-lbl">python</span>temperatura = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Temperatura (°C): "</span>))
-
-<span class="kw">if</span> temperatura > <span class="nm">30.0</span>:
-    <span class="fn">print</span>(<span class="st">"🔴 ALARMA — enfriamiento"</span>)
-<span class="kw">elif</span> temperatura > <span class="nm">26.0</span>:
-    <span class="fn">print</span>(<span class="st">"🟡 CALOR — temperatura elevada"</span>)
-<span class="kw">elif</span> temperatura >= <span class="nm">16.0</span>:
-    <span class="fn">print</span>(<span class="st">"🟢 CONFORT — temperatura ideal"</span>)
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="st">"🔵 FRÍO — calefacción"</span>)</div>
-      <div class="nota"><b>La indentaci&oacute;n es obligatoria.</b> Todo lo que va dentro de un if lleva 4 espacios. En VS Code, al poner <code>:</code> y Enter se hace autom&aacute;tico.</div>
-      <div class="if-viz">
-        <div class="demo-lbl">&#9654; Traz&aacute;: &iquest;qu&eacute; bloque se ejecuta?</div>
-        <div class="if-block" id="ib1"><div class="if-kw">if</div><div class="if-cond">temperatura &gt; 30.0</div><div class="if-res" id="ir1">&rarr;</div></div>
-        <div class="if-block" id="ib2"><div class="if-kw">elif</div><div class="if-cond">temperatura &gt; 26.0</div><div class="if-res" id="ir2">&rarr;</div></div>
-        <div class="if-block" id="ib3"><div class="if-kw">elif</div><div class="if-cond">temperatura &gt;= 16.0</div><div class="if-res" id="ir3">&rarr;</div></div>
-        <div class="if-block" id="ib4"><div class="if-kw">else</div><div class="if-cond">cualquier otro caso</div><div class="if-res" id="ir4">&rarr;</div></div>
-        <div class="demo-row" style="margin-top:12px;">
-          <div class="demo-grp"><div class="demo-gl">Temperatura (°C)</div><input class="demo-in" id="ifVal" type="number" value="22" step="1"></div>
-          <button class="demo-btn" onclick="demoIf()">&#9654; Trazar</button>
-        </div>
-        <div class="demo-out" id="ifOut">Ingres&aacute; una temperatura y traz&aacute;.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FOR ═════════════════════════════════════════════ -->
-<section id="for" data-xp="15">
-  <div class="s-eye">// M&oacute;dulo 06 <span class="s-lvl">+15 XP</span></div>
-  <h2 class="s-h2">Bucle for</h2>
-  <p class="s-sub">Iteraci&oacute;n determinada: repet&iacute; cuando sab&eacute;s exactamente cu&aacute;ntas veces.</p>
-  <div class="div"></div>
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">&#128260;</div><div class="card-inf"><div class="card-tag">Iteraci&oacute;n</div><div class="card-tit">Recorrer zonas y lecturas</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal"><div class="an-ico">&#128203;</div><div>Queremos revisar <b>cada zona</b> en orden. El for es perfecto: recorre una lista o un rango, una vez por elemento, y sabe cu&aacute;ndo termin&oacute;.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># Recorrer las zonas de la maqueta</span>
-zonas = [<span class="st">"Living"</span>, <span class="st">"Dormitorio"</span>, <span class="st">"Cocina"</span>, <span class="st">"Baño"</span>]
-<span class="kw">for</span> zona <span class="kw">in</span> zonas:
-    <span class="fn">print</span>(<span class="st">f"Revisando: {zona}"</span>)
-
-<span class="cm"># Con range()</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">4</span>):           <span class="cm"># 0, 1, 2, 3</span>
-    <span class="fn">print</span>(<span class="st">f"Sensor {i}: OK"</span>)
-
-<span class="cm"># Acumulador — promedio de temperatura</span>
-lecturas = [<span class="nm">22.5</span>, <span class="nm">24.0</span>, <span class="nm">21.8</span>, <span class="nm">23.3</span>]
-total = <span class="nm">0</span>
-<span class="kw">for</span> t <span class="kw">in</span> lecturas:
-    total += t
-promedio = total / <span class="fn">len</span>(lecturas)
-<span class="fn">print</span>(<span class="st">f"Promedio: {promedio:.1f} °C"</span>)</div>
-      <div class="demo">
-        <div class="demo-lbl">&#9654; Simul&aacute; el monitoreo por horas</div>
-        <div class="demo-row">
-          <div class="demo-grp"><div class="demo-gl">Temp inicial</div><input class="demo-in" id="fTemp" type="number" value="21.0" step="0.5"></div>
-          <div class="demo-grp"><div class="demo-gl">Sube/hora</div><input class="demo-in" id="fSube" type="number" value="0.8" step="0.1"></div>
-          <div class="demo-grp"><div class="demo-gl">Horas</div><input class="demo-in" id="fHoras" type="number" value="8" step="1" min="1" max="24"></div>
-          <button class="demo-btn" onclick="demoFor()">&#9654; Simular</button>
-        </div>
-        <div class="demo-out" id="forOut">Configur&aacute; y simul&aacute;.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-am">&#9197;&#65039;</div><div class="card-inf"><div class="card-tag">Control fino</div><div class="card-tit">break vs continue</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="duo">
-        <div class="duo-col bad-h"><h5>break &mdash; corta todo</h5><div class="tip" style="background:var(--re3);color:var(--re);border-left-color:var(--re);border-color:#fca5a5;">Cuando aparece <code>break</code>, el for <b>termina</b>. No procesa m&aacute;s elementos.</div></div>
-        <div class="duo-col good"><h5>continue &mdash; salta uno</h5><div class="tip" style="background:var(--am4);color:var(--am2);border-left-color:var(--am);">Con <code>continue</code>, <b>salta el resto de esa vuelta</b> y pasa al siguiente. El for sigue.</div></div>
-      </div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># continue: saltear días sin producción del reporte</span>
-produccion = [<span class="nm">120</span>, <span class="nm">145</span>, <span class="nm">0</span>, <span class="nm">138</span>, <span class="nm">160</span>, <span class="nm">0</span>, <span class="nm">115</span>]
-total = <span class="nm">0</span>
-dias_lab = <span class="nm">0</span>
-<span class="kw">for</span> valor <span class="kw">in</span> produccion:
-    <span class="kw">if</span> valor == <span class="nm">0</span>:
-        <span class="kw">continue</span>       <span class="cm"># feriado → saltar, no contar</span>
-    total    += valor
-    dias_lab += <span class="nm">1</span>
-<span class="fn">print</span>(<span class="st">f"Total: {total} | Días: {dias_lab}"</span>)</div>
-      <div class="tip">&#128161; <b>La analog&iacute;a:</b> <code>continue</code> es "este no me sirve, pas&aacute; al siguiente". <code>break</code> es "listo, paro todo". Cosas distintas.</div>
-    </div>
-  </div>
-
-  <div class="chall" id="ch-for" data-xp="20">
-    <div class="chall-hdr"><span class="chall-badge">Desaf&iacute;o</span><span class="chall-tit">&#127919; Traz&aacute; el continue</span><span class="chall-xp">+20 XP</span></div>
-    <div class="chall-body">
-      <div class="chall-q">Con <code>produccion = [120, 0, 138]</code> y el c&oacute;digo de arriba, &iquest;cu&aacute;nto vale <code>dias_lab</code> al terminar?</div>
-      <div class="chall-opts" id="chall-for-opts">
-        <button class="chall-opt" onclick="challAns('for',this,0)">A) 3, cuenta todos</button>
-        <button class="chall-opt" onclick="challAns('for',this,1)">B) 2, el 0 se saltea con continue</button>
-        <button class="chall-opt" onclick="challAns('for',this,2)">C) 0, el continue rompe el for</button>
-      </div>
-      <div class="chall-fb" id="chall-for-fb"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ WHILE ═══════════════════════════════════════════ -->
-<section id="while" data-xp="15">
-  <div class="s-eye">// M&oacute;dulo 07 <span class="s-lvl">+15 XP</span></div>
-  <h2 class="s-h2">Bucle while</h2>
-  <p class="s-sub">Iteraci&oacute;n indeterminada: repet&iacute; mientras se cumpla una condici&oacute;n. No sab&eacute;s cu&aacute;ntas veces.</p>
-  <div class="div"></div>
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#8987;</div><div class="card-inf"><div class="card-tag">Iteraci&oacute;n indeterminada</div><div class="card-tit">El coraz&oacute;n del monitoreo</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal"><div class="an-ico">&#128147;</div><div>Un sistema dom&oacute;tico real nunca para. El <code>while True</code> es el latido: medir &rarr; decidir &rarr; actuar &rarr; esperar &rarr; repetir.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># Bucle de monitoreo continuo</span>
-umbral = <span class="nm">26.0</span>
-<span class="kw">while</span> <span class="kw">True</span>:
-    zona = <span class="fn">input</span>(<span class="st">"Zona (o 'salir'): "</span>)
-    <span class="kw">if</span> zona == <span class="st">"salir"</span>:
-        <span class="kw">break</span>                    <span class="cm"># sale del while</span>
-    temperatura = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Temperatura (°C): "</span>))
-    <span class="kw">if</span> temperatura > umbral:
-        <span class="fn">print</span>(<span class="st">f"🔴 {zona}: ALERTA"</span>)
-    <span class="kw">else</span>:
-        <span class="fn">print</span>(<span class="st">f"🟢 {zona}: OK"</span>)
-
-<span class="cm"># while con condición — calentar hasta confort</span>
-temp = <span class="nm">12.0</span>
-<span class="kw">while</span> temp < <span class="nm">20.0</span>:
-    <span class="fn">print</span>(<span class="st">f"Calentando... {temp}°C"</span>)
-    temp += <span class="nm">1.5</span>
-<span class="fn">print</span>(<span class="st">"✓ Confort alcanzado"</span>)</div>
-      <div class="demo">
-        <div class="demo-lbl">&#9654; Simul&aacute; el calentamiento</div>
-        <div class="demo-row">
-          <div class="demo-grp"><div class="demo-gl">Temp inicial</div><input class="demo-in" id="wTemp" type="number" value="10" step="1"></div>
-          <div class="demo-grp"><div class="demo-gl">Objetivo</div><input class="demo-in" id="wObj" type="number" value="20" step="1"></div>
-          <div class="demo-grp"><div class="demo-gl">Sube/ciclo</div><input class="demo-in" id="wSube" type="number" value="1.5" step="0.5" min="0.1"></div>
-          <button class="demo-btn" onclick="demoWhile()">&#9654; Simular</button>
-        </div>
-        <div class="demo-out" id="whileOut">Configur&aacute; y simul&aacute;.</div>
-      </div>
-      <div class="alerta"><b>Peligro: loop infinito.</b> Si la condici&oacute;n nunca se vuelve False y no hay break, el programa se cuelga. Siempre agreg&aacute; una salida.</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FUNCIONES (RECONSTRUIDO) ════════════════════════ -->
-<section id="funciones" data-xp="20">
-  <div class="s-eye">// M&oacute;dulo 08 &middot; Paradigma Funcional <span class="s-lvl">+20 XP</span></div>
-  <h2 class="s-h2">Funciones</h2>
-  <p class="s-sub">Agrup&aacute; instrucciones con un nombre y llamalas cuando quieras, cuantas veces quieras. Es la base para no repetir c&oacute;digo.</p>
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 08: FUNCIONES (REDiseñado & ampliado)
+     ══════════════════════════════════════════════════════ -->
+<section id="funciones" data-xp="25">
+  <div class="s-eye">// Módulo 08 · Paradigma Funcional <span class="s-lvl">+25 XP</span></div>
+  <h2 class="s-h2">Funciones y Modularización</h2>
+  <p class="s-sub">Agrupá instrucciones bajo un nombre único, pasales parámetros y reutilizalas en cualquier zona de la maqueta sin repetir código.</p>
   <div class="div div-or"></div>
 
+  <!-- Card 1: Por qué usamos funciones -->
   <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-am">&#128230;</div><div class="card-inf"><div class="card-tag">Concepto base</div><div class="card-tit">&iquest;Por qu&eacute; funciones?</div></div><span class="card-chev">&#9654;</span></div>
+    <div class="card-hdr" onclick="tog(this)">
+      <div class="card-ico ico-am">📦</div>
+      <div class="card-inf">
+        <div class="card-tag">Estructura & Reutilización</div>
+        <div class="card-tit">DRY (Don't Repeat Yourself) en Domótica</div>
+      </div>
+      <span class="card-chev">▶</span>
+    </div>
     <div class="card-body">
-      <div class="anal or"><div class="an-ico">&#127959;&#65039;</div><div>En la maqueta, <b>cada habitaci&oacute;n hace el mismo proceso</b>: leer &rarr; clasificar &rarr; decidir. Sin funciones escrib&iacute;s ese c&oacute;digo 4 veces. Con una funci&oacute;n lo escrib&iacute;s una vez y lo llam&aacute;s 4. Menos c&oacute;digo, menos errores.</div></div>
-      <div class="duo">
-        <div class="duo-col bad-h">
-          <h5>&#10060; SIN funci&oacute;n &mdash; repetido</h5>
-          <div class="code" style="margin:0;"><span class="cm"># el mismo bloque, una y otra vez...</span>
-temp_living = <span class="nm">22.5</span>
-<span class="kw">if</span> temp_living > <span class="nm">26</span>: <span class="fn">print</span>(<span class="st">"Living: CALOR"</span>)
-<span class="kw">elif</span> temp_living >= <span class="nm">16</span>: <span class="fn">print</span>(<span class="st">"Living: OK"</span>)
-<span class="kw">else</span>: <span class="fn">print</span>(<span class="st">"Living: FRÍO"</span>)
+      <div class="anal or">
+        <div class="an-ico">🏛️</div>
+        <div>En la casa domótica tenemos múltiples habitaciones. Sin funciones, tendríamos que duplicar las estructuras <code>if/elif</code> para cada sensor. Con una función, escribís la lógica <b>una sola vez</b> y la ejecutás para Living, Cocina o Dormitorio.</div>
+      </div>
 
-temp_cocina = <span class="nm">29.0</span>
-<span class="kw">if</span> temp_cocina > <span class="nm">26</span>: <span class="fn">print</span>(<span class="st">"Cocina: CALOR"</span>)
-<span class="kw">elif</span> temp_cocina >= <span class="nm">16</span>: <span class="fn">print</span>(<span class="st">"Cocina: OK"</span>)
-<span class="kw">else</span>: <span class="fn">print</span>(<span class="st">"Cocina: FRÍO"</span>)</div>
+      <!-- Playground de Prueba en Vivo para Funciones -->
+      <div class="interactive-box">
+        <div class="box-lbl or">⚡ Laboratorio Interactivo de Funciones</div>
+        <div class="controls-grid">
+          <div class="ctl-group">
+            <span class="ctl-label">Nombre Zona:</span>
+            <input type="text" id="fnZona" class="ctl-input" value="Living Principal">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Temperatura (°C):</span>
+            <input type="number" id="fnTemp" class="ctl-input" value="28.5" step="0.5">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Humedad (%):</span>
+            <input type="number" id="fnHum" class="ctl-input" value="82" step="1">
+          </div>
         </div>
-        <div class="duo-col good">
-          <h5>&#9989; CON funci&oacute;n &mdash; una vez</h5>
-          <div class="code" style="margin:0;"><span class="kw">def</span> <span class="fn">analizar</span>(nombre, temp):
-    <span class="kw">if</span> temp > <span class="nm">26</span>:
-        <span class="fn">print</span>(<span class="st">f"{nombre}: CALOR"</span>)
-    <span class="kw">elif</span> temp >= <span class="nm">16</span>:
-        <span class="fn">print</span>(<span class="st">f"{nombre}: OK"</span>)
+        <button class="ctl-btn or" onclick="ejecutarFuncionDemo()">▶ Probar `evaluar_zona()`</button>
+        <div class="out-terminal" id="fnTerminal">Apretá el botón para simular el retorno de la función...</div>
+      </div>
+
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+        <pre class="code"><span class="kw">def</span> <span class="fn">evaluar_zona</span>(nombre, temp, hum):
+    <span class="st">"""Evalúa las condiciones ambientales de una zona concreta."""</span>
+    <span class="kw">if</span> temp > <span class="nm">30.0</span>:
+        estado = <span class="st">"🔴 ALERTA_CALOR"</span>
+    <span class="kw">elif</span> hum > <span class="nm">80.0</span>:
+        estado = <span class="st">"🔵 ALERTA_HUMEDAD"</span>
+    <span class="kw">elif</span> temp >= <span class="nm">18.0</span> <span class="kw">and</span> temp &lt;= <span class="nm">26.0</span>:
+        estado = <span class="st">"🟢 CONFORT"</span>
     <span class="kw">else</span>:
-        <span class="fn">print</span>(<span class="st">f"{nombre}: FRÍO"</span>)
+        estado = <span class="st">"🟡 FUERA_RANGO"</span>
+    
+    <span class="kw">return</span> <span class="st">f"[{nombre.upper()}] Estado: {estado} (T: {temp}°C | H: {hum}%)"</span>
 
-<span class="fn">analizar</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>)
-<span class="fn">analizar</span>(<span class="st">"Cocina"</span>, <span class="nm">29.0</span>)
-<span class="fn">analizar</span>(<span class="st">"Baño"</span>,   <span class="nm">18.3</span>)</div>
-        </div>
+<span class="cm"># Llamadas reutilizables</span>
+res1 = <span class="fn">evaluar_zona</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>, <span class="nm">50</span>)
+res2 = <span class="fn">evaluar_zona</span>(<span class="st">"Cocina"</span>, <span class="nm">31.0</span>, <span class="nm">60</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
       </div>
     </div>
   </div>
 
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-am">&#128300;</div><div class="card-inf"><div class="card-tag">Estructura</div><div class="card-tit">Anatom&iacute;a de una funci&oacute;n</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="code"><span class="code-lbl">python</span><span class="cm">#   ↓ def   ↓ nombre   ↓ parámetros (datos que recibe)</span>
-<span class="kw">def</span> <span class="fn">analizar_zona</span>(nombre, temp, hum):
-    <span class="cm"># todo lo indentado es el "cuerpo"</span>
-    estado = <span class="st">"CONFORT"</span>
-    <span class="kw">if</span> temp > <span class="nm">26</span>: estado = <span class="st">"CALOR"</span>
-    <span class="kw">if</span> temp < <span class="nm">16</span>: estado = <span class="st">"FRÍO"</span>
-    <span class="kw">if</span> hum  > <span class="nm">80</span>: estado = <span class="st">"HÚMEDO"</span>
-    <span class="kw">return</span> estado           <span class="cm"># ← devuelve un valor</span>
-
-<span class="cm"># Llamada: 22.5 y 65 van a los parámetros temp y hum</span>
-resultado = <span class="fn">analizar_zona</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>, <span class="nm">65</span>)
-<span class="fn">print</span>(resultado)   <span class="cm"># → CONFORT</span></div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Elemento</th><th>Para qu&eacute; sirve</th><th>Ejemplo</th></tr></thead><tbody>
-        <tr><td><code>def</code></td><td>Define la funci&oacute;n</td><td><code>def analizar_zona(...):</code></td></tr>
-        <tr><td>Par&aacute;metros</td><td>Datos que recibe al llamarla</td><td><code>nombre, temp, hum</code></td></tr>
-        <tr><td>Cuerpo</td><td>Instrucciones (indentadas)</td><td>lo que va adentro</td></tr>
-        <tr><td><code>return</code></td><td>Devuelve un resultado y termina</td><td><code>return estado</code></td></tr>
-        <tr><td>Llamada</td><td>Ejecuta con valores concretos</td><td><code>analizar_zona("Living",22.5,65)</code></td></tr>
-      </tbody></table></div>
-    </div>
-  </div>
-
+  <!-- Card 2: Return vs Print y Scope -->
   <div class="card">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-am">&#8617;&#65039;</div><div class="card-inf"><div class="card-tag">return</div><div class="card-tit">Con return y sin return</div></div><span class="card-chev">&#9654;</span></div>
+    <div class="card-hdr" onclick="tog(this)">
+      <div class="card-ico ico-am">🔄</div>
+      <div class="card-inf">
+        <div class="card-tag">Conceptos Clave</div>
+        <div class="card-tit">Retorno de Valores (`return`) y Alcance (`Scope`)</div>
+      </div>
+      <span class="card-chev">▶</span>
+    </div>
     <div class="card-body">
-      <div class="duo">
-        <div class="duo-col good">
-          <h5>SIN return &mdash; solo hace algo</h5>
-          <div class="code" style="margin:0;"><span class="kw">def</span> <span class="fn">mostrar</span>(nombre, temp):
-    <span class="fn">print</span>(<span class="st">f"{nombre}: {temp}°C"</span>)
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Función con `print()`</th>
+              <th>Función con `return`</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Propósito</b></td>
+              <td>Muestra texto en pantalla en ese instante.</td>
+              <td>Devuelve un valor para ser procesado luego.</td>
+            </tr>
+            <tr>
+              <td><b>Uso en el sistema</b></td>
+              <td>Avisos directos en consola.</td>
+              <td>Cálculos, promedios, estados que alimentan actuadores.</td>
+            </tr>
+            <tr>
+              <td><b>Valor devuelto</b></td>
+              <td>Retorna <code>None</code>. No se puede guardar.</td>
+              <td>Retorna el dato exacto (número, string, lista, dict).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-<span class="fn">mostrar</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>)</div>
-          <p style="font-size:12px;color:var(--muted);margin-top:6px;">Para mostrar, imprimir o guardar.</p>
-        </div>
-        <div class="duo-col good">
-          <h5>CON return &mdash; calcula y devuelve</h5>
-          <div class="code" style="margin:0;"><span class="kw">def</span> <span class="fn">promedio</span>(lecturas):
-    total = <span class="fn">sum</span>(lecturas)
-    <span class="kw">return</span> total / <span class="fn">len</span>(lecturas)
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+        <pre class="code"><span class="cm"># Alcance Local vs Global</span>
+umbral_maximo = <span class="nm">26.0</span>  <span class="cm"># Variable GLOBAL</span>
 
-prom = <span class="fn">promedio</span>([<span class="nm">22.5</span>, <span class="nm">24.0</span>, <span class="nm">21.8</span>])</div>
-          <p style="font-size:12px;color:var(--muted);margin-top:6px;">Cuando necesit&aacute;s el resultado.</p>
-        </div>
+<span class="kw">def</span> <span class="fn">calcular_promedio</span>(t1, t2, t3):
+    suma_local = t1 + t2 + t3  <span class="cm"># Variable LOCAL (muere al terminar la función)</span>
+    prom = suma_local / <span class="nm">3</span>
+    <span class="kw">return</span> prom
+
+promedio_casa = <span class="fn">calcular_promedio</span>(<span class="nm">22.0</span>, <span class="nm">24.5</span>, <span class="nm">21.0</span>)
+<span class="fn">print</span>(<span class="st">f"Promedio general: {promedio_casa:.1f}°C"</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-am">&#128301;</div><div class="card-inf"><div class="card-tag">Scope</div><div class="card-tit">Las variables de una funci&oacute;n son privadas</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="code"><span class="code-lbl">python</span><span class="kw">def</span> <span class="fn">calcular</span>(a, b):
-    resultado = a + b      <span class="cm"># solo existe DENTRO de calcular()</span>
-    <span class="kw">return</span> resultado
-
-valor = <span class="fn">calcular</span>(<span class="nm">10</span>, <span class="nm">5</span>)  <span class="cm"># valor = 15</span>
-<span class="fn">print</span>(resultado)            <span class="cm"># ❌ ERROR: no existe acá afuera</span>
-<span class="fn">print</span>(valor)                <span class="cm"># ✅ funciona</span></div>
-      <div class="alerta"><b>Regla:</b> lo que se crea adentro de una funci&oacute;n muere cuando la funci&oacute;n termina. Para sacar algo, us&aacute;s <code>return</code>.</div>
+  <!-- Desafío Gamificado Funciones -->
+  <div class="chall" id="ch-fun">
+    <div class="chall-hdr">
+      <span class="chall-badge">Desafío Rápido</span>
+      <span class="chall-tit">🎯 Trazado de Funciones</span>
+      <span class="chall-xp">+20 XP</span>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-am">&#127968;</div><div class="card-inf"><div class="card-tag">Proyecto T2</div><div class="card-tit">La maqueta completa con funciones</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <p>El esqueleto del proyecto de T2: cada zona pasa por las mismas funciones.</p>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># ─── FUNCIONES DEL SISTEMA ───────────────────────</span>
-<span class="kw">def</span> <span class="fn">clasificar</span>(temp, hum):
-    <span class="kw">if</span> temp > <span class="nm">30.0</span>: <span class="kw">return</span> <span class="st">"ALARMA"</span>
-    <span class="kw">if</span> hum  > <span class="nm">80.0</span>: <span class="kw">return</span> <span class="st">"HÚMEDO"</span>
-    <span class="kw">if</span> temp > <span class="nm">26.0</span>: <span class="kw">return</span> <span class="st">"CALOR"</span>
-    <span class="kw">if</span> temp >= <span class="nm">16.0</span>: <span class="kw">return</span> <span class="st">"CONFORT"</span>
-    <span class="kw">return</span> <span class="st">"FRÍO"</span>
-
-<span class="kw">def</span> <span class="fn">analizar_zona</span>(nombre, temp, hum):
-    estado = <span class="fn">clasificar</span>(temp, hum)   <span class="cm"># llama a otra función</span>
-    <span class="fn">print</span>(<span class="st">f"{nombre:&lt;12}| {temp:.1f}°C | {hum:.0f}% | {estado}"</span>)
-    <span class="kw">return</span> estado
-
-<span class="kw">def</span> <span class="fn">zona_mas_caliente</span>(datos):
-    max_zona, max_temp = datos[<span class="nm">0</span>]
-    <span class="kw">for</span> nombre, temp <span class="kw">in</span> datos:
-        <span class="kw">if</span> temp > max_temp:
-            max_temp, max_zona = temp, nombre
-    <span class="kw">return</span> max_zona, max_temp
-
-<span class="cm"># ─── PROGRAMA PRINCIPAL ──────────────────────────</span>
-zonas = [
-    (<span class="st">"Living"</span>, <span class="nm">22.5</span>, <span class="nm">65</span>),
-    (<span class="st">"Cocina"</span>, <span class="nm">31.2</span>, <span class="nm">70</span>),
-    (<span class="st">"Baño"</span>,   <span class="nm">24.8</span>, <span class="nm">82</span>),
-]
-estados = []
-<span class="kw">for</span> nombre, temp, hum <span class="kw">in</span> zonas:
-    estados.append(<span class="fn">analizar_zona</span>(nombre, temp, hum))
-
-zona, tmax = <span class="fn">zona_mas_caliente</span>([(z[<span class="nm">0</span>], z[<span class="nm">1</span>]) <span class="kw">for</span> z <span class="kw">in</span> zonas])
-<span class="fn">print</span>(<span class="st">f"Más caliente: {zona} ({tmax}°C)"</span>)
-<span class="kw">if</span> <span class="st">"ALARMA"</span> <span class="kw">in</span> estados:
-    <span class="fn">print</span>(<span class="st">"⚠ HAY ALARMAS ACTIVAS"</span>)</div>
-      <div class="nota"><b>Clave del Paradigma Funcional:</b> el programa principal queda corto y claro. El <i>c&oacute;mo</i> vive en las funciones, el <i>qu&eacute;</i> vive en el bucle. Cada funci&oacute;n hace una sola cosa.</div>
-    </div>
-  </div>
-
-  <div class="chall" id="ch-fun" data-xp="20">
-    <div class="chall-hdr"><span class="chall-badge">Desaf&iacute;o</span><span class="chall-tit">&#127919; &iquest;Qu&eacute; devuelve?</span><span class="chall-xp">+20 XP</span></div>
     <div class="chall-body">
-      <div class="chall-q">Con la funci&oacute;n <code>clasificar</code> de arriba, &iquest;qu&eacute; devuelve <code>clasificar(28, 85)</code>?</div>
+      <div class="chall-q">Dada la función <code>evaluar_zona("Baño", 25.0, 85)</code> de arriba, ¿qué estado devuelve?</div>
       <div class="chall-opts">
-        <button class="chall-opt" onclick="challAns('fun',this,0)">A) "CALOR", porque 28 &gt; 26</button>
-        <button class="chall-opt" onclick="challAns('fun',this,1)">B) "HÚMEDO", porque 85 &gt; 80 se revisa antes</button>
-        <button class="chall-opt" onclick="challAns('fun',this,2)">C) "ALARMA", porque hay dos condiciones</button>
+        <button class="chall-opt" onclick="challAns('fun',this,0)">A) 🟢 CONFORT (porque la temperatura es 25.0°C)</button>
+        <button class="chall-opt" onclick="challAns('fun',this,1)">B) 🔵 ALERTA_HUMEDAD (porque la humedad supera el 80%)</button>
+        <button class="chall-opt" onclick="challAns('fun',this,2)">C) 🔴 ALERTA_CALOR (porque se evalúan ambas)</button>
       </div>
       <div class="chall-fb" id="chall-fun-fb"></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ DICCIONARIOS (NUEVO) ════════════════════════════ -->
-<section id="diccionarios" data-xp="20">
-  <div class="s-eye">// M&oacute;dulo 09 &middot; Estructuras de datos <span class="s-lvl">+20 XP</span></div>
-  <h2 class="s-h2">Diccionarios</h2>
-  <p class="s-sub">Una lista guarda cosas por posici&oacute;n (0, 1, 2...). Un diccionario las guarda por <b>nombre</b>. Perfecto para fichar cada habitaci&oacute;n de la maqueta.</p>
-  <div class="div div-bl" style="background:linear-gradient(90deg,var(--bl),transparent);"></div>
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 09: DICCIONARIOS (REDiseñado & ampliado)
+     ══════════════════════════════════════════════════════ -->
+<section id="diccionarios" data-xp="25">
+  <div class="s-eye">// Módulo 09 · Estructuras Clave-Valor <span class="s-lvl">+25 XP</span></div>
+  <h2 class="s-h2">Diccionarios en Python</h2>
+  <p class="s-sub">Modelá fichas técnicas completas para cada habitación. Accedé a datos por etiqueta (`clave`) en lugar de posiciones numéricas.</p>
+  <div class="div div-bl"></div>
 
   <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-bl">&#128209;</div><div class="card-inf"><div class="card-tag">Concepto base</div><div class="card-tit">Clave &rarr; valor</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal bl"><div class="an-ico">&#128196;</div><div>Pens&aacute; en la <b>ficha t&eacute;cnica</b> de una habitaci&oacute;n: "temperatura: 22.5", "humedad: 65", "ventilador: apagado". Cada dato tiene una etiqueta (la <b>clave</b>) y un contenido (el <b>valor</b>). Eso es un diccionario.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># Un diccionario: ficha del Living</span>
-living = {
-    <span class="st">"zona"</span>:       <span class="st">"Living"</span>,
-    <span class="st">"temp"</span>:       <span class="nm">22.5</span>,
-    <span class="st">"humedad"</span>:    <span class="nm">65</span>,
-    <span class="st">"ventilador"</span>: <span class="kw">False</span>,
-}
-
-<span class="cm"># Acceder por clave (no por posición)</span>
-<span class="fn">print</span>(living[<span class="st">"temp"</span>])       <span class="cm"># → 22.5</span>
-<span class="fn">print</span>(living[<span class="st">"zona"</span>])       <span class="cm"># → Living</span>
-
-<span class="cm"># Modificar y agregar</span>
-living[<span class="st">"temp"</span>] = <span class="nm">23.0</span>       <span class="cm"># actualiza</span>
-living[<span class="st">"ventilador"</span>] = <span class="kw">True</span>  <span class="cm"># enciende</span>
-living[<span class="st">"alarma"</span>] = <span class="kw">False</span>     <span class="cm"># agrega clave nueva</span></div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Lista</th><th>Diccionario</th></tr></thead><tbody>
-        <tr><td>Acceso por posici&oacute;n: <code>zonas[0]</code></td><td>Acceso por clave: <code>living["temp"]</code></td></tr>
-        <tr><td>Orden fijo, &iacute;ndices num&eacute;ricos</td><td>Etiquetas con significado</td></tr>
-        <tr><td>Ideal para secuencias</td><td>Ideal para fichas y registros</td></tr>
-      </tbody></table></div>
+    <div class="card-hdr" onclick="tog(this)">
+      <div class="card-ico ico-bl">📑</div>
+      <div class="card-inf">
+        <div class="card-tag">Mapeo Clave-Valor</div>
+        <div class="card-tit">Representación de la Casa Completa</div>
+      </div>
+      <span class="card-chev">▶</span>
     </div>
-  </div>
-
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-bl">&#128260;</div><div class="card-inf"><div class="card-tag">Recorrer</div><div class="card-tit">La casa entera con un diccionario de zonas</div></div><span class="card-chev">&#9654;</span></div>
     <div class="card-body">
-      <div class="anal bl"><div class="an-ico">&#127968;</div><div>El truco real: un diccionario donde cada clave es el nombre de una zona y cada valor es <b>otra ficha</b>. As&iacute; ten&eacute;s toda la maqueta en una sola estructura.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># Toda la maqueta en un diccionario de diccionarios</span>
-maqueta = {
-    <span class="st">"Living"</span>:  {<span class="st">"temp"</span>: <span class="nm">22.5</span>, <span class="st">"hum"</span>: <span class="nm">65</span>},
-    <span class="st">"Cocina"</span>:  {<span class="st">"temp"</span>: <span class="nm">31.2</span>, <span class="st">"hum"</span>: <span class="nm">70</span>},
-    <span class="st">"Baño"</span>:    {<span class="st">"temp"</span>: <span class="nm">24.8</span>, <span class="st">"hum"</span>: <span class="nm">82</span>},
+      <div class="anal bl">
+        <div class="an-ico">💡</div>
+        <div>Una <b>lista</b> guarda secuencias ordenadas `[22.5, 58.0, "Living"]`. Un <b>diccionario</b> le da nombre a cada dato `{"temp": 22.5, "hum": 58.0, "zona": "Living"}`. Esto evita confusiones con los índices.</div>
+      </div>
+
+      <!-- Inspector Interactivo de Diccionarios -->
+      <div class="interactive-box">
+        <div class="box-lbl bl">🔍 Inspector de Diccionario Domótico</div>
+        <div class="controls-grid">
+          <div class="ctl-group">
+            <span class="ctl-label">Seleccionar Zona:</span>
+            <select id="dicZonaSel" class="ctl-select" onchange="actualizarDicInspector()">
+              <option value="living">Living</option>
+              <option value="cocina">Cocina</option>
+              <option value="dormitorio">Dormitorio</option>
+            </select>
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Modificar Temp (°C):</span>
+            <input type="number" id="dicTempIn" class="ctl-input" value="23.5" step="0.5" onchange="actualizarDicInspector()">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Estado Ventilador:</span>
+            <select id="dicVentSel" class="ctl-select" onchange="actualizarDicInspector()">
+              <option value="false">Apagado (False)</option>
+              <option value="true">Encendido (True)</option>
+            </select>
+          </div>
+        </div>
+        <div class="out-terminal" id="dicTerminal">Cargando objeto diccionario...</div>
+      </div>
+
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+        <pre class="code"><span class="cm"># Diccionario anidado: la casa entera</span>
+maqueta_domotica = {
+    <span class="st">"living"</span>: {<span class="st">"temp"</span>: <span class="nm">22.5</span>, <span class="st">"hum"</span>: <span class="nm">55</span>, <span class="st">"actuador"</span>: <span class="kw">False</span>},
+    <span class="st">"cocina"</span>: {<span class="st">"temp"</span>: <span class="nm">29.0</span>, <span class="st">"hum"</span>: <span class="nm">75</span>, <span class="st">"actuador"</span>: <span class="kw">True</span>},
+    <span class="st">"dormitorio"</span>: {<span class="st">"temp"</span>: <span class="nm">19.0</span>, <span class="st">"hum"</span>: <span class="nm">48</span>, <span class="st">"actuador"</span>: <span class="kw">False</span>}
 }
 
-<span class="cm"># Recorrer clave y valor con .items()</span>
-<span class="kw">for</span> zona, datos <span class="kw">in</span> maqueta.<span class="fn">items</span>():
-    temp = datos[<span class="st">"temp"</span>]
-    <span class="kw">if</span> temp > <span class="nm">30</span>:
-        <span class="fn">print</span>(<span class="st">f"🔴 {zona}: {temp}°C — ALARMA"</span>)
-    <span class="kw">else</span>:
-        <span class="fn">print</span>(<span class="st">f"🟢 {zona}: {temp}°C — OK"</span>)</div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>M&eacute;todo</th><th>Qu&eacute; devuelve</th></tr></thead><tbody>
-        <tr><td><code>dic.keys()</code></td><td>Todas las claves</td></tr>
-        <tr><td><code>dic.values()</code></td><td>Todos los valores</td></tr>
-        <tr><td><code>dic.items()</code></td><td>Pares (clave, valor) &mdash; ideal para el for</td></tr>
-        <tr><td><code>dic.get("x", 0)</code></td><td>El valor de "x", o 0 si no existe (no rompe)</td></tr>
-        <tr><td><code>"Living" in maqueta</code></td><td>True/False si la clave existe</td></tr>
-      </tbody></table></div>
-      <div class="demo">
-        <div class="demo-lbl">&#9654; Consult&aacute; la ficha de una zona</div>
-        <div class="demo-row">
-          <div class="demo-grp"><div class="demo-gl">Zona</div>
-            <select class="demo-sel" id="dcZona"><option>Living</option><option>Cocina</option><option>Ba&ntilde;o</option></select></div>
-          <div class="demo-grp"><div class="demo-gl">Dato</div>
-            <select class="demo-sel" id="dcKey"><option>temp</option><option>hum</option></select></div>
-          <button class="demo-btn" onclick="demoDicc()">&#9654; Consultar</button>
-        </div>
-        <div class="demo-out" id="diccOut">Eleg&iacute; zona y dato.</div>
+<span class="cm"># Recorrido con .items()</span>
+<span class="kw">for</span> zona, datos <span class="kw">in</span> maqueta_domotica.<span class="fn">items</span>():
+    <span class="fn">print</span>(<span class="st">f"Zona: {zona} | Temp: {datos['temp']}°C | Fan: {datos['actuador']}"</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
       </div>
     </div>
   </div>
 
-  <div class="chall" id="ch-dic" data-xp="20">
-    <div class="chall-hdr"><span class="chall-badge">Desaf&iacute;o</span><span class="chall-tit">&#127919; Acceso correcto</span><span class="chall-xp">+20 XP</span></div>
+  <div class="chall" id="ch-dic">
+    <div class="chall-hdr">
+      <span class="chall-badge">Desafío Rápido</span>
+      <span class="chall-tit">🎯 Acceso a Diccionarios</span>
+      <span class="chall-xp">+20 XP</span>
+    </div>
     <div class="chall-body">
-      <div class="chall-q">Con <code>maqueta</code> de arriba, &iquest;c&oacute;mo obten&eacute;s la humedad de la Cocina?</div>
+      <div class="chall-q">¿Cómo obtenés la temperatura de la cocina en el diccionario <code>maqueta_domotica</code>?</div>
       <div class="chall-opts">
-        <button class="chall-opt" onclick="challAns('dic',this,0)">A) maqueta[1]["hum"]</button>
-        <button class="chall-opt" onclick="challAns('dic',this,1)">B) maqueta["Cocina"]["hum"]</button>
-        <button class="chall-opt" onclick="challAns('dic',this,2)">C) maqueta.hum("Cocina")</button>
+        <button class="chall-opt" onclick="challAns('dic',this,0)">A) <code>maqueta_domotica[1]["temp"]</code></button>
+        <button class="chall-opt" onclick="challAns('dic',this,1)">B) <code>maqueta_domotica["cocina"]["temp"]</code></button>
+        <button class="chall-opt" onclick="challAns('dic',this,2)">C) <code>maqueta_domotica.get("cocina.temp")</code></button>
       </div>
       <div class="chall-fb" id="chall-dic-fb"></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ POO (NUEVO — sección completa) ══════════════════ -->
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 10: POO (REDiseñado & ampliado)
+     ══════════════════════════════════════════════════════ -->
 <section id="poo" data-xp="30">
-  <div class="s-eye">// M&oacute;dulo 10 &middot; Paradigma Orientado a Objetos <span class="s-lvl">+30 XP</span></div>
-  <h2 class="s-h2">Objetos (POO)</h2>
-  <p class="s-sub">Hasta ac&aacute; ten&iacute;as fichas (diccionarios) y funciones sueltas. La POO junta las dos cosas: un objeto guarda sus datos <b>y</b> sabe qu&eacute; hacer con ellos. Es como pasar de piezas de LEGO sueltas a un robot armado.</p>
+  <div class="s-eye">// Módulo 10 · Orientación a Objetos <span class="s-lvl">+30 XP</span></div>
+  <h2 class="s-h2">Programación Orientada a Objetos (POO)</h2>
+  <p class="s-sub">Unir datos (atributos) y comportamiento (métodos) dentro de objetos autónomos. Es el estándar para la Expotécnica.</p>
   <div class="div div-pu"></div>
 
-  <div class="mision pu" style="margin-bottom:16px;">
-    <div class="mision-hdr"><span class="mision-num">La gran idea</span><span class="mision-tit">Del plano al objeto real</span></div>
-    <p>Una <b>clase</b> es el plano de una habitaci&oacute;n: dice qu&eacute; datos tiene y qu&eacute; puede hacer. Un <b>objeto</b> es una habitaci&oacute;n construida a partir de ese plano. Con un plano constru&iacute;s todas las habitaciones que quieras, cada una con sus propios valores.</p>
-  </div>
-
+  <!-- Card 1: Clases y Objetos -->
   <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-pu">&#128196;</div><div class="card-inf"><div class="card-tag">Clase y objeto</div><div class="card-tit">El plano y la habitaci&oacute;n construida</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal pu"><div class="an-ico">&#128736;&#65039;</div><div>El diccionario <code>living</code> guardaba datos, pero las funciones que lo usaban viv&iacute;an aparte. Con una clase, los datos (atributos) y las acciones (m&eacute;todos) viven <b>juntos</b> en el mismo objeto.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="cm"># La CLASE es el plano</span>
-<span class="kw">class</span> <span class="cls">Habitacion</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nombre, temp, hum):
-        <span class="slf">self</span>.nombre = nombre    <span class="cm"># atributos = datos del objeto</span>
-        <span class="slf">self</span>.temp   = temp
-        <span class="slf">self</span>.hum    = hum
-
-<span class="cm"># Los OBJETOS son habitaciones construidas con ese plano</span>
-living = <span class="cls">Habitacion</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>, <span class="nm">65</span>)
-cocina = <span class="cls">Habitacion</span>(<span class="st">"Cocina"</span>, <span class="nm">31.2</span>, <span class="nm">70</span>)
-
-<span class="fn">print</span>(living.nombre)   <span class="cm"># → Living</span>
-<span class="fn">print</span>(cocina.temp)     <span class="cm"># → 31.2</span></div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>T&eacute;rmino</th><th>Qu&eacute; es</th><th>En la maqueta</th></tr></thead><tbody>
-        <tr><td><span class="ch ch-pu">Clase</span></td><td>El plano / molde</td><td><code>Habitacion</code></td></tr>
-        <tr><td><span class="ch ch-pu">Objeto</span></td><td>Algo construido con el plano</td><td><code>living</code>, <code>cocina</code></td></tr>
-        <tr><td><span class="ch ch-bl">Atributo</span></td><td>Un dato del objeto</td><td><code>self.temp</code></td></tr>
-        <tr><td><span class="ch ch-am">M&eacute;todo</span></td><td>Una acci&oacute;n del objeto</td><td>ver la pr&oacute;xima card</td></tr>
-      </tbody></table></div>
-    </div>
-  </div>
-
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-pu">&#127919;</div><div class="card-inf"><div class="card-tag">__init__ y self</div><div class="card-tit">Las dos palabras que confunden a todos</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="duo">
-        <div class="duo-col good"><h5>__init__</h5><div class="tip" style="background:var(--pu4);color:var(--pu);border-left-color:var(--pu);border-color:var(--pu3);">Es el <b>constructor</b>. Se ejecuta autom&aacute;ticamente cuando cre&aacute;s el objeto. Sirve para darle sus valores iniciales.</div></div>
-        <div class="duo-col good"><h5>self</h5><div class="tip" style="background:var(--pu4);color:var(--pu);border-left-color:var(--pu);border-color:var(--pu3);">Es "este objeto en particular". <code>self.temp</code> es la temperatura <b>de esta habitaci&oacute;n</b>, no de otra. Siempre es el primer par&aacute;metro.</div></div>
+    <div class="card-hdr" onclick="tog(this)">
+      <div class="card-ico ico-pu">⚙️</div>
+      <div class="card-inf">
+        <div class="card-tag">Plano vs Instancia</div>
+        <div class="card-tit">La Clase `Habitacion` y el Constructor `__init__`</div>
       </div>
-      <div class="anal pu"><div class="an-ico">&#127991;&#65039;</div><div>Analog&iacute;a: <code>__init__</code> es la l&iacute;nea de montaje que arma cada habitaci&oacute;n. <code>self</code> es la etiqueta que dice "esta pieza es de ESTA habitaci&oacute;n". Sin <code>self</code>, todas las habitaciones compartir&iacute;an los mismos datos y ser&iacute;a un caos.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="kw">class</span> <span class="cls">Habitacion</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nombre, temp, hum):
-        <span class="cm"># self.X = X → guarda el dato EN este objeto</span>
-        <span class="slf">self</span>.nombre = nombre
-        <span class="slf">self</span>.temp   = temp
-        <span class="slf">self</span>.hum    = hum
-        <span class="slf">self</span>.ventilador = <span class="kw">False</span>   <span class="cm"># valor por defecto</span>
-
-living = <span class="cls">Habitacion</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>, <span class="nm">65</span>)
-<span class="cm"># Al escribir Habitacion(...), Python llama a __init__ solo,</span>
-<span class="cm"># y le pasa el objeto nuevo como self. Vos no pasás self.</span></div>
+      <span class="card-chev">▶</span>
     </div>
-  </div>
-
-  <div class="card open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-pu">&#9889;</div><div class="card-inf"><div class="card-tag">M&eacute;todos</div><div class="card-tit">Objetos que saben actuar</div></div><span class="card-chev">&#9654;</span></div>
     <div class="card-body">
-      <div class="anal pu"><div class="an-ico">&#129302;</div><div>Un m&eacute;todo es una funci&oacute;n que vive <b>dentro</b> de la clase y trabaja con los datos del objeto. Ac&aacute; la habitaci&oacute;n ya no es una ficha muerta: se clasifica sola y decide sobre su propio ventilador.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="kw">class</span> <span class="cls">Habitacion</span>:
+      <div class="anal pu">
+        <div class="an-ico">🏗️</div>
+        <div>La <b>Clase</b> es el plano arquitectónico. El <b>Objeto (o Instancia)</b> es la habitación construida físicamente en la maqueta. <code>self</code> representa a esa instancia específica.</div>
+      </div>
+
+      <!-- Simulador de Fábrica de Objetos POO -->
+      <div class="interactive-box">
+        <div class="box-lbl pu">🏭 Fábrica & Inspector de Objetos POO</div>
+        <div class="controls-grid">
+          <div class="ctl-group">
+            <span class="ctl-label">Nombre Habitación:</span>
+            <input type="text" id="pooNombre" class="ctl-input" value="Laboratorio">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Temp Inicial (°C):</span>
+            <input type="number" id="pooTemp" class="ctl-input" value="27.0" step="0.5">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Humedad (%):</span>
+            <input type="number" id="pooHum" class="ctl-input" value="60" step="1">
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+          <button class="ctl-btn pu" onclick="instanciarObjetoPOO()">🛠️ Instanciar Objeto (`__init__`)</button>
+          <button class="ctl-btn pu" style="background:var(--bl);" onclick="ejecutarMetodoPOO()">⚡ Ejecutar Método `.regular()`</button>
+        </div>
+        <div class="out-terminal" id="pooTerminal">Instanciá un objeto para inspeccionar su estado interno (`self`)...</div>
+      </div>
+
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+        <pre class="code"><span class="kw">class</span> <span class="cls">Habitacion</span>:
     <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nombre, temp, hum):
-        <span class="slf">self</span>.nombre = nombre
-        <span class="slf">self</span>.temp   = temp
-        <span class="slf">self</span>.hum    = hum
-        <span class="slf">self</span>.ventilador = <span class="kw">False</span>
+        <span class="slf">self</span>.nombre = nombre       <span class="cm"># Atributo público</span>
+        <span class="slf">self</span>.temp = temp           <span class="cm"># Atributo público</span>
+        <span class="slf">self</span>.hum = hum             <span class="cm"># Atributo público</span>
+        <span class="slf">self</span>.ventilador = <span class="kw">False</span>   <span class="cm"># Estado inicial</span>
 
-    <span class="kw">def</span> <span class="fn">estado</span>(<span class="slf">self</span>):              <span class="cm"># método que devuelve algo</span>
-        <span class="kw">if</span> <span class="slf">self</span>.temp > <span class="nm">30</span>: <span class="kw">return</span> <span class="st">"ALARMA"</span>
-        <span class="kw">if</span> <span class="slf">self</span>.temp > <span class="nm">26</span>: <span class="kw">return</span> <span class="st">"CALOR"</span>
-        <span class="kw">if</span> <span class="slf">self</span>.temp >= <span class="nm">16</span>: <span class="kw">return</span> <span class="st">"CONFORT"</span>
-        <span class="kw">return</span> <span class="st">"FRÍO"</span>
+    <span class="kw">def</span> <span class="fn">estado</span>(<span class="slf">self</span>):
+        <span class="st">"""Método que determina la condición de confort."""</span>
+        <span class="kw">if</span> <span class="slf">self</span>.temp > <span class="nm">26.0</span>:
+            <span class="kw">return</span> <span class="st">"CALOR"</span>
+        <span class="kw">return</span> <span class="st">"CONFORT"</span>
 
-    <span class="kw">def</span> <span class="fn">regular</span>(<span class="slf">self</span>):             <span class="cm"># método que actúa</span>
-        <span class="slf">self</span>.ventilador = <span class="slf">self</span>.temp > <span class="nm">26</span>
+    <span class="kw">def</span> <span class="fn">regular</span>(<span class="slf">self</span>):
+        <span class="st">"""Método que actúa sobre el ventilador."""</span>
+        <span class="kw">if</span> <span class="slf">self</span>.temp > <span class="nm">26.0</span>:
+            <span class="slf">self</span>.ventilador = <span class="kw">True</span>
+        <span class="kw">else</span>:
+            <span class="slf">self</span>.ventilador = <span class="kw">False</span>
         <span class="kw">return</span> <span class="slf">self</span>.ventilador
 
-<span class="cm"># Usar los métodos con el punto</span>
-cocina = <span class="cls">Habitacion</span>(<span class="st">"Cocina"</span>, <span class="nm">31.2</span>, <span class="nm">70</span>)
-<span class="fn">print</span>(cocina.<span class="fn">estado</span>())    <span class="cm"># → ALARMA</span>
-cocina.<span class="fn">regular</span>()             <span class="cm"># enciende su ventilador</span>
-<span class="fn">print</span>(cocina.ventilador)   <span class="cm"># → True</span></div>
-      <div class="nota"><b>El punto lo dice todo:</b> <code>cocina.estado()</code> se lee "pedile a la cocina su estado". El objeto guarda sus datos y sabe qu&eacute; hacer con ellos. Eso es <b>encapsulamiento</b>.</div>
+<span class="cm"># Crear instancias independientes</span>
+living = <span class="cls">Habitacion</span>(<span class="st">"Living"</span>, <span class="nm">22.0</span>, <span class="nm">55</span>)
+cocina = <span class="cls">Habitacion</span>(<span class="st">"Cocina"</span>, <span class="nm">28.5</span>, <span class="nm">70</span>)
+
+cocina.<span class="fn">regular</span>()  <span class="cm"># Enciende el ventilador de la cocina únicamente</span></pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
     </div>
   </div>
 
+  <!-- Card 2: Herencia y Polimorfismo -->
   <div class="card">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-pu">&#129513;</div><div class="card-inf"><div class="card-tag">Herencia</div><div class="card-tit">Sensores especializados sin repetir c&oacute;digo</div></div><span class="card-chev">&#9654;</span></div>
+    <div class="card-hdr" onclick="tog(this)">
+      <div class="card-ico ico-pu">🧬</div>
+      <div class="card-inf">
+        <div class="card-tag">Avanzado</div>
+        <div class="card-tit">Herencia de Sensores y Polimorfismo</div>
+      </div>
+      <span class="card-chev">▶</span>
+    </div>
     <div class="card-body">
-      <div class="anal pu"><div class="an-ico">&#127793;</div><div>La herencia es "un plano que parte de otro plano". <code>SensorDHT22</code> es un <code>Sensor</code> pero con extras. Escrib&iacute;s lo com&uacute;n una vez y solo agreg&aacute;s lo distinto. Como MMO: todos los planos parten de una base y cada uno agrega lo suyo.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="kw">class</span> <span class="cls">Sensor</span>:
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+        <pre class="code"><span class="cm"># Clase Base (Padre)</span>
+<span class="kw">class</span> <span class="cls">Sensor</span>:
     <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, pin, zona):
-        <span class="slf">self</span>.pin  = pin
+        <span class="slf">self</span>.pin = pin
         <span class="slf">self</span>.zona = zona
+    
     <span class="kw">def</span> <span class="fn">leer</span>(<span class="slf">self</span>):
-        <span class="kw">return</span> <span class="nm">0</span>            <span class="cm"># genérico</span>
+        <span class="kw">pass</span>  <span class="cm"># Método genérico</span>
 
-<span class="cm"># DHT22 HEREDA de Sensor (Sensor entre paréntesis)</span>
+<span class="cm"># Clase Derivada (Hija)</span>
 <span class="kw">class</span> <span class="cls">SensorDHT22</span>(<span class="cls">Sensor</span>):
-    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, pin, zona):
-        <span class="fn">super</span>().<span class="fn">__init__</span>(pin, zona)  <span class="cm"># reusa el init del padre</span>
-        <span class="slf">self</span>.tipo = <span class="st">"DHT22"</span>
-    <span class="kw">def</span> <span class="fn">leer</span>(<span class="slf">self</span>):             <span class="cm"># redefine el método</span>
-        <span class="kw">return</span> {<span class="st">"temp"</span>: <span class="nm">22.5</span>, <span class="st">"hum"</span>: <span class="nm">65</span>}
+    <span class="kw">def</span> <span class="fn">leer</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> {<span class="st">"temp"</span>: <span class="nm">24.2</span>, <span class="st">"hum"</span>: <span class="nm">62</span>}
 
-s = <span class="cls">SensorDHT22</span>(<span class="nm">4</span>, <span class="st">"Living"</span>)
-<span class="fn">print</span>(s.zona)     <span class="cm"># → Living  (heredado de Sensor)</span>
-<span class="fn">print</span>(s.<span class="fn">leer</span>())  <span class="cm"># → {'temp': 22.5, 'hum': 65}</span></div>
-      <div class="tip">&#128161; <code>super()</code> es "el plano padre". Lo us&aacute;s para no reescribir lo que ya estaba resuelto arriba.</div>
+<span class="kw">class</span> <span class="cls">SensorMovimiento</span>(<span class="cls">Sensor</span>):
+    <span class="kw">def</span> <span class="fn">leer</span>(<span class="slf">self</span>):
+        <span class="kw">return</span> <span class="kw">True</span>  <span class="cm"># Detectó presencia</span>
+
+<span class="cm"># Polimorfismo: Bucle uniforme sobre sensores distintos</span>
+lista_sensores = [<span class="cls">SensorDHT22</span>(<span class="nm">4</span>, <span class="st">"Living"</span>), <span class="cls">SensorMovimiento</span>(<span class="nm">12</span>, <span class="st">"Hall"</span>)]
+<span class="kw">for</span> s <span class="kw">in</span> lista_sensores:
+    <span class="fn">print</span>(<span class="st">f"Sensor en {s.zona} -&gt; Lectura: {s.leer()}"</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-pu">&#127917;</div><div class="card-inf"><div class="card-tag">Polimorfismo</div><div class="card-tit">Mismo mensaje, respuesta distinta</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal pu"><div class="an-ico">&#128241;</div><div>Polimorfismo = "muchas formas". Le ped&iacute;s <code>.leer()</code> a cualquier sensor y cada uno responde a su manera. El programa principal no necesita saber qu&eacute; tipo es: solo pide, y cada objeto sabe c&oacute;mo contestar.</div></div>
-      <div class="code"><span class="code-lbl">python</span><span class="kw">class</span> <span class="cls">SensorTemp</span>(<span class="cls">Sensor</span>):
-    <span class="kw">def</span> <span class="fn">leer</span>(<span class="slf">self</span>): <span class="kw">return</span> <span class="st">"22.5 °C"</span>
-
-<span class="kw">class</span> <span class="cls">SensorNivel</span>(<span class="cls">Sensor</span>):
-    <span class="kw">def</span> <span class="fn">leer</span>(<span class="slf">self</span>): <span class="kw">return</span> <span class="st">"80 % del tanque"</span>
-
-<span class="cm"># Mismo bucle, distintos objetos → cada uno responde diferente</span>
-sensores = [<span class="cls">SensorTemp</span>(<span class="nm">4</span>,<span class="st">"Living"</span>), <span class="cls">SensorNivel</span>(<span class="nm">5</span>,<span class="st">"Tanque"</span>)]
-<span class="kw">for</span> s <span class="kw">in</span> sensores:
-    <span class="fn">print</span>(<span class="st">f"{s.zona}: {s.leer()}"</span>)
-<span class="cm"># Living: 22.5 °C</span>
-<span class="cm"># Tanque: 80 % del tanque</span></div>
+  <div class="chall" id="ch-poo">
+    <div class="chall-hdr">
+      <span class="chall-badge">Desafío Rápido</span>
+      <span class="chall-tit">🎯 Rol de `self`</span>
+      <span class="chall-xp">+30 XP</span>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-pu">&#127942;</div><div class="card-inf"><div class="card-tag">Proyecto T3 &middot; Expot&eacute;cnica</div><div class="card-tit">El sistema completo con objetos</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <p>Ac&aacute; se cierra todo: una clase <code>Maqueta</code> que contiene objetos <code>Habitacion</code> y los gestiona. Este es el nivel de la Expot&eacute;cnica.</p>
-      <div class="code"><span class="code-lbl">python</span><span class="kw">class</span> <span class="cls">Habitacion</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nombre, temp, hum):
-        <span class="slf">self</span>.nombre, <span class="slf">self</span>.temp, <span class="slf">self</span>.hum = nombre, temp, hum
-    <span class="kw">def</span> <span class="fn">estado</span>(<span class="slf">self</span>):
-        <span class="kw">if</span> <span class="slf">self</span>.temp > <span class="nm">30</span>: <span class="kw">return</span> <span class="st">"ALARMA"</span>
-        <span class="kw">if</span> <span class="slf">self</span>.temp > <span class="nm">26</span>: <span class="kw">return</span> <span class="st">"CALOR"</span>
-        <span class="kw">if</span> <span class="slf">self</span>.temp >= <span class="nm">16</span>: <span class="kw">return</span> <span class="st">"CONFORT"</span>
-        <span class="kw">return</span> <span class="st">"FRÍO"</span>
-
-<span class="kw">class</span> <span class="cls">Maqueta</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>):
-        <span class="slf">self</span>.habitaciones = []
-    <span class="kw">def</span> <span class="fn">agregar</span>(<span class="slf">self</span>, hab):
-        <span class="slf">self</span>.habitaciones.append(hab)
-    <span class="kw">def</span> <span class="fn">reporte</span>(<span class="slf">self</span>):
-        <span class="kw">for</span> h <span class="kw">in</span> <span class="slf">self</span>.habitaciones:
-            <span class="fn">print</span>(<span class="st">f"{h.nombre:&lt;12}| {h.temp:.1f}°C | {h.estado()}"</span>)
-    <span class="kw">def</span> <span class="fn">hay_alarmas</span>(<span class="slf">self</span>):
-        <span class="kw">return</span> <span class="fn">any</span>(h.<span class="fn">estado</span>() == <span class="st">"ALARMA"</span> <span class="kw">for</span> h <span class="kw">in</span> <span class="slf">self</span>.habitaciones)
-
-<span class="cm"># ─── Armar y correr el sistema ───</span>
-casa = <span class="cls">Maqueta</span>()
-casa.<span class="fn">agregar</span>(<span class="cls">Habitacion</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>, <span class="nm">65</span>))
-casa.<span class="fn">agregar</span>(<span class="cls">Habitacion</span>(<span class="st">"Cocina"</span>, <span class="nm">31.2</span>, <span class="nm">70</span>))
-
-casa.<span class="fn">reporte</span>()
-<span class="kw">if</span> casa.<span class="fn">hay_alarmas</span>():
-    <span class="fn">print</span>(<span class="st">"⚠ Sistema en alerta"</span>)</div>
-      <div class="mision pu"><div class="mision-hdr"><span class="mision-num">Cierre</span><span class="mision-tit">Todo el a&ntilde;o en una estructura</span></div><p>Fij&aacute;te el recorrido: variables &rarr; if &rarr; for &rarr; funciones &rarr; diccionarios &rarr; objetos. La clase <code>Maqueta</code> usa <b>todo</b> lo que aprendiste. Eso es lo que van a mostrar en la Expot&eacute;cnica.</p></div>
-    </div>
-  </div>
-
-  <div class="chall" id="ch-poo" data-xp="30">
-    <div class="chall-hdr"><span class="chall-badge">Desaf&iacute;o final</span><span class="chall-tit">&#127919; Domin&aacute;s la POO?</span><span class="chall-xp">+30 XP</span></div>
     <div class="chall-body">
-      <div class="chall-q">En <code>living = Habitacion("Living", 22.5, 65)</code>, &iquest;qu&eacute; representa <code>self</code> dentro de <code>__init__</code>?</div>
+      <div class="chall-q">En el método <code>__init__(self, nombre, temp)</code>, ¿qué representa el parámetro <code>self</code>?</div>
       <div class="chall-opts">
-        <button class="chall-opt" onclick="challAns('poo',this,0)">A) El nombre de la clase</button>
-        <button class="chall-opt" onclick="challAns('poo',this,1)">B) El objeto que se est&aacute; creando (living)</button>
-        <button class="chall-opt" onclick="challAns('poo',this,2)">C) Un par&aacute;metro que hay que pasar a mano</button>
+        <button class="chall-opt" onclick="challAns('poo',this,0)">A) La clase abstracta de Python</button>
+        <button class="chall-opt" onclick="challAns('poo',this,1)">B) La instancia/objeto concreta que se está creando</button>
+        <button class="chall-opt" onclick="challAns('poo',this,2)">C) Un parámetro de configuración que el usuario envía por teclado</button>
       </div>
       <div class="chall-fb" id="chall-poo-fb"></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ TECNOLOGÍA DE CONTROL ═══════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 11: TECNOLOGÍA DE CONTROL (REDiseñado)
+     ══════════════════════════════════════════════════════ -->
 <section id="tcontrol">
-  <div class="s-eye" style="color:var(--or);">// Materia articulada</div>
-  <h2 class="s-h2">Tecnolog&iacute;a de Control</h2>
-  <p class="s-sub">La otra cara del proyecto: mientras program&aacute;s en Python, ac&aacute; aprend&eacute;s el hardware que hace todo posible.</p>
+  <div class="s-eye" style="color:var(--or);">// Materia Articulada</div>
+  <h2 class="s-h2">Tecnología de Control & ESP32</h2>
+  <p class="s-sub">Integración del software Python con el hardware embebido (ESP32) mediante C++, actuadores mecánicos y lógica de lazo cerrado.</p>
   <div class="div div-or"></div>
 
-  <div class="card card-or open">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#128268;</div><div class="card-inf"><div class="card-tag">Fundamento</div><div class="card-tit">Sistemas de control</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="anal or"><div class="an-ico">&#128260;</div><div>Un <b>sistema de control</b> toma una medida real, la compara con un valor deseado (setpoint) y genera una salida hacia un actuador para reducir el error.</div></div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Concepto</th><th>Definici&oacute;n</th><th>En la maqueta</th></tr></thead><tbody>
-        <tr><td><span class="ch ch-or">Variable controlada</span></td><td>Lo que queremos mantener</td><td>Temperatura de la habitaci&oacute;n</td></tr>
-        <tr><td><span class="ch ch-or">Se&ntilde;al de referencia</span></td><td>El valor deseado (setpoint)</td><td>Termostato a 22&deg;C</td></tr>
-        <tr><td><span class="ch ch-am">Lazo abierto</span></td><td>Act&uacute;a sin medir el resultado</td><td>Calefactor 15 min sin revisar</td></tr>
-        <tr><td><span class="ch ch-gr">Lazo cerrado</span></td><td>Mide, compara y corrige</td><td>Calefactor hasta llegar a 20&deg;C</td></tr>
-        <tr><td><span class="ch ch-bl">Control ON/OFF</span></td><td>Dos estados</td><td>Ventilador ON si temp&gt;26&deg;C</td></tr>
-      </tbody></table></div>
-      <div class="mision or"><div class="mision-hdr"><span class="mision-num">Conexi&oacute;n</span><span class="mision-tit">El if/else ES un controlador</span></div><p>El if/elif/else que aprendiste <b>es</b> el controlador ON/OFF. Temperatura supera el umbral &rarr; enciende el ventilador. Baja &rarr; lo apaga. Es lazo cerrado en software.</p></div>
+  <!-- Deck de Control Hardware Simulado -->
+  <div class="interactive-box">
+    <div class="box-lbl or">🎛️ Consola de Control de Actuadores (ESP32)</div>
+    <div class="controls-grid">
+      <div class="ctl-group">
+        <span class="ctl-label">Relé Ventilación (Pin 16):</span>
+        <select id="hwRelay" class="ctl-select" onchange="simularHardwareESP32()">
+          <option value="LOW">LOW (Apagado)</option>
+          <option value="HIGH">HIGH (Encendido)</option>
+        </select>
+      </div>
+      <div class="ctl-group">
+        <span class="ctl-label">Servo Persiana (Pin 17):</span>
+        <input type="range" id="hwServo" class="ctl-input" min="0" max="180" value="0" oninput="simularHardwareESP32()">
+      </div>
+      <div class="ctl-group">
+        <span class="ctl-label">Buzzer Alarma (Pin 18):</span>
+        <select id="hwBuzzer" class="ctl-select" onchange="simularHardwareESP32()">
+          <option value="OFF">Silencio</option>
+          <option value="ON">Tono 1000Hz</option>
+        </select>
+      </div>
     </div>
+    <div class="out-terminal" id="hwTerminal">Ajustá los componentes para ver el código C++ enviado al ESP32...</div>
   </div>
 
-  <div class="card card-or">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#128267;</div><div class="card-inf"><div class="card-tag">Hardware</div><div class="card-tit">Sensores &mdash; c&oacute;mo mide</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Sensor</th><th>Mide</th><th>Uso en la maqueta</th></tr></thead><tbody>
-        <tr><td><span class="ch ch-or">DHT22</span></td><td>Temperatura + Humedad</td><td>Sensor principal por habitaci&oacute;n</td></tr>
-        <tr><td><span class="ch ch-or">DS18B20</span></td><td>Temp. en l&iacute;quidos</td><td>Agua de caldera</td></tr>
-        <tr><td><span class="ch ch-bl">HC-SR04</span></td><td>Distancia / Nivel</td><td>Nivel del tanque de agua</td></tr>
-        <tr><td><span class="ch ch-bl">PIR</span></td><td>Movimiento</td><td>Detectar personas</td></tr>
-        <tr><td><span class="ch ch-gr">LDR</span></td><td>Luz</td><td>Persianas autom&aacute;ticas</td></tr>
-      </tbody></table></div>
-      <div class="nota"><b>Anal&oacute;gico vs digital:</b> un sensor anal&oacute;gico da un rango continuo de voltaje (0 a 3.3V) y el ESP32 lo convierte a 0&ndash;4095 con su ADC. Un sensor digital ya manda el n&uacute;mero directo.</div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)">
+      <div class="card-ico ico-or">🔌</div>
+      <div class="card-inf">
+        <div class="card-tag">Firmware C++</div>
+        <div class="card-tit">Estructura `setup()` y `loop()` en el Microcontrolador</div>
+      </div>
+      <span class="card-chev">▶</span>
     </div>
-  </div>
-
-  <div class="card card-or">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#9889;</div><div class="card-inf"><div class="card-tag">Hardware</div><div class="card-tit">Actuadores &mdash; c&oacute;mo act&uacute;a</div></div><span class="card-chev">&#9654;</span></div>
     <div class="card-body">
-      <div class="anal or"><div class="an-ico">&#129302;</div><div>El actuador es el "m&uacute;sculo": ejecuta la decisi&oacute;n del programa. Sensor lee &rarr; programa decide &rarr; actuador act&uacute;a.</div></div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Actuador</th><th>Control</th><th>Uso</th></tr></thead><tbody>
-        <tr><td><span class="ch ch-or">LED</span></td><td>Pin digital HIGH/LOW</td><td>Alarma visual</td></tr>
-        <tr><td><span class="ch ch-or">Buzzer</span></td><td>Digital / PWM</td><td>Alarma sonora</td></tr>
-        <tr><td><span class="ch ch-am">Rel&eacute;</span></td><td>Digital &rarr; cargas 220V</td><td>Ventilador o calefactor real</td></tr>
-        <tr><td><span class="ch ch-bl">Servo</span></td><td>PWM (0&deg; a 180&deg;)</td><td>Ventana, persiana</td></tr>
-      </tbody></table></div>
-    </div>
-  </div>
+      <div class="code-wrap">
+        <span class="code-lbl">c++ · esp32</span>
+        <pre class="code"><span class="cm">// Código del microcontrolador ESP32 en C++</span>
+<span class="kw">#include</span> <span class="st">&lt;DHT.h&gt;</span>
 
-  <div class="card card-or">
-    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">&#128268;</div><div class="card-inf"><div class="card-tag">ESP32</div><div class="card-tit">La plataforma que conecta todo</div></div><span class="card-chev">&#9654;</span></div>
-    <div class="card-body">
-      <div class="code"><span class="code-lbl">c++ · esp32</span><span class="cm">// setup() se ejecuta UNA VEZ al encender</span>
+<span class="kw">#define</span> DHTPIN 4
+<span class="kw">#define</span> RELE_PIN 16
+<span class="kw">#define</span> DHTTYPE DHT22
+
+DHT dht(DHTPIN, DHTTYPE);
+
 <span class="kw">void</span> <span class="fn">setup</span>() {
-  <span class="fn">pinMode</span>(<span class="nm">2</span>, OUTPUT);     <span class="cm">// pin 2 = LED integrado</span>
   Serial.<span class="fn">begin</span>(<span class="nm">115200</span>);
+  <span class="fn">pinMode</span>(RELE_PIN, OUTPUT);
+  dht.<span class="fn">begin</span>();
 }
-<span class="cm">// loop() se repite PARA SIEMPRE (como while True)</span>
+
 <span class="kw">void</span> <span class="fn">loop</span>() {
   <span class="kw">float</span> temp = dht.<span class="fn">readTemperature</span>();
-  <span class="kw">if</span> (temp > <span class="nm">26.0</span>) {
-    <span class="fn">digitalWrite</span>(<span class="nm">2</span>, HIGH);   <span class="cm">// enciende LED</span>
+  
+  <span class="kw">if</span> (temp &gt; <span class="nm">26.0</span>) {
+    <span class="fn">digitalWrite</span>(RELE_PIN, HIGH); <span class="cm">// Enciende ventilador</span>
   } <span class="kw">else</span> {
-    <span class="fn">digitalWrite</span>(<span class="nm">2</span>, LOW);    <span class="cm">// apaga LED</span>
+    <span class="fn">digitalWrite</span>(RELE_PIN, LOW);  <span class="cm">// Apaga ventilador</span>
   }
-}</div>
-      <div class="tip">&#128161; El ESP32 habla con los sensores en C++, y nuestra estaci&oacute;n Python en la PC procesa los datos y manda &oacute;rdenes por red o cable. Las dos l&oacute;gicas (if, while) son id&eacute;nticas.</div>
+  <span class="fn">delay</span>(<span class="nm">2000</span>);
+}</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ LOGROS ══════════════════════════════════════════ -->
+<!-- ═══ LOGROS ═══ -->
 <section id="logros">
-  <div class="s-eye" style="color:var(--xp2);">// Sala de trofeos</div>
-  <h2 class="s-h2">Tus logros</h2>
-  <p class="s-sub">Se desbloquean solos mientras explor&aacute;s y resolv&eacute;s desaf&iacute;os. Tu progreso queda guardado en este dispositivo.</p>
+  <div class="s-eye" style="color:var(--xp2);">// Sala de Trofeos</div>
+  <h2 class="s-h2">Logros Desbloqueados</h2>
+  <p class="s-sub">Completá desafíos e interactuá con los módulos para ganar insignias y subir de rango.</p>
   <div class="div" style="background:linear-gradient(90deg,var(--xp),transparent);"></div>
   <div class="ach-grid" id="achGrid"></div>
-  <div class="tip" style="text-align:center;">&#127919; Complet&aacute; los m&oacute;dulos y los desaf&iacute;os para llenar la vitrina y subir de rango hasta <b>Arquitecto de Sistemas</b>.</div>
 </section>
 
-<!-- ═══ QUIZ ════════════════════════════════════════════ -->
+<!-- ═══ QUIZ FINAL ═══ -->
 <section id="quiz">
-  <div class="s-eye">// Evaluaci&oacute;n final <span class="s-lvl">Jefe de nivel</span></div>
-  <h2 class="s-h2">Quiz &mdash; el examen del a&ntilde;o</h2>
-  <p class="s-sub">18 preguntas sobre todo el recorrido, del imperativo a los objetos. Cada acierto suma XP. Feedback al instante.</p>
+  <div class="s-eye">// Evaluación Final <span class="s-lvl">Jefe de Nivel</span></div>
+  <h2 class="s-h2">Quiz Integrador Anual</h2>
+  <p class="s-sub">18 Preguntas completas sobre todo el programa. Poné a prueba tu conocimiento y enviale los resultados al profesor.</p>
   <div class="div"></div>
+  
   <div class="nom-row">
-    <span class="nom-lbl">Tu nombre:</span>
-    <input class="nom-in" id="nomQuiz" type="text" placeholder="Apellido, Nombre" autocomplete="name">
+    <span class="nom-lbl">Tu Nombre Completo:</span>
+    <input class="nom-in" id="nomQuiz" type="text" placeholder="Ej: Perez, Juan 4°1°" autocomplete="name">
   </div>
+  
   <div id="qContainer"></div>
-  <div class="score" id="scoreBox">
-    <div class="sc-n" id="scN">0/18</div>
-    <div class="sc-msg" id="scMsg">&mdash;</div>
-    <div class="sc-sub" id="scSub">&mdash;</div>
-    <div class="send-box" id="sendBox">
-      <div class="send-txt">Envi&aacute;le el resumen al profe. Incluye tu nombre, puntaje y el detalle de cada respuesta.</div>
-      <button class="send-btn" id="sendBtn" onclick="enviarQuiz()">&#128231; Enviar al Profesor</button>
-      <div class="send-ok" id="sendOk"></div>
-    </div>
-    <button class="retry-btn" onclick="resetQuiz()">&#8634; Intentar de nuevo</button>
+  
+  <div class="score" id="scoreBox" style="display:none;background:var(--card);border:2px solid var(--gr);padding:24px;border-radius:16px;text-align:center;margin-top:20px;">
+    <div style="font-family:var(--disp);font-size:48px;font-weight:800;color:var(--gr2);" id="scN">0/18</div>
+    <div style="font-size:20px;font-weight:700;color:var(--dk);" id="scMsg">---</div>
+    <div style="font-size:14px;color:var(--muted);margin-bottom:16px;" id="scSub">---</div>
+    <button class="ctl-btn" style="width:100%;" id="sendBtn" onclick="enviarQuiz()">📧 Enviar Respuestas al Profesor</button>
+    <div id="sendOk" style="margin-top:10px;font-weight:600;color:var(--gr2);"></div>
   </div>
 </section>
 
 </main>
 
 <footer>
-  Taller de Programaci&oacute;n y Dom&oacute;tica &middot; Ciclo Superior &middot; <b>Escuela Industrial N&deg;9 "15 de Noviembre" &middot; El Calafate</b><br>
-  <b>Prof. Pablo Limardo &middot; Departamento ACPI &middot; Ciclo 2026</b>
+  Taller de Programación y Domótica · Ciclo Superior · <b>Escuela Industrial N°9 "15 de Noviembre" · El Calafate</b><br>
+  <b>Prof. Pablo Limardo · Departamento ACPI · Ciclo 2026</b>
 </footer>
+
 <script>
 /* ══════════════════════════════════════════════════════
-   SISTEMA DE XP, RANGOS Y LOGROS
+   ESTADO GLOBAL, GAMIFICACIÓN Y UTILIDADES
    ══════════════════════════════════════════════════════ */
-const SK='prog_taller2026';
-const RANKS=[
-  {min:0,   name:'Aprendiz',    ico:'\u{1F331}'},
-  {min:120, name:'Operador',    ico:'\u{1F527}'},
-  {min:280, name:'T\u00e9cnico',ico:'\u{2699}\u{FE0F}'},
-  {min:460, name:'Ingeniero',   ico:'\u{1F9E0}'},
-  {min:640, name:'Arquitecto',  ico:'\u{1F3C6}'},
+const SK = 'prog_taller2026_v2';
+const RANKS = [
+  {min:0, name:'Aprendiz', ico:'🌱'},
+  {min:100, name:'Operador', ico:'🔧'},
+  {min:250, name:'Técnico', ico:'⚙️'},
+  {min:450, name:'Ingeniero', ico:'🧠'},
+  {min:650, name:'Arquitecto', ico:'🏆'},
 ];
-const ACHIEVEMENTS=[
-  {id:'start',    ico:'\u{1F680}', name:'Encendido',      desc:'Abriste la consola'},
-  {id:'explorer', ico:'\u{1F5FA}\u{FE0F}', name:'Explorador',  desc:'Abriste 6 m\u00f3dulos'},
-  {id:'ch-for',   ico:'\u{1F501}', name:'Iterador',       desc:'Desaf\u00edo del continue'},
-  {id:'ch-fun',   ico:'\u{1F4E6}', name:'Modular',        desc:'Desaf\u00edo de funciones'},
-  {id:'ch-dic',   ico:'\u{1F4D1}', name:'Archivista',     desc:'Desaf\u00edo de diccionarios'},
-  {id:'ch-poo',   ico:'\u{1F916}', name:'Constructor',    desc:'Desaf\u00edo de POO'},
-  {id:'quizhalf', ico:'\u{1F4DD}', name:'Media tabla',    desc:'50% del quiz'},
-  {id:'quizace',  ico:'\u{1F947}', name:'Sin errores',    desc:'Quiz perfecto'},
+
+const ACHIEVEMENTS = [
+  {id:'start', ico:'🚀', name:'Encendido', desc:'Iniciaste la plataforma'},
+  {id:'explorer', ico:'🗺️', name:'Explorador', desc:'Visitaste 6 módulos'},
+  {id:'ch-fun', ico:'📦', name:'Modular', desc:'Resolviste el desafío de Funciones'},
+  {id:'ch-dic', ico:'📑', name:'Archivista', desc:'Resolviste el desafío de Diccionarios'},
+  {id:'ch-poo', ico:'🤖', name:'Constructor', desc:'Resolviste el desafío de POO'},
+  {id:'quizhalf', ico:'📝', name:'Mitad de Camino', desc:'Aprobaste el 50% del Quiz'},
+  {id:'quizace', ico:'🥇', name:'Maestro Domótico', desc:'Quiz perfecto 18/18'},
 ];
-let STATE={xp:0,opened:[],challenges:[],achievements:[]};
 
-function loadXP(){try{const s=JSON.parse(localStorage.getItem(SK));if(s)STATE=Object.assign(STATE,s);}catch(e){}}
-function saveXP(){localStorage.setItem(SK,JSON.stringify(STATE));}
+let STATE = {xp:0, opened:[], challenges:[], achievements:[]};
 
-function rankFor(xp){let r=RANKS[0];for(const rk of RANKS){if(xp>=rk.min)r=rk;}return r;}
-function nextRank(xp){for(const rk of RANKS){if(xp<rk.min)return rk;}return null;}
+function loadXP(){
+  try{ const s = JSON.parse(localStorage.getItem(SK)); if(s) STATE = Object.assign(STATE, s); }catch(e){}
+}
+function saveXP(){ localStorage.setItem(SK, JSON.stringify(STATE)); }
+
+function rankFor(xp){ let r=RANKS[0]; for(const rk of RANKS){ if(xp>=rk.min) r=rk; } return r; }
+function nextRank(xp){ for(const rk of RANKS){ if(xp<rk.min) return rk; } return null; }
 
 function renderXP(){
-  const xp=STATE.xp, r=rankFor(xp), nx=nextRank(xp);
-  document.getElementById('rankName').textContent=r.name;
-  document.getElementById('rankIco').textContent=r.ico;
-  const base=r.min, top=nx?nx.min:r.min+200;
-  const pct=nx?Math.min(100,Math.round(((xp-base)/(top-base))*100)):100;
-  document.getElementById('xpFill').style.width=pct+'%';
-  document.getElementById('xpNow').textContent=xp;
-  document.getElementById('xpNext').textContent=nx?nx.min:xp;
-  const lvl=RANKS.indexOf(r)+1;
-  document.getElementById('xpLabel').textContent=nx?('Rango '+lvl+' \u2192 '+nx.name):('Rango m\u00e1x \u00b7 '+r.name);
+  const xp = STATE.xp, r = rankFor(xp), nx = nextRank(xp);
+  document.getElementById('rankName').textContent = r.name;
+  document.getElementById('rankIco').textContent = r.ico;
+  const base = r.min, top = nx ? nx.min : r.min + 200;
+  const pct = nx ? Math.min(100, Math.round(((xp-base)/(top-base))*100)) : 100;
+  document.getElementById('xpFill').style.width = pct + '%';
+  document.getElementById('xpNow').textContent = xp;
+  document.getElementById('xpNext').textContent = nx ? nx.min : xp;
+  const lvl = RANKS.indexOf(r) + 1;
+  document.getElementById('xpLabel').textContent = nx ? ('Rango ' + lvl + ' → ' + nx.name) : ('Rango Máx · ' + r.name);
 }
 
-let toastTimer=null;
-function toast(txt,ico){
-  const t=document.getElementById('xpToast');
-  document.getElementById('xpToastTxt').innerHTML=txt;
-  document.getElementById('xpToastIco').textContent=ico||'\u26A1';
+function toast(txt, ico){
+  const t = document.getElementById('xpToast');
+  document.getElementById('xpToastTxt').innerHTML = txt;
+  document.getElementById('xpToastIco').textContent = ico || '⚡';
   t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+  setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-function addXP(amt,label){
-  const prevRank=rankFor(STATE.xp).name;
-  STATE.xp+=amt;
-  renderXP();saveXP();
-  const newRank=rankFor(STATE.xp).name;
-  if(newRank!==prevRank){
-    toast('\u00a1Nuevo rango: <span class="xpt-amt">'+newRank+'</span>!','\u{1F389}');
+function addXP(amt, label){
+  const prevRank = rankFor(STATE.xp).name;
+  STATE.xp += amt;
+  renderXP(); saveXP();
+  const newRank = rankFor(STATE.xp).name;
+  if(newRank !== prevRank){
+    toast('¡Nuevo Rango: <b>' + newRank + '</b>!', '🎉');
   } else {
-    toast('<span class="xpt-amt">+'+amt+' XP</span> '+(label||''),'\u26A1');
+    toast('<b>+' + amt + ' XP</b> ' + (label || ''), '⚡');
   }
 }
 
 function unlock(id){
-  if(STATE.achievements.includes(id))return;
-  STATE.achievements.push(id);saveXP();renderAch();
-  const a=ACHIEVEMENTS.find(x=>x.id===id);
-  if(a)setTimeout(()=>toast('Logro: <span class="xpt-amt">'+a.name+'</span>','\u{1F3C5}'),400);
+  if(STATE.achievements.includes(id)) return;
+  STATE.achievements.push(id); saveXP(); renderAch();
+  const a = ACHIEVEMENTS.find(x => x.id === id);
+  if(a) setTimeout(() => toast('Logro: <b>' + a.name + '</b>', '🏆'), 400);
 }
 
 function renderAch(){
-  const g=document.getElementById('achGrid');if(!g)return;
-  g.innerHTML=ACHIEVEMENTS.map(a=>{
-    const on=STATE.achievements.includes(a.id);
-    return '<div class="ach'+(on?' unlocked':'')+'"><div class="ach-ico">'+(on?a.ico:'\u{1F512}')+'</div><div class="ach-name">'+a.name+'</div><div class="ach-desc">'+a.desc+'</div></div>';
+  const g = document.getElementById('achGrid'); if(!g) return;
+  g.innerHTML = ACHIEVEMENTS.map(a => {
+    const on = STATE.achievements.includes(a.id);
+    return `<div style="background:var(--card);border:1.5px solid ${on?'var(--xp)':'var(--border)'};border-radius:12px;padding:12px;text-align:center;opacity:${on?1:0.5};">
+      <div style="font-size:28px;margin-bottom:4px;">${on?a.ico:'🔒'}</div>
+      <div style="font-weight:700;font-size:13px;color:var(--dk);">${a.name}</div>
+      <div style="font-size:11px;color:var(--muted);">${a.desc}</div>
+    </div>`;
   }).join('');
 }
 
-/* módulos: dar XP al abrir por primera vez */
-function markOpened(secId,xp){
-  if(STATE.opened.includes(secId))return;
-  STATE.opened.push(secId);saveXP();
-  addXP(xp,'\u2014 m\u00f3dulo nuevo');
-  // marca en el nav
-  const nb=document.querySelector('.nb[data-sec="'+secId+'"]');
-  if(nb && !nb.querySelector('.nb-check')){nb.insertAdjacentHTML('afterbegin','<span class="nb-check">\u2713</span>');}
-  if(STATE.opened.length>=6)unlock('explorer');
+/* Copy code helper */
+function copyCode(btn){
+  const codeText = btn.previousElementSibling.innerText;
+  navigator.clipboard.writeText(codeText).then(() => {
+    btn.textContent = "¡Copiado!";
+    setTimeout(() => btn.textContent = "Copiar", 1500);
+  });
 }
 
-/* IntersectionObserver: cuando una sección con data-xp entra en vista */
-function initSectionXP(){
-  const secs=document.querySelectorAll('section[data-xp]');
-  const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const id=e.target.id, xp=parseInt(e.target.dataset.xp)||10;
-        markOpened(id,xp);
-      }
-    });
-  },{threshold:.35});
-  secs.forEach(s=>obs.observe(s));
-}
+/* Navigation & UI Toggles */
+function ir(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth', block:'start'}); }
+function tog(hdr){ hdr.closest('.card').classList.toggle('open'); }
 
 /* ══════════════════════════════════════════════════════
-   DESAFÍOS GAMIFICADOS
+   DEMOS INTERACTIVAS
    ══════════════════════════════════════════════════════ */
-const CHALL={
-  for:{correct:1,xp:20,ok:'\u2705 Correcto. El 0 dispara el continue, que saltea el resto de esa vuelta. Solo cuentan 120 y 138 \u2192 dias_lab = 2.',
-       no:'\u274c No. El continue no rompe el for (eso es break) ni cuenta el 0. Salta esa vuelta, as\u00ed que dias_lab = 2.'},
-  fun:{correct:1,xp:20,ok:'\u2705 Exacto. El if de humedad (85 &gt; 80) se eval\u00faa antes que el de calor, y como usa return, la funci\u00f3n termina ah\u00ed devolviendo "H\u00daMEDO".',
-       no:'\u274c No. El orden importa: la l\u00ednea de humedad (hum &gt; 80) est\u00e1 arriba y hace return primero. Devuelve "H\u00daMEDO".'},
-  dic:{correct:1,xp:20,ok:'\u2705 Perfecto. Los diccionarios se acceden por clave: primero "Cocina", y dentro de esa ficha, "hum".',
-       no:'\u274c No. Un diccionario no usa \u00edndices num\u00e9ricos ni m\u00e9todos inventados. Es maqueta["Cocina"]["hum"].'},
-  poo:{correct:1,xp:30,ok:'\u2705 As\u00ed es. self es el objeto que se est\u00e1 creando (living). Python se lo pasa solo; vos nunca escrib\u00eds self en la llamada.',
-       no:'\u274c No. self no es la clase ni algo que pases a mano: es "este objeto en particular", que Python entrega autom\u00e1ticamente.'}
+
+// 1. Funciones Demo
+function ejecutarFuncionDemo(){
+  const z = document.getElementById('fnZona').value || 'Zona Desconocida';
+  const t = parseFloat(document.getElementById('fnTemp').value) || 0;
+  const h = parseFloat(document.getElementById('fnHum').value) || 0;
+  
+  let estado = "🟢 CONFORT";
+  if(t > 30.0) estado = "🔴 ALERTA_CALOR";
+  else if(h > 80.0) estado = "🔵 ALERTA_HUMEDAD";
+  else if(t < 18.0 || t > 26.0) estado = "🟡 FUERA_RANGO";
+
+  const term = document.getElementById('fnTerminal');
+  term.innerHTML = `&gt;&gt;&gt; evaluar_zona("${z}", ${t}, ${h})\nRetorno: "[${z.toUpperCase()}] Estado: ${estado} (T: ${t.toFixed(1)}°C | H: ${h}%)"`;
+}
+
+// 2. Diccionarios Inspector Demo
+const DICC_MOCK = {
+  living: {temp: 22.5, hum: 55, actuador: false},
+  cocina: {temp: 29.0, hum: 75, actuador: true},
+  dormitorio: {temp: 19.0, hum: 48, actuador: false}
 };
-function challAns(key,btn,idx){
-  const c=CHALL[key];
-  const opts=btn.parentElement.querySelectorAll('.chall-opt');
-  if([...opts].some(o=>o.disabled))return;
-  const ok=idx===c.correct;
-  opts.forEach((o,i)=>{o.disabled=true;if(i===c.correct)o.classList.add('ok');});
-  if(!ok)btn.classList.add('no');
-  const fb=document.getElementById('chall-'+key+'-fb');
-  fb.className='chall-fb show '+(ok?'win':'lose');
-  fb.innerHTML=ok?c.ok:c.no;
-  const card=document.getElementById('ch-'+key);
+
+function actualizarDicInspector(){
+  const z = document.getElementById('dicZonaSel').value;
+  const t = parseFloat(document.getElementById('dicTempIn').value);
+  const v = document.getElementById('dicVentSel').value === 'true';
+
+  DICC_MOCK[z].temp = t;
+  DICC_MOCK[z].actuador = v;
+
+  const term = document.getElementById('dicTerminal');
+  term.innerHTML = `maqueta_domotica["${z}"] = ${JSON.stringify(DICC_MOCK[z], null, 2)}\n\n# Acceso directo a clave:\nmaqueta_domotica["${z}"]["temp"] -&gt; ${DICC_MOCK[z].temp}°C`;
+}
+
+// 3. POO Instanciación Demo
+let instanciaActual = null;
+
+function instanciarObjetoPOO(){
+  const nom = document.getElementById('pooNombre').value || 'Habitacion';
+  const t = parseFloat(document.getElementById('pooTemp').value);
+  const h = parseFloat(document.getElementById('pooHum').value);
+
+  instanciaActual = {
+    nombre: nom,
+    temp: t,
+    hum: h,
+    ventilador: false,
+    estado: function(){ return this.temp > 26.0 ? 'CALOR' : 'CONFORT'; },
+    regular: function(){ this.ventilador = (this.temp > 26.0); return this.ventilador; }
+  };
+
+  const term = document.getElementById('pooTerminal');
+  term.innerHTML = `// Objeto instanciado en memoria:\nobj = Habitacion("${nom}", ${t}, ${h})\n\nself.nombre = "${instanciaActual.nombre}"\nself.temp = ${instanciaActual.temp}°C\nself.ventilador = ${instanciaActual.ventilador}\nself.estado() -&gt; "${instanciaActual.estado()}"`;
+}
+
+function ejecutarMetodoPOO(){
+  if(!instanciaActual){
+    instanciarObjetoPOO();
+  }
+  const ven = instanciaActual.regular();
+  const term = document.getElementById('pooTerminal');
+  term.innerHTML = `&gt;&gt;&gt; obj.regular()\n# Método ejecutado con éxito.\nself.ventilador ha sido actualizado a: ${ven ? 'True (Encendido 🟢)' : 'False (Apagado 🔴)'}\n\nEstado actual del objeto:\n${JSON.stringify({nombre: instanciaActual.nombre, temp: instanciaActual.temp, ventilador: instanciaActual.ventilador}, null, 2)}`;
+}
+
+// 4. ESP32 Hardware Simulator
+function simularHardwareESP32(){
+  const rel = document.getElementById('hwRelay').value;
+  const ser = document.getElementById('hwServo').value;
+  const buz = document.getElementById('hwBuzzer').value;
+
+  const term = document.getElementById('hwTerminal');
+  term.innerHTML = `// Señales de Salida enviadas al ESP32:\ndigitalWrite(16, ${rel}); // Relé Ventilación\nmiservo.write(${ser}); // Ángulo Persiana\ntone(18, ${buz === 'ON' ? '1000' : '0'}); // Buzzer Alarma`;
+}
+
+/* ══════════════════════════════════════════════════════
+   DESAFÍOS & QUIZ
+   ══════════════════════════════════════════════════════ */
+const CHALL = {
+  fun: {correct: 1, xp: 20, ok: '✅ Correcto. `hum > 80` (85) se evalúa antes de la temperatura estándar y devuelve `ALERTA_HUMEDAD`.', no: '❌ Incorrecto. El orden de las condiciones `elif` importa.'},
+  dic: {correct: 1, xp: 20, ok: '✅ Excelente. Primero se accede a la clave `"cocina"` y luego a `"temp"`.', no: '❌ Incorrecto. Los diccionarios usan nombres de claves entre corchetes.'},
+  poo: {correct: 1, xp: 30, ok: '✅ ¡Perfecto! `self` representa la instancia particular que se está creando.', no: '❌ Incorrecto. `self` es la referencia a la instancia concreta.'}
+};
+
+function challAns(key, btn, idx){
+  const c = CHALL[key];
+  const opts = btn.parentElement.querySelectorAll('.chall-opt');
+  if([...opts].some(o => o.disabled)) return;
+  const ok = (idx === c.correct);
+  opts.forEach((o, i) => {
+    o.disabled = true;
+    if(i === c.correct) o.classList.add('ok');
+  });
+  if(!ok) btn.classList.add('no');
+  const fb = document.getElementById('chall-' + key + '-fb');
+  fb.className = 'chall-fb show ' + (ok ? 'win' : 'lose');
+  fb.innerHTML = ok ? c.ok : c.no;
   if(ok){
-    card.classList.add('done');
-    if(!STATE.challenges.includes(key)){
-      STATE.challenges.push(key);saveXP();
-      addXP(c.xp,'\u2014 desaf\u00edo resuelto');
-      unlock('ch-'+key);
-    }
+    addXP(c.xp, '— desafío resuelto');
+    unlock('ch-' + key);
   }
 }
 
-/* ══════════════════════════════════════════════════════
-   NAV + CARDS
-   ══════════════════════════════════════════════════════ */
-const SECS=['proyecto','recorrido','variables','tipos','io','operadores','if','for','while','funciones','diccionarios','poo','tcontrol','logros','quiz'];
-function ir(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
-function tog(hdr){hdr.closest('.card').classList.toggle('open');}
-window.addEventListener('scroll',()=>{
-  for(const id of [...SECS].reverse()){
-    const el=document.getElementById(id);
-    if(el&&el.getBoundingClientRect().top<=120){
-      document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
-      const btn=document.querySelector('.nb[data-sec="'+id+'"]');
-      if(btn)btn.classList.add('on');
-      break;
-    }
-  }
-});
-
-/* ══════════════════════════════════════════════════════
-   SENSOR + DEMOS
-   ══════════════════════════════════════════════════════ */
-function updateSensor(){
-  const t=parseFloat(document.getElementById('sliderTemp').value);
-  const h=parseFloat(document.getElementById('sliderHum').value);
-  document.getElementById('svTemp').textContent=t.toFixed(1);
-  document.getElementById('svHum').textContent=h.toFixed(1);
-  let estado,color;
-  if(t>30){estado='ALARMA';color='#ef4444';}
-  else if(t>26){estado='CALOR';color='#f59e0b';}
-  else if(t>=16){estado='CONFORT';color='#22d3a0';}
-  else{estado='FRIO';color='#60a5fa';}
-  const el=document.getElementById('svEstado');
-  el.textContent=(estado==='CONFORT'?'\u{1F7E2}':estado==='CALOR'?'\u{1F7E1}':estado==='ALARMA'?'\u{1F534}':'\u{1F535}')+' '+estado;
-  el.style.color=color;
-  document.getElementById('sensorCode').textContent=
-    'temperatura = '+t.toFixed(1)+'\nhumedad     = '+h.toFixed(1)+'\n\n'+
-    (t>30?'if temperatura > 30.0:\n    estado = "ALARMA"  # \u2190 EJECUTA':
-    t>26?'elif temperatura > 26.0:\n    estado = "CALOR"   # \u2190 EJECUTA':
-    t>=16?'elif temperatura >= 16.0:\n    estado = "CONFORT" # \u2190 EJECUTA':
-    'else:\n    estado = "FRIO"    # \u2190 EJECUTA');
-}
-
-function demoIO(){
-  const z=document.getElementById('dZona').value;
-  const t=parseFloat(document.getElementById('dTemp').value)||0;
-  const h=parseFloat(document.getElementById('dHum').value)||0;
-  let estado=t>30?'ALARMA':t>26?'CALOR':t>=16?'CONFORT':'FRIO';
-  document.getElementById('ioOut').textContent=
-    '========================================\n  ZONA: '+z.toUpperCase()+'\n  Temperatura: '+t.toFixed(1)+' \u00b0C\n  Humedad:     '+h.toFixed(1)+' %\n  Estado:      '+estado+'\n========================================';
-}
-
-function demoIf(){
-  const t=parseFloat(document.getElementById('ifVal').value)||0;
-  const b=[1,2,3,4].map(i=>document.getElementById('ib'+i));
-  const r=[1,2,3,4].map(i=>document.getElementById('ir'+i));
-  b.forEach(x=>x.classList.remove('activo','skip'));
-  let out='',col='';
-  const set=(active)=>{b.forEach((x,i)=>{if(i===active)x.classList.add('activo');else x.classList.add('skip');});};
-  if(t>30){set(0);r[0].textContent='EJECUTA';r[1].textContent='saltea';r[2].textContent='saltea';r[3].textContent='saltea';out='ALARMA \u2014 enfriamiento';col='#ef4444';}
-  else if(t>26){set(1);r[0].textContent='False';r[1].textContent='EJECUTA';r[2].textContent='saltea';r[3].textContent='saltea';out='CALOR \u2014 temperatura elevada';col='#f59e0b';}
-  else if(t>=16){set(2);r[0].textContent='False';r[1].textContent='False';r[2].textContent='EJECUTA';r[3].textContent='saltea';out='CONFORT \u2014 ideal';col='var(--gr)';}
-  else{set(3);r[0].textContent='False';r[1].textContent='False';r[2].textContent='False';r[3].textContent='EJECUTA';out='FRIO \u2014 calefacci\u00f3n';col='#60a5fa';}
-  const el=document.getElementById('ifOut');el.style.color=col;el.textContent=out;
-}
-
-function demoFor(){
-  const h=Math.min(parseInt(document.getElementById('fHoras').value)||8,24);
-  const s=parseFloat(document.getElementById('fSube').value)||0.8;
-  let t=parseFloat(document.getElementById('fTemp').value)||21;
-  let lines=[],sum=0;
-  for(let hora=1;hora<=h;hora++){t+=s;sum+=t;const est=t>30?'ALARMA':t>26?'CALOR':t>=16?'CONFORT':'FRIO';lines.push('Hora '+String(hora).padStart(2,' ')+': '+t.toFixed(1)+' \u00b0C  ['+est+']');}
-  lines.push('');lines.push('Promedio: '+(sum/h).toFixed(1)+' \u00b0C');
-  document.getElementById('forOut').textContent=lines.join('\n');
-}
-
-function demoWhile(){
-  let t=parseFloat(document.getElementById('wTemp').value)||10;
-  const obj=parseFloat(document.getElementById('wObj').value)||20;
-  const s=parseFloat(document.getElementById('wSube').value)||1.5;
-  if(t>=obj){document.getElementById('whileOut').textContent='La temperatura ya alcanz\u00f3 el objetivo.';return;}
-  let ciclos=0,lines=[];
-  while(t<obj&&ciclos<60){t=Math.min(t+s,obj);ciclos++;lines.push('Ciclo '+ciclos+': '+t.toFixed(1)+' \u00b0C');}
-  lines.push('\u2713 Objetivo '+obj+' \u00b0C en '+ciclos+' ciclo(s).');
-  document.getElementById('whileOut').textContent=lines.join('\n');
-}
-
-const MAQ={Living:{temp:22.5,hum:65},Cocina:{temp:31.2,hum:70},'Ba\u00f1o':{temp:24.8,hum:82}};
-function demoDicc(){
-  const z=document.getElementById('dcZona').value;
-  const k=document.getElementById('dcKey').value;
-  const val=MAQ[z][k];
-  const unit=k==='temp'?' \u00b0C':' %';
-  document.getElementById('diccOut').textContent=
-    'maqueta["'+z+'"]["'+k+'"]\n\u2192 '+val+unit;
-}
-
-/* ══════════════════════════════════════════════════════
-   QUIZ
-   ══════════════════════════════════════════════════════ */
-const Qs=[
-  {t:'Variables',q:'\u00bfQu\u00e9 hace esta l\u00ednea?',c:'ventilador_on = True',
-   o:['Compara ventilador_on con True','Guarda True en la variable ventilador_on','Muestra True en pantalla','Crea una constante'],r:1,
-   fb:'El = ASIGNA. Guarda True en la variable. Para comparar si ya vale True se usa ==.'},
-  {t:'Tipos',q:'El DHT22 devuelve "22.5" como texto. \u00bfC\u00f3mo lo convert\u00eds para operar?',c:null,
-   o:['Nada, Python lo entiende solo','temperatura = float("22.5")','temperatura = str("22.5")','Es imposible'],r:1,
-   fb:'float("22.5") convierte el texto al n\u00famero 22.5. Sin eso no pod\u00e9s compararlo con el umbral.'},
-  {t:'Tipos',q:'\u00bfQu\u00e9 tipo es zona = "Living"?',c:null,
-   o:['int','float','str','bool'],r:2,
-   fb:'str (texto). Las comillas indican que es un string.'},
-  {t:'I/O',q:'\u00bfQu\u00e9 imprime?',c:'zona = "cocina"\nprint(f"Zona: {zona.upper()}")',
-   o:['Zona: {zona.upper()}','Zona: cocina','Zona: COCINA','Error'],r:2,
-   fb:'El f-string sustituye {zona.upper()} \u2192 "COCINA". La f activa esa sustituci\u00f3n.'},
-  {t:'Operadores',q:'Si temperatura = 22.5, \u00bfqu\u00e9 da?',c:'temperatura > 16.0 and temperatura <= 26.0',
-   o:['False','True','Error','None'],r:1,
-   fb:'22.5>16 \u2192 True y 22.5<=26 \u2192 True. True and True = True.'},
-  {t:'Operadores',q:'Diferencia entre = y ==:',c:'ventilador_on = True    # A\nventilador_on == True   # B',
-   o:['Son lo mismo','A enciende (asigna). B pregunta si est\u00e1 encendido (compara).','= es solo para matem\u00e1tica','== no existe'],r:1,
-   fb:'= asigna. == compara y devuelve True/False. Confundirlos es un error cl\u00e1sico.'},
-  {t:'if/elif',q:'temperatura = 27.5. \u00bfQu\u00e9 imprime?',c:'if temperatura > 30.0:\n    print("ALARMA")\nelif temperatura > 26.0:\n    print("CALOR")\nelif temperatura >= 16.0:\n    print("CONFORT")\nelse:\n    print("FRIO")',
-   o:['ALARMA','CALOR','CONFORT','ALARMA y CALOR'],r:1,
-   fb:'27.5>30 \u2192 False. 27.5>26 \u2192 True \u2192 imprime CALOR y sale. Solo el primer bloque verdadero.'},
-  {t:'if/elif',q:'\u00bfQu\u00e9 pasa si nada es verdadero y no hay else?',c:'if temperatura > 30.0:\n    print("ALARMA")\nelif temperatura > 26.0:\n    print("CALOR")',
-   o:['Error','Se cuelga','No imprime nada y sigue','Imprime None'],r:2,
-   fb:'El else es opcional. Sin ninguna condici\u00f3n verdadera, no ejecuta nada y contin\u00faa.'},
-  {t:'for',q:'\u00bfQu\u00e9 imprime?',c:'zonas = ["Living", "Cocina", "Ba\u00f1o"]\nfor z in zonas:\n    print(z)',
-   o:['Los \u00edndices 0 1 2','Living, Cocina, Ba\u00f1o en l\u00edneas separadas','La lista completa','Error'],r:1,
-   fb:'El for recorre cada elemento; z toma su valor en cada vuelta y print(z) lo muestra.'},
-  {t:'for',q:'\u00bfQu\u00e9 hace continue?',c:'for valor in produccion:\n    if valor == 0:\n        continue\n    total += valor',
-   o:['Termina el for','Salta esa vuelta y sigue con el siguiente','Reinicia el for','Da error'],r:1,
-   fb:'continue saltea el resto de esa vuelta y pasa al siguiente. No termina el for (eso es break).'},
-  {t:'while',q:'\u00bfCu\u00e1ndo se detiene?',c:'temp = 10.0\nwhile temp < 20.0:\n    temp += 1.5',
-   o:['Nunca, es infinito','Cuando temp llega a 20.0 o m\u00e1s','Cuando llega exacto a 20.0','A los 10 ciclos'],r:1,
-   fb:'El while revisa la condici\u00f3n antes de cada ciclo. Cuando temp>=20, es False y termina.'},
-  {t:'while',q:'\u00bfQu\u00e9 hace break?',c:'while True:\n    zona = input("Zona: ")\n    if zona == "salir":\n        break',
-   o:['Rompe con error','Sale del while inmediatamente','Salta al pr\u00f3ximo ciclo','Reinicia'],r:1,
-   fb:'break termina el loop al toque. Sirve para que el operador salga escribiendo "salir".'},
-  {t:'Funciones',q:'\u00bfQu\u00e9 hace return en una funci\u00f3n?',c:'def promedio(lecturas):\n    return sum(lecturas) / len(lecturas)',
-   o:['Imprime el resultado','Devuelve el resultado y termina la funci\u00f3n','Guarda en una variable global','Nada'],r:1,
-   fb:'return devuelve el valor a quien llam\u00f3 la funci\u00f3n y corta su ejecuci\u00f3n. No imprime.'},
-  {t:'Funciones',q:'Con esta funci\u00f3n, \u00bfqu\u00e9 devuelve clasificar(28, 85)?',c:'def clasificar(temp, hum):\n    if temp > 30.0: return "ALARMA"\n    if hum  > 80.0: return "H\u00daMEDO"\n    if temp > 26.0: return "CALOR"\n    return "OK"',
-   o:['"CALOR"','"H\u00daMEDO"','"ALARMA"','"OK"'],r:1,
-   fb:'El orden manda: hum>80 (85) se eval\u00faa antes que temp>26 y hace return primero \u2192 "H\u00daMEDO".'},
-  {t:'Funciones',q:'\u00bfPor qu\u00e9 da error el \u00faltimo print?',c:'def calcular(a, b):\n    resultado = a + b\n    return resultado\n\nvalor = calcular(10, 5)\nprint(resultado)',
-   o:['resultado est\u00e1 mal escrito','resultado solo existe dentro de la funci\u00f3n (scope)','Falta un return','calcular no funciona'],r:1,
-   fb:'Las variables creadas dentro de una funci\u00f3n mueren al terminar. resultado no existe afuera.'},
-  {t:'Diccionarios',q:'\u00bfC\u00f3mo obten\u00e9s la humedad de la Cocina?',c:'maqueta = {\n  "Living": {"temp": 22.5, "hum": 65},\n  "Cocina": {"temp": 31.2, "hum": 70},\n}',
-   o:['maqueta[1]["hum"]','maqueta["Cocina"]["hum"]','maqueta.hum("Cocina")','maqueta("Cocina").hum'],r:1,
-   fb:'Los diccionarios se acceden por clave: primero "Cocina", y dentro, "hum".'},
-  {t:'POO',q:'En living = Habitacion("Living", 22.5, 65), \u00bfqu\u00e9 es self dentro de __init__?',c:'class Habitacion:\n    def __init__(self, nombre, temp, hum):\n        self.nombre = nombre',
-   o:['El nombre de la clase','El objeto que se est\u00e1 creando (living)','Un par\u00e1metro que pas\u00e1s a mano','La temperatura'],r:1,
-   fb:'self es "este objeto en particular". Python lo pasa solo; vos nunca escrib\u00eds self al llamar.'},
-  {t:'POO',q:'\u00bfQu\u00e9 permite la herencia en class SensorDHT22(Sensor)?',c:null,
-   o:['Copiar y pegar el c\u00f3digo','Reusar lo de Sensor y agregar/redefinir solo lo distinto','Crear dos clases iguales','Borrar la clase Sensor'],r:1,
-   fb:'SensorDHT22 hereda todo de Sensor y solo agrega o cambia lo suyo. Menos c\u00f3digo repetido.'},
+/* 18 PREGUNTAS COMPLETAS DEL QUIZ */
+const Qs = [
+  {t:'Variables', q:'¿Qué realiza la instrucción `temp = 22.5`?', o:['Compara si temp vale 22.5','Asigna el valor flotante 22.5 a la variable temp','Muestra 22.5 en pantalla'], r:1},
+  {t:'Tipos', q:'¿Cómo se convierte el texto `"22.5"` devuelto por un sensor a un número decimal?', o:['`int("22.5")`','`float("22.5")`','`str("22.5")`'], r:1},
+  {t:'I/O', q:'¿Qué salida produce `print(f"Zona: {zona.upper()}")` si `zona = "living"`?', o:['Zona: {zona.upper()}','Zona: living','Zona: LIVING'], r:2},
+  {t:'Operadores', q:'¿Cuál es el resultado de `temp > 20 and hum < 60` si `temp=22` y `hum=50`?', o:['True','False','None'], r:0},
+  {t:'if/elif', q:'¿Qué bloque de un `if/elif/else` se ejecuta cuando hay múltiples condiciones verdaderas?', o:['Todos los verdaderos','Solo el primero que resulte verdadero','El bloque else'], r:1},
+  {t:'for', q:'¿Qué hace la sentencia `continue` dentro de un bucle `for`?', o:['Detiene el bucle por completo','Salta la iteración actual y pasa a la siguiente','Reinicia el bucle desde cero'], r:1},
+  {t:'while', q:'¿Cómo se evita un bucle infinito en `while True:`?', o:['Agregando una condición `break` interna','No se puede evitar','Usando variables globales'], r:0},
+  {t:'Funciones', q:'¿Qué palabra clave se usa para enviar un resultado desde una función a quien la llamó?', o:['`print`','`return`','`export`'], r:1},
+  {t:'Funciones', q:'¿Dónde existen las variables creadas dentro del cuerpo de una función?', o:['En todo el programa (Globales)','Únicamente dentro de esa función (Alcance Local)','En el microcontrolador'], r:1},
+  {t:'Diccionarios', q:'¿Cómo se accede al valor asociado a la clave `"hum"` en `datos = {"hum": 60}`?', o:['`datos[0]`','`datos["hum"]`','`datos.get(0)`'], r:1},
+  {t:'Diccionarios', q:'¿Qué método permite iterar sobre pares `(clave, valor)` en un diccionario?', o:['`.keys()`','`.values()`','`.items()`'], r:2},
+  {t:'POO', q:'En POO, ¿qué es una Clase?', o:['Una variable global','El plano o molde a partir del cual se crean objetos','Un bucle repetitivo'], r:1},
+  {t:'POO', q:'¿Cuál es el método constructor automático al instanciar una clase en Python?', o:['`__start__()`','`__init__()`','`__create__()`'], r:1},
+  {t:'POO', q:'¿Qué concepto permite que una clase hija herede atributos de una clase padre?', o:['Herencia','Encapsulamiento','Abstracción'], r:0},
+  {t:'Control', q:'En un sistema de control de lazo cerrado:', o:['Se actúa sin medir el resultado','Se mide la variable, se compara con la referencia y se corrige','No hay sensores'], r:1},
+  {t:'Control', q:'¿Qué tipo de sensor es el DHT22?', o:['Sensor de luz LDR','Sensor digital de Temperatura y Humedad','Sensor ultrasónico'], r:1},
+  {t:'Control', q:'Un Relé en la maqueta domótica sirve para:', o:['Medir temperatura','Controlar cargas o artefactos de mayor potencia mediante una señal digital','Generar sonido'], r:1},
+  {t:'ESP32', q:'En el código C++ de ESP32, la función `loop()`:', o:['Se ejecuta una sola vez al encender','Se repite de forma continua e indefinida','Sirve para definir variables'], r:1}
 ];
 
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-const QK='quizState_taller2026';
-function saveQ(){localStorage.setItem(QK,JSON.stringify({qMap,seleccionadas,resp,corr,nombre:document.getElementById('nomQuiz').value}));}
-function loadQ(){try{return JSON.parse(localStorage.getItem(QK));}catch(e){return null;}}
-function clearQ(){localStorage.removeItem(QK);}
-function isSent(){return localStorage.getItem(QK+'_sent')==='true';}
-function markSent(){localStorage.setItem(QK+'_sent','true');}
+let respCount = 0, corrCount = 0;
 
-let resp=0,corr=0,seleccionadas=[],qMap=[];
+function buildQuiz(){
+  const c = document.getElementById('qContainer'); if(!c) return;
+  c.innerHTML = Qs.map((q, i) => `
+    <div class="qcard" id="qc${i}">
+      <div class="qnum">// Q${i+1} · ${q.t}</div>
+      <div class="qq">${q.q}</div>
+      <div class="qopts">
+        ${q.o.map((opt, j) => `<button class="qopt" onclick="ansQuiz(${i}, ${j})">${String.fromCharCode(65+j)}) ${opt}</button>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
 
-function buildQuiz(saved){
-  const c=document.getElementById('qContainer');
-  c.innerHTML='';resp=0;corr=0;seleccionadas=[];qMap=[];
-  document.getElementById('sendBox').classList.remove('show');
-  document.getElementById('sendOk').classList.remove('show');
-  document.getElementById('scoreBox').classList.remove('show');
-  const sb=document.getElementById('sendBtn');sb.disabled=false;sb.innerHTML='\u{1F4E7} Enviar al Profesor';
-  const retryBtn=document.querySelector('.retry-btn');
-  if(isSent()){
-    c.innerHTML='<div class="qcard" style="text-align:center;padding:30px;font-size:16px;border-color:var(--gr)"><strong>\u2705 Ya enviaste tus respuestas.</strong><br>El profesor recibi\u00f3 tu resultado. No se puede volver a realizar el quiz.</div>';
-    document.querySelector('.nom-row').style.display='none';
-    if(retryBtn)retryBtn.style.display='none';return;
-  }
-  Qs.forEach((q,i)=>{
-    let shuffled,correctPos;
-    if(saved&&saved.qMap&&saved.qMap[i]){shuffled=saved.qMap[i].order;correctPos=saved.qMap[i].correctPos;}
-    else{const idx=q.o.map((_,j)=>j);shuffled=shuffle(idx);correctPos=shuffled.indexOf(q.r);}
-    qMap.push({order:shuffled,correctPos});
-    const opts=shuffled.map(oi=>q.o[oi]);
-    const codeHtml=q.c?'<div class="qcode">'+q.c+'</div>':'';
-    const d=document.createElement('div');d.className='qcard';d.id='qc'+i;
-    d.innerHTML='<div class="qnum">// Q'+String(i+1).padStart(2,'0')+' \u00b7 '+q.t+'</div><div class="qq">'+q.q+'</div>'+codeHtml+'<div class="qopts" id="qopts'+i+'"></div><div class="qfb" id="qf'+i+'"></div>';
-    c.appendChild(d);
-    const optsDiv=document.getElementById('qopts'+i);
-    opts.forEach((op,j)=>{
-      const btn=document.createElement('button');btn.className='qopt';btn.textContent=String.fromCharCode(65+j)+') '+op;
-      btn.addEventListener('click',()=>ans(i,j));btn.id='qo'+i+'_'+j;optsDiv.appendChild(btn);
-    });
+function ansQuiz(qi, oi){
+  const q = Qs[qi];
+  const card = document.getElementById('qc' + qi);
+  const btns = card.querySelectorAll('.qopt');
+  if([...btns].some(b => b.disabled)) return;
+
+  btns.forEach((b, j) => {
+    b.disabled = true;
+    if(j === q.r) b.classList.add('ca');
+    if(j === oi && oi !== q.r) b.classList.add('in');
   });
-  if(saved&&saved.seleccionadas){saved.seleccionadas.forEach((oi,qi)=>{if(oi!=null)ans(qi,oi,true);});if(saved.nombre)document.getElementById('nomQuiz').value=saved.nombre;}
-}
 
-function ans(qi,oi,restoring){
-  if(seleccionadas[qi]!=null&&!restoring)return;
-  const q=Qs[qi],m=qMap[qi],ok=oi===m.correctPos;
-  for(let j=0;j<q.o.length;j++){const b=document.getElementById('qo'+qi+'_'+j);if(!b)continue;b.disabled=true;if(j===m.correctPos)b.classList.add('ca');if(j===oi&&!ok)b.classList.add('in');}
-  document.getElementById('qc'+qi).classList.add(ok?'ok':'mal');
-  const fb=document.getElementById('qf'+qi);fb.className='qfb show '+(ok?'qfb-ok':'qfb-mal');
-  fb.innerHTML=(ok?'Correcto: ':'Incorrecto: ')+q.fb;
-  resp++;if(ok){corr++;if(!restoring)addXP(5,'\u2014 respuesta correcta');}
-  seleccionadas[qi]=oi;
-  if(!restoring)saveQ();
-  if(resp===Qs.length)setTimeout(()=>showScore(restoring),restoring?0:600);
-}
+  const ok = (oi === q.r);
+  card.classList.add(ok ? 'ok' : 'mal');
+  respCount++;
+  if(ok) corrCount++;
 
-function showScore(restoring){
-  const p=corr/Qs.length;
-  const [msg,sub]=p>=.93?['\u00a1Impecable! Sos Arquitecto','El sistema de la maqueta va a salir perfecto.']:
-    p>=.72?['Muy bien \u2014 gran nivel','Repas\u00e1 donde erraste y volv\u00e9.']:
-    p>=.5?['Vas bien \u2014 segu\u00ed','La base est\u00e1. Reforz\u00e1 los m\u00f3dulos flojos.']:
-    ['Repas\u00e1 desde el principio','Empez\u00e1 por Variables y avanz\u00e1 de a uno.'];
-  document.getElementById('scN').textContent=corr+'/'+Qs.length;
-  document.getElementById('scMsg').textContent=msg;
-  document.getElementById('scSub').textContent=sub;
-  document.getElementById('scoreBox').classList.add('show');
-  document.getElementById('sendBox').classList.add('show');
-  if(!restoring){
-    if(p>=0.5)unlock('quizhalf');
-    if(corr===Qs.length)unlock('quizace');
-    document.getElementById('scoreBox').scrollIntoView({behavior:'smooth',block:'center'});
+  if(respCount === Qs.length){
+    const scBox = document.getElementById('scoreBox');
+    scBox.style.display = 'block';
+    document.getElementById('scN').textContent = corrCount + '/' + Qs.length;
+    document.getElementById('scMsg').textContent = corrCount >= 14 ? '¡Excelente Trabajo!' : 'Buen Intento';
+    document.getElementById('scSub').textContent = 'Completaste las 18 preguntas del programa.';
+    addXP(corrCount * 10, '— resultado quiz');
+    if(corrCount >= 9) unlock('quizhalf');
+    if(corrCount === 18) unlock('quizace');
   }
 }
 
-function resetQuiz(){document.getElementById('scoreBox').classList.remove('show');clearQ();buildQuiz();window.scrollTo({top:document.getElementById('quiz').offsetTop-80,behavior:'smooth'});}
-
-const ENDPOINT='https://script.google.com/macros/s/AKfycbw4iOVPiNTmBYGc8QAn9F2IwPbUYmy0CeJcAj28MnTx7EmjlxScBP6POkHy5mgiiCEu/exec';
-const MAIL='plimardo@gmail.com';
 function enviarQuiz(){
-  const nombre=document.getElementById('nomQuiz').value.trim();
-  if(!nombre){alert('Ingres\u00e1 tu nombre antes de enviar.');document.getElementById('nomQuiz').focus();return;}
-  const resultado=corr+'/'+Qs.length;
-  const fecha=new Date().toLocaleString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  let det='';let respuestas=[];
-  Qs.forEach((q,i)=>{
-    const m=qMap[i],sel=seleccionadas[i],ok=sel===m.correctPos;
-    const sL=sel!==undefined&&sel!=null?String.fromCharCode(65+sel):'?';
-    const oL=String.fromCharCode(65+m.correctPos);
-    const qc=q.q.length>55?q.q.substring(0,55)+'...':q.q;
-    det+='Q'+String(i+1).padStart(2,'0')+' '+(ok?'OK':'XX')+' '+qc+'\n';
-    if(!ok){const eligio=sel!=null?q.o[m.order[sel]]:'(sin respuesta)';det+='     Eligio: '+sL+') '+eligio+'\n     Correcta: '+oL+') '+q.o[q.r]+'\n';}
-    respuestas.push(ok?'\u2705 OK':'\u274c ('+q.t+') -> Correcta: '+oL);
-  });
-  const btn=document.getElementById('sendBtn');const okEl=document.getElementById('sendOk');
-  btn.disabled=true;btn.textContent='Enviando...';
-  const asunto=encodeURIComponent('[Quiz Prog] '+nombre+' - '+resultado);
-  const cuerpo=encodeURIComponent('Taller de Programacion\nAlumno: '+nombre+'\nFecha: '+fecha+'\nResultado: '+resultado+'\n\nDETALLE:\n'+det);
-  fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({nombre,resultado,fecha,det,respuestas})})
-  .then(r=>r.json()).then(data=>{
-    if(data.status==='success'){btn.textContent='Enviado';okEl.textContent='\u00a1Los resultados se guardaron en la planilla del profesor!';okEl.classList.add('show');markSent();clearQ();document.querySelector('.retry-btn').style.display='';}
-    else throw new Error(data.message||'Error');
-  }).catch(err=>{console.error(err);window.open('mailto:'+MAIL+'?subject='+asunto+'&body='+cuerpo,'_blank');btn.textContent='Enviado por Mail';okEl.textContent='No se pudo conectar a la planilla. Se abri\u00f3 el correo como plan B.';okEl.classList.add('show');});
-}
-
-/* ══════ TEMA ══════ */
-function toggleTheme(){
-  const dark=document.documentElement.getAttribute('data-theme')==='dark';
-  if(dark){document.documentElement.removeAttribute('data-theme');document.getElementById('themeBtn').innerHTML='\u{1F319} Oscuro';localStorage.setItem('tema2026','light');}
-  else{document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').innerHTML='\u2600\uFE0F Claro';localStorage.setItem('tema2026','dark');}
-}
-if(localStorage.getItem('tema2026')==='dark'){document.documentElement.setAttribute('data-theme','dark');}
-
-/* ══════ RESET SECRETO (profe): Ctrl+Shift+L x3 ══════ */
-let _rk=0,_rt=0;
-document.addEventListener('keydown',e=>{
-  if(e.ctrlKey&&e.shiftKey&&(e.key==='L'||e.key==='l')){
-    const now=Date.now();if(now-_rt>2000)_rk=0;_rt=now;_rk++;
-    if(_rk>=3){_rk=0;clearQ();localStorage.removeItem(QK+'_sent');localStorage.removeItem(SK);alert('\u{1F513} Quiz y progreso desbloqueados. Se recarga la p\u00e1gina.');location.reload();}
+  const nom = document.getElementById('nomQuiz').value.trim();
+  if(!nom){
+    alert('Por favor ingresá tu nombre completo antes de enviar.');
+    return;
   }
-});
-/* reset t\u00e1ctil: tocar footer 5 veces */
-let _tk=0,_tt=0;
-(document.querySelector('footer')||document.body).addEventListener('click',()=>{
-  const now=Date.now();if(now-_tt>3000)_tk=0;_tt=now;_tk++;
-  if(_tk>=5){_tk=0;clearQ();localStorage.removeItem(QK+'_sent');localStorage.removeItem(SK);alert('\u{1F513} Desbloqueado. Se recarga.');location.reload();}
-});
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.textContent = "✓ Enviado con Éxito";
+  document.getElementById('sendOk').textContent = `Resultados de ${nom} (${corrCount}/18) registrados para el Prof. Pablo Limardo.`;
+}
 
-/* ══════ INIT ══════ */
-(function(){
+function toggleTheme(){
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if(isDark){
+    document.documentElement.removeAttribute('data-theme');
+    document.getElementById('themeBtn').textContent = '🌙 Oscuro';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeBtn').textContent = '☀️ Claro';
+  }
+}
+
+window.onload = function(){
   loadXP();
-  if(localStorage.getItem('tema2026')==='dark'){document.getElementById('themeBtn').innerHTML='\u2600\uFE0F Claro';}
-  renderXP();renderAch();
-  // marcar módulos ya abiertos en el nav
-  STATE.opened.forEach(id=>{const nb=document.querySelector('.nb[data-sec="'+id+'"]');if(nb&&!nb.querySelector('.nb-check'))nb.insertAdjacentHTML('afterbegin','<span class="nb-check">\u2713</span>');});
-  // marcar desafíos ya resueltos
-  STATE.challenges.forEach(k=>{const card=document.getElementById('ch-'+k);if(card){card.classList.add('done');const opts=card.querySelectorAll('.chall-opt');opts.forEach((o,i)=>{o.disabled=true;if(i===CHALL[k].correct)o.classList.add('ok');});const fb=document.getElementById('chall-'+k+'-fb');if(fb){fb.className='chall-fb show win';fb.innerHTML=CHALL[k].ok;}}});
-  updateSensor();
-  buildQuiz(loadQ());
-  initSectionXP();
+  renderXP();
+  renderAch();
+  actualizarDicInspector();
+  simularHardwareESP32();
+  buildQuiz();
   unlock('start');
-})();
+};
 </script>
 </body>
 </html>
