@@ -87,7 +87,6 @@ nav{background:var(--card);border-bottom:2px solid var(--border);position:sticky
 .nav-in::-webkit-scrollbar-thumb{background:var(--border);}
 .nb{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:12px 14px;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px;}
 .nb:hover,.nb.on{color:var(--gr);border-bottom-color:var(--gr);}
-.nb-check{color:var(--gr);font-size:11px;}
 
 main{max-width:960px;margin:0 auto;padding:36px 20px 100px;}
 section{margin-bottom:72px;scroll-margin-top:100px;}
@@ -119,20 +118,62 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
 .card.open .card-body{display:block;animation:fadeIn 0.3s ease-out;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
 
+/* STRICT CODE BOX FORMATTING FIX */
 .code-wrap{position:relative;margin:16px 0;}
-.code{background:#0b131e;color:#e2e8f0;border-radius:12px;padding:16px 18px;font-family:var(--mono);font-size:13.5px;line-height:1.65;white-space:pre;overflow-x:auto;border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 2px 8px rgba(0,0,0,0.4);}
-.code-lbl{position:absolute;top:0;right:0;font-size:9px;font-family:var(--mono);font-weight:600;letter-spacing:1px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.08);padding:4px 10px;border-radius:0 12px 0 10px;text-transform:uppercase;}
-.copy-btn{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
+.code{
+  background:#0d1117 !important;
+  color:#e6edf3 !important;
+  border-radius:12px;
+  padding:16px 18px;
+  font-family:var(--mono);
+  font-size:13.5px;
+  line-height:1.65;
+  white-space:pre !important;
+  overflow-x:auto;
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,0.5);
+  display:block !important;
+}
+.code-lbl{
+  position:absolute;
+  top:0;
+  right:0;
+  font-size:9px;
+  font-family:var(--mono);
+  font-weight:600;
+  letter-spacing:1px;
+  color:rgba(255,255,255,0.4);
+  background:rgba(255,255,255,0.08);
+  padding:4px 10px;
+  border-radius:0 12px 0 10px;
+  text-transform:uppercase;
+  z-index:2;
+}
+.copy-btn{
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.2);
+  color:#fff;
+  font-family:var(--mono);
+  font-size:10px;
+  padding:4px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  transition:all 0.2s;
+  z-index:2;
+}
 .copy-btn:hover{background:var(--gr);border-color:var(--gr);}
 
 /* Syntax Highlight Simulated Tokens */
-.cm{color:#64748b;font-style:italic;}
-.kw{color:#f43f5e;font-weight:600;}
-.st{color:#38bdf8;}
-.nm{color:#fbbf24;}
-.fn{color:#c084fc;font-weight:600;}
-.cls{color:#f97316;font-weight:700;}
-.slf{color:#4ade80;font-style:italic;}
+.cm{color:#8b949e;font-style:italic;}
+.kw{color:#ff7b72;font-weight:600;}
+.st{color:#a5d6ff;}
+.nm{color:#79c0ff;}
+.fn{color:#d2a8ff;font-weight:600;}
+.cls{color:#ffa657;font-weight:700;}
+.slf{color:#7ee787;font-style:italic;}
 
 /* ══ CALLOUTS & INTERACTIVE PLAYGROUNDS ══ */
 .anal{border-radius:12px;padding:14px 18px;margin:14px 0;display:flex;gap:14px;font-size:14.5px;align-items:flex-start;background:var(--gr4);border-left:5px solid var(--gr);box-shadow:var(--shadow-sm);}
@@ -195,6 +236,11 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
 .qopt:hover:not(:disabled){background:var(--gr4);border-color:var(--gr);}
 .qopt.ca{background:var(--gr4)!important;border-color:var(--gr)!important;color:var(--gr2)!important;font-weight:700;}
 .qopt.in{background:var(--re3)!important;border-color:var(--re)!important;color:var(--re)!important;}
+
+.nom-row{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;margin-bottom:18px;background:var(--gr4);border:1.5px solid var(--gr3);flex-wrap:wrap;}
+.nom-lbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.nom-in{flex:1;min-width:200px;background:var(--card);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:15px;font-weight:500;padding:10px 14px;border-radius:8px;outline:none;transition:border-color .2s;}
+.nom-in:focus{border-color:var(--gr);}
 
 /* Toast Notification */
 .xp-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dk);color:#fff;padding:12px 24px;border-radius:30px;font-family:var(--disp);font-weight:700;font-size:15px;z-index:500;box-shadow:0 10px 30px rgba(0,0,0,0.4);display:flex;align-items:center;gap:10px;opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;border:2px solid var(--gr);}
@@ -276,7 +322,7 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
 
 <main>
 
-<!-- ═══ PROYECTO ═══ -->
+<!-- ═══ PROYECTO & MAPA (Módulos iniciales) ═══ -->
 <section id="proyecto">
   <div class="s-eye">// Briefing de la Misión <span class="s-lvl">Nivel 0</span></div>
   <h2 class="s-h2">Red Climática de la Maqueta Domótica</h2>
@@ -284,7 +330,6 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
   <div class="div"></div>
 </section>
 
-<!-- ═══ RECORRIDO ═══ -->
 <section id="recorrido">
   <div class="s-eye">// Ruta de Aprendizaje</div>
   <h2 class="s-h2">El Camino hacia Arquitecto</h2>
@@ -292,7 +337,6 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
   <div class="div"></div>
 </section>
 
-<!-- ═══ VARIABLES / TIPOS / IO / OPERADORES / CONTROL FLOW (Shortened summary blocks for context) ═══ -->
 <section id="variables" data-xp="10">
   <div class="s-eye">// Módulo 01 <span class="s-lvl">+10 XP</span></div>
   <h2 class="s-h2">Variables y Estado</h2>
@@ -302,7 +346,8 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
     <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">📦</div><div class="card-inf"><div class="card-tag">Concepto Base</div><div class="card-tit">Asignación y Nombres</div></div><span class="card-chev">▶</span></div>
     <div class="card-body">
       <div class="code-wrap">
-        <pre class="code"><span class="cm"># Variables del sistema domótico</span>
+        <span class="code-lbl">python</span>
+<pre class="code"><span class="cm"># Variables del sistema domótico</span>
 temp_living = <span class="nm">22.5</span>
 hum_living = <span class="nm">58.0</span>
 zona = <span class="st">"Living"</span>
@@ -314,7 +359,7 @@ ventilador_on = <span class="kw">False</span></pre>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
-     MÓDULO 08: FUNCIONES (REDiseñado & ampliado)
+     MÓDULO 08: FUNCIONES (Estructura de Código Reconstruida)
      ══════════════════════════════════════════════════════ -->
 <section id="funciones" data-xp="25">
   <div class="s-eye">// Módulo 08 · Paradigma Funcional <span class="s-lvl">+25 XP</span></div>
@@ -338,7 +383,7 @@ ventilador_on = <span class="kw">False</span></pre>
         <div>En la casa domótica tenemos múltiples habitaciones. Sin funciones, tendríamos que duplicar las estructuras <code>if/elif</code> para cada sensor. Con una función, escribís la lógica <b>una sola vez</b> y la ejecutás para Living, Cocina o Dormitorio.</div>
       </div>
 
-      <!-- Playground de Prueba en Vivo para Funciones -->
+      <!-- Playground Interactivo -->
       <div class="interactive-box">
         <div class="box-lbl or">⚡ Laboratorio Interactivo de Funciones</div>
         <div class="controls-grid">
@@ -359,9 +404,29 @@ ventilador_on = <span class="kw">False</span></pre>
         <div class="out-terminal" id="fnTerminal">Apretá el botón para simular el retorno de la función...</div>
       </div>
 
+      <!-- Código estrictamente preformateado -->
       <div class="code-wrap">
         <span class="code-lbl">python</span>
-        <pre class="code"><span class="kw">def</span> <span class="fn">evaluar_zona</span>(nombre, temp, hum):
+<pre class="code"><span class="cm"># SIN función — código repetido e ineficiente (malo)</span>
+temp_living = <span class="nm">22.5</span>
+<span class="kw">if</span> temp_living > <span class="nm">26</span>:
+    <span class="fn">print</span>(<span class="st">"Living: CALOR"</span>)
+<span class="kw">elif</span> temp_living >= <span class="nm">16</span>:
+    <span class="fn">print</span>(<span class="st">"Living: CONFORT"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Living: FRÍO"</span>)
+
+temp_cocina = <span class="nm">29.0</span>
+<span class="kw">if</span> temp_cocina > <span class="nm">26</span>:
+    <span class="fn">print</span>(<span class="st">"Cocina: CALOR"</span>)
+<span class="kw">elif</span> temp_cocina >= <span class="nm">16</span>:
+    <span class="fn">print</span>(<span class="st">"Cocina: CONFORT"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"Cocina: FRÍO"</span>)
+
+
+<span class="cm"># CON función — escrita una sola vez, modular y limpia (bien)</span>
+<span class="kw">def</span> <span class="fn">evaluar_zona</span>(nombre, temp, hum):
     <span class="st">"""Evalúa las condiciones ambientales de una zona concreta."""</span>
     <span class="kw">if</span> temp > <span class="nm">30.0</span>:
         estado = <span class="st">"🔴 ALERTA_CALOR"</span>
@@ -376,19 +441,21 @@ ventilador_on = <span class="kw">False</span></pre>
 
 <span class="cm"># Llamadas reutilizables</span>
 res1 = <span class="fn">evaluar_zona</span>(<span class="st">"Living"</span>, <span class="nm">22.5</span>, <span class="nm">50</span>)
-res2 = <span class="fn">evaluar_zona</span>(<span class="st">"Cocina"</span>, <span class="nm">31.0</span>, <span class="nm">60</span>)</pre>
+res2 = <span class="fn">evaluar_zona</span>(<span class="st">"Cocina"</span>, <span class="nm">31.0</span>, <span class="nm">60</span>)
+res3 = <span class="fn">evaluar_zona</span>(<span class="st">"Dormitorio"</span>, <span class="nm">18.3</span>, <span class="nm">45</span>)
+res4 = <span class="fn">evaluar_zona</span>(<span class="st">"Baño"</span>, <span class="nm">24.1</span>, <span class="nm">85</span>)</pre>
         <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
       </div>
     </div>
   </div>
 
-  <!-- Card 2: Return vs Print y Scope -->
+  <!-- Card 2: Anatomía de la Función -->
   <div class="card">
     <div class="card-hdr" onclick="tog(this)">
       <div class="card-ico ico-am">🔄</div>
       <div class="card-inf">
         <div class="card-tag">Conceptos Clave</div>
-        <div class="card-tit">Retorno de Valores (`return`) y Alcance (`Scope`)</div>
+        <div class="card-tit">Anatomía, Parámetros y Alcance (`Scope`)</div>
       </div>
       <span class="card-chev">▶</span>
     </div>
@@ -405,17 +472,17 @@ res2 = <span class="fn">evaluar_zona</span>(<span class="st">"Cocina"</span>, <s
           <tbody>
             <tr>
               <td><b>Propósito</b></td>
-              <td>Muestra texto en pantalla en ese instante.</td>
+              <td>Muestra texto en consola en el instante.</td>
               <td>Devuelve un valor para ser procesado luego.</td>
             </tr>
             <tr>
-              <td><b>Uso en el sistema</b></td>
-              <td>Avisos directos en consola.</td>
-              <td>Cálculos, promedios, estados que alimentan actuadores.</td>
+              <td><b>Uso en Domótica</b></td>
+              <td>Avisos visuales inmediatos.</td>
+              <td>Cálculos y promedios que alimentan relés/actuadores.</td>
             </tr>
             <tr>
               <td><b>Valor devuelto</b></td>
-              <td>Retorna <code>None</code>. No se puede guardar.</td>
+              <td>Retorna <code>None</code>. No se puede reutilizar.</td>
               <td>Retorna el dato exacto (número, string, lista, dict).</td>
             </tr>
           </tbody>
@@ -424,7 +491,7 @@ res2 = <span class="fn">evaluar_zona</span>(<span class="st">"Cocina"</span>, <s
 
       <div class="code-wrap">
         <span class="code-lbl">python</span>
-        <pre class="code"><span class="cm"># Alcance Local vs Global</span>
+<pre class="code"><span class="cm"># Alcance Local vs Global</span>
 umbral_maximo = <span class="nm">26.0</span>  <span class="cm"># Variable GLOBAL</span>
 
 <span class="kw">def</span> <span class="fn">calcular_promedio</span>(t1, t2, t3):
@@ -459,7 +526,7 @@ promedio_casa = <span class="fn">calcular_promedio</span>(<span class="nm">22.0<
 </section>
 
 <!-- ══════════════════════════════════════════════════════
-     MÓDULO 09: DICCIONARIOS (REDiseñado & ampliado)
+     MÓDULO 09: DICCIONARIOS
      ══════════════════════════════════════════════════════ -->
 <section id="diccionarios" data-xp="25">
   <div class="s-eye">// Módulo 09 · Estructuras Clave-Valor <span class="s-lvl">+25 XP</span></div>
@@ -479,10 +546,10 @@ promedio_casa = <span class="fn">calcular_promedio</span>(<span class="nm">22.0<
     <div class="card-body">
       <div class="anal bl">
         <div class="an-ico">💡</div>
-        <div>Una <b>lista</b> guarda secuencias ordenadas `[22.5, 58.0, "Living"]`. Un <b>diccionario</b> le da nombre a cada dato `{"temp": 22.5, "hum": 58.0, "zona": "Living"}`. Esto evita confusiones con los índices.</div>
+        <div>Una <b>lista</b> guarda secuencias ordenadas <code>[22.5, 58.0, "Living"]</code>. Un <b>diccionario</b> le da nombre explícito a cada dato <code>{"temp": 22.5, "hum": 58.0, "zona": "Living"}</code>. Esto evita confusiones con los índices.</div>
       </div>
 
-      <!-- Inspector Interactivo de Diccionarios -->
+      <!-- Inspector Interactivo -->
       <div class="interactive-box">
         <div class="box-lbl bl">🔍 Inspector de Diccionario Domótico</div>
         <div class="controls-grid">
@@ -511,16 +578,19 @@ promedio_casa = <span class="fn">calcular_promedio</span>(<span class="nm">22.0<
 
       <div class="code-wrap">
         <span class="code-lbl">python</span>
-        <pre class="code"><span class="cm"># Diccionario anidado: la casa entera</span>
+<pre class="code"><span class="cm"># Diccionario anidado: la casa entera</span>
 maqueta_domotica = {
     <span class="st">"living"</span>: {<span class="st">"temp"</span>: <span class="nm">22.5</span>, <span class="st">"hum"</span>: <span class="nm">55</span>, <span class="st">"actuador"</span>: <span class="kw">False</span>},
     <span class="st">"cocina"</span>: {<span class="st">"temp"</span>: <span class="nm">29.0</span>, <span class="st">"hum"</span>: <span class="nm">75</span>, <span class="st">"actuador"</span>: <span class="kw">True</span>},
     <span class="st">"dormitorio"</span>: {<span class="st">"temp"</span>: <span class="nm">19.0</span>, <span class="st">"hum"</span>: <span class="nm">48</span>, <span class="st">"actuador"</span>: <span class="kw">False</span>}
 }
 
+<span class="cm"># Acceso por clave</span>
+temp_cocina = maqueta_domotica[<span class="st">"cocina"</span>][<span class="st">"temp"</span>]  <span class="cm"># -> 29.0°C</span>
+
 <span class="cm"># Recorrido con .items()</span>
 <span class="kw">for</span> zona, datos <span class="kw">in</span> maqueta_domotica.<span class="fn">items</span>():
-    <span class="fn">print</span>(<span class="st">f"Zona: {zona} | Temp: {datos['temp']}°C | Fan: {datos['actuador']}"</span>)</pre>
+    <span class="fn">print</span>(<span class="st">f"Zona: {zona:<10} | Temp: {datos['temp']}°C | Fan: {datos['actuador']}"</span>)</pre>
         <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
       </div>
     </div>
@@ -545,7 +615,7 @@ maqueta_domotica = {
 </section>
 
 <!-- ══════════════════════════════════════════════════════
-     MÓDULO 10: POO (REDiseñado & ampliado)
+     MÓDULO 10: POO
      ══════════════════════════════════════════════════════ -->
 <section id="poo" data-xp="30">
   <div class="s-eye">// Módulo 10 · Orientación a Objetos <span class="s-lvl">+30 XP</span></div>
@@ -595,7 +665,7 @@ maqueta_domotica = {
 
       <div class="code-wrap">
         <span class="code-lbl">python</span>
-        <pre class="code"><span class="kw">class</span> <span class="cls">Habitacion</span>:
+<pre class="code"><span class="kw">class</span> <span class="cls">Habitacion</span>:
     <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, nombre, temp, hum):
         <span class="slf">self</span>.nombre = nombre       <span class="cm"># Atributo público</span>
         <span class="slf">self</span>.temp = temp           <span class="cm"># Atributo público</span>
@@ -639,7 +709,7 @@ cocina.<span class="fn">regular</span>()  <span class="cm"># Enciende el ventila
     <div class="card-body">
       <div class="code-wrap">
         <span class="code-lbl">python</span>
-        <pre class="code"><span class="cm"># Clase Base (Padre)</span>
+<pre class="code"><span class="cm"># Clase Base (Padre)</span>
 <span class="kw">class</span> <span class="cls">Sensor</span>:
     <span class="kw">def</span> <span class="fn">__init__</span>(<span class="slf">self</span>, pin, zona):
         <span class="slf">self</span>.pin = pin
@@ -685,7 +755,7 @@ lista_sensores = [<span class="cls">SensorDHT22</span>(<span class="nm">4</span>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
-     MÓDULO 11: TECNOLOGÍA DE CONTROL (REDiseñado)
+     MÓDULO 11: TECNOLOGÍA DE CONTROL
      ══════════════════════════════════════════════════════ -->
 <section id="tcontrol">
   <div class="s-eye" style="color:var(--or);">// Materia Articulada</div>
@@ -731,7 +801,7 @@ lista_sensores = [<span class="cls">SensorDHT22</span>(<span class="nm">4</span>
     <div class="card-body">
       <div class="code-wrap">
         <span class="code-lbl">c++ · esp32</span>
-        <pre class="code"><span class="cm">// Código del microcontrolador ESP32 en C++</span>
+<pre class="code"><span class="cm">// Código del microcontrolador ESP32 en C++</span>
 <span class="kw">#include</span> <span class="st">&lt;DHT.h&gt;</span>
 
 <span class="kw">#define</span> DHTPIN 4
@@ -762,7 +832,7 @@ DHT dht(DHTPIN, DHTTYPE);
   </div>
 </section>
 
-<!-- ═══ LOGROS ═══ -->
+<!-- ═══ LOGROS & QUIZ ═══ -->
 <section id="logros">
   <div class="s-eye" style="color:var(--xp2);">// Sala de Trofeos</div>
   <h2 class="s-h2">Logros Desbloqueados</h2>
@@ -771,7 +841,6 @@ DHT dht(DHTPIN, DHTTYPE);
   <div class="ach-grid" id="achGrid"></div>
 </section>
 
-<!-- ═══ QUIZ FINAL ═══ -->
 <section id="quiz">
   <div class="s-eye">// Evaluación Final <span class="s-lvl">Jefe de Nivel</span></div>
   <h2 class="s-h2">Quiz Integrador Anual</h2>
@@ -802,9 +871,6 @@ DHT dht(DHTPIN, DHTTYPE);
 </footer>
 
 <script>
-/* ══════════════════════════════════════════════════════
-   ESTADO GLOBAL, GAMIFICACIÓN Y UTILIDADES
-   ══════════════════════════════════════════════════════ */
 const SK = 'prog_taller2026_v2';
 const RANKS = [
   {min:0, name:'Aprendiz', ico:'🌱'},
