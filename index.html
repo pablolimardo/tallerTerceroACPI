@@ -166,7 +166,7 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
 }
 .copy-btn:hover{background:var(--gr);border-color:var(--gr);}
 
-/* Syntax Highlight Simulated Tokens */
+/* Syntax Token Simulated Styles */
 .cm{color:#8b949e;font-style:italic;}
 .kw{color:#ff7b72;font-weight:600;}
 .st{color:#a5d6ff;}
@@ -232,7 +232,7 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
 .qnum{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gr2);margin-bottom:8px;}
 .qq{font-family:var(--disp);font-size:16px;font-weight:700;color:var(--dk);margin-bottom:10px;}
 .qopts{display:flex;flex-direction:column;gap:8px;}
-.qopt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:500;padding:11px 15px;border-radius:9px;cursor:pointer;text-align:left;transition:all .2s;}
+.qopt{background:var(--bg2);border:1.5px solid var(--border);color:var(--txt);font-family:var(--sans);font-size:14px;font-weight:500;padding:11px 15px;border-radius:99px;cursor:pointer;text-align:left;transition:all .2s;}
 .qopt:hover:not(:disabled){background:var(--gr4);border-color:var(--gr);}
 .qopt.ca{background:var(--gr4)!important;border-color:var(--gr)!important;color:var(--gr2)!important;font-weight:700;}
 .qopt.in{background:var(--re3)!important;border-color:var(--re)!important;color:var(--re)!important;}
@@ -322,7 +322,7 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
 
 <main>
 
-<!-- ═══ PROYECTO & MAPA (Módulos iniciales) ═══ -->
+<!-- ═══ PROYECTO & MAPA ═══ -->
 <section id="proyecto">
   <div class="s-eye">// Briefing de la Misión <span class="s-lvl">Nivel 0</span></div>
   <h2 class="s-h2">Red Climática de la Maqueta Domótica</h2>
@@ -337,6 +337,9 @@ section{margin-bottom:72px;scroll-margin-top:100px;}
   <div class="div"></div>
 </section>
 
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 01: VARIABLES
+     ══════════════════════════════════════════════════════ -->
 <section id="variables" data-xp="10">
   <div class="s-eye">// Módulo 01 <span class="s-lvl">+10 XP</span></div>
   <h2 class="s-h2">Variables y Estado</h2>
@@ -359,7 +362,270 @@ ventilador_on = <span class="kw">False</span></pre>
 </section>
 
 <!-- ══════════════════════════════════════════════════════
-     MÓDULO 08: FUNCIONES (Estructura de Código Reconstruida)
+     MÓDULO 02: TIPOS DE DATOS
+     ══════════════════════════════════════════════════════ -->
+<section id="tipos" data-xp="10">
+  <div class="s-eye">// Módulo 02 <span class="s-lvl">+10 XP</span></div>
+  <h2 class="s-h2">Tipos de Datos</h2>
+  <p class="s-sub">Clasificación de datos en Python: enteros, decimales, textos y booleanos.</p>
+  <div class="div"></div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">🏷️</div><div class="card-inf"><div class="card-tag">Tipos Primitivos</div><div class="card-tit">int, float, str, bool y Conversiones</div></div><span class="card-chev">▶</span></div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Tipo</th><th>Significado</th><th>Ejemplo Domótico</th></tr></thead>
+          <tbody>
+            <tr><td><code>int</code></td><td>Número entero</td><td><code>pines_activos = 4</code></td></tr>
+            <tr><td><code>float</code></td><td>Número decimal</td><td><code>temp_sensor = 24.8</code></td></tr>
+            <tr><td><code>str</code></td><td>Cadena de texto</td><td><code>estado = "OPERATIVO"</code></td></tr>
+            <tr><td><code>bool</code></td><td>Verdadero / Falso</td><td><code>relay_state = True</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+<pre class="code"><span class="cm"># Conversión explícita de datos (Casting)</span>
+lectura_raw = <span class="st">"25.4"</span>               <span class="cm"># Texto proveniente del puerto serie</span>
+temperatura = <span class="fn">float</span>(lectura_raw)   <span class="cm"># Convierte a decimal: 25.4</span>
+limite_entero = <span class="fn">int</span>(temperatura)   <span class="cm"># Convierte a entero: 25</span>
+flag_activo = <span class="fn">bool</span>(temperatura)    <span class="cm"># Evalúa a True</span></pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 03: I/O (ENTRADA Y SALIDA)
+     ══════════════════════════════════════════════════════ -->
+<section id="io" data-xp="10">
+  <div class="s-eye">// Módulo 03 <span class="s-lvl">+10 XP</span></div>
+  <h2 class="s-h2">Entrada y Salida (I/O)</h2>
+  <p class="s-sub">Captura de datos del operador con `input()` y presentación mediante f-strings con `print()`.</p>
+  <div class="div"></div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">📟</div><div class="card-inf"><div class="card-tag">Interactividad Básica</div><div class="card-tit">Consola de Diagnóstico Directa</div></div><span class="card-chev">▶</span></div>
+    <div class="card-body">
+      <div class="interactive-box">
+        <div class="box-lbl">🖥️ Consola de Formateo I/O en Vivo</div>
+        <div class="controls-grid">
+          <div class="ctl-group">
+            <span class="ctl-label">Zona:</span>
+            <input type="text" id="ioZona" class="ctl-input" value="Estar Comedor">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Temp (°C):</span>
+            <input type="number" id="ioTemp" class="ctl-input" value="23.4" step="0.1">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Humedad (%):</span>
+            <input type="number" id="ioHum" class="ctl-input" value="55" step="1">
+          </div>
+        </div>
+        <button class="ctl-btn" onclick="demoIO()">▶ Generar Reporte f-string</button>
+        <div class="out-terminal" id="ioOut">Presioná para ver la salida formateada...</div>
+      </div>
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+<pre class="code"><span class="cm"># Entrada de datos desde teclado</span>
+nombre_zona = <span class="fn">input</span>(<span class="st">"Ingrese la zona a monitorear: "</span>)
+temp_ingresada = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Ingrese la temperatura actual: "</span>))
+
+<span class="cm"># Salida formateada con f-string</span>
+<span class="fn">print</span>(<span class="st">f"--- MONITOREO DE {nombre_zona.upper()} ---"</span>)
+<span class="fn">print</span>(<span class="st">f"Estado: {temp_ingresada:.2f}°C registrados correctamente."</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 04: OPERADORES
+     ══════════════════════════════════════════════════════ -->
+<section id="operadores" data-xp="10">
+  <div class="s-eye">// Módulo 04 <span class="s-lvl">+10 XP</span></div>
+  <h2 class="s-h2">Operadores Lógicos y Aritméticos</h2>
+  <p class="s-sub">Herramientas matemáticas y comparativas para combinar múltiples condiciones de sensores.</p>
+  <div class="div"></div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">⚖️</div><div class="card-inf"><div class="card-tag">Comparación & Lógica</div><div class="card-tit">and, or, not y Evaluación Relacional</div></div><span class="card-chev">▶</span></div>
+    <div class="card-body">
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+<pre class="code">temp = <span class="nm">27.5</span>
+humedad = <span class="nm">85</span>
+presencia = <span class="kw">True</span>
+
+<span class="cm"># Operadores relacionales (==, !=, >, <, >=, <=)</span>
+hace_calor = temp > <span class="nm">25.0</span>               <span class="cm"># True</span>
+
+<span class="cm"># Operadores lógicos de combinación</span>
+alerta_critica = hace_calor <span class="kw">and</span> (humedad > <span class="nm">80</span>) <span class="cm"># True (Ambas verdaderas)</span>
+activar_clima = hace_calor <span class="kw">or</span> presencia         <span class="cm"># True</span>
+sistema_bloqueado = <span class="kw">not</span> presencia               <span class="cm"># False</span></pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 05: IF / ELIF / ELSE
+     ══════════════════════════════════════════════════════ -->
+<section id="if" data-xp="15">
+  <div class="s-eye">// Módulo 05 <span class="s-lvl">+15 XP</span></div>
+  <h2 class="s-h2">Estructuras Condicionales (if / elif / else)</h2>
+  <p class="s-sub">Toma de decisiones en tiempo real según las lecturas del clima.</p>
+  <div class="div"></div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">🔀</div><div class="card-inf"><div class="card-tag">Control de Flujo</div><div class="card-tit">Trazador de Decisiones Térmicas</div></div><span class="card-chev">▶</span></div>
+    <div class="card-body">
+      <div class="interactive-box">
+        <div class="box-lbl or">🔀 Simulador de Ramificación Condicional</div>
+        <div class="controls-grid">
+          <div class="ctl-group">
+            <span class="ctl-label">Temperatura (°C):</span>
+            <input type="number" id="ifVal" class="ctl-input" value="27.5" step="0.5">
+          </div>
+        </div>
+        <button class="ctl-btn or" onclick="demoIf()">▶ Trazar Ejecución</button>
+        <div class="out-terminal" id="ifOut">Ajustá el valor para ver la rama ejecutada...</div>
+      </div>
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+<pre class="code">temp = <span class="nm">27.5</span>
+
+<span class="kw">if</span> temp > <span class="nm">30.0</span>:
+    <span class="fn">print</span>(<span class="st">"🔴 ALERTA: Activando refrigeración máxima"</span>)
+<span class="kw">elif</span> temp > <span class="nm">26.0</span>:
+    <span class="fn">print</span>(<span class="st">"🟡 ADVERTENCIA: Encendiendo ventiladores auxiliares"</span>)
+<span class="kw">elif</span> temp >= <span class="nm">18.0</span>:
+    <span class="fn">print</span>(<span class="st">"🟢 ESTADO: Confort térmico dentro del rango"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="st">"🔵 CALEFACCIÓN: Encendiendo caldera de zona"</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 06: BUCLE FOR
+     ══════════════════════════════════════════════════════ -->
+<section id="for" data-xp="15">
+  <div class="s-eye">// Módulo 06 <span class="s-lvl">+15 XP</span></div>
+  <h2 class="s-h2">Bucle Determinado (`for`)</h2>
+  <p class="s-sub">Iteración sobre secuencias de datos, listas de sensores y rangos de tiempo.</p>
+  <div class="div"></div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-gr">🔄</div><div class="card-inf"><div class="card-tag">Iteración Contada</div><div class="card-tit">Procesamiento de Muestras Horarias</div></div><span class="card-chev">▶</span></div>
+    <div class="card-body">
+      <div class="interactive-box">
+        <div class="box-lbl">⏱️ Simulador de Registro por Horas</div>
+        <div class="controls-grid">
+          <div class="ctl-group">
+            <span class="ctl-label">Temp Inicial (°C):</span>
+            <input type="number" id="fTemp" class="ctl-input" value="21.0" step="0.5">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Incremento/Hora:</span>
+            <input type="number" id="fSube" class="ctl-input" value="0.8" step="0.1">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Horas a simular:</span>
+            <input type="number" id="fHoras" class="ctl-input" value="6" min="1" max="24">
+          </div>
+        </div>
+        <button class="ctl-btn" onclick="demoFor()">▶ Ejecutar Bucle `for`</button>
+        <div class="out-terminal" id="forOut">Ejecutá el bucle para ver el reporte...</div>
+      </div>
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+<pre class="code"><span class="cm"># Recorrido de una lista de zonas</span>
+zonas = [<span class="st">"Living"</span>, <span class="st">"Cocina"</span>, <span class="st">"Dormitorio"</span>, <span class="st">"Baño"</span>]
+<span class="kw">for</span> z <span class="kw">in</span> zonas:
+    <span class="fn">print</span>(<span class="st">f"Escaneando sensor en: {z}"</span>)
+
+<span class="cm"># Uso de range() e instrucción continue para omitir fallos</span>
+lecturas = [<span class="nm">22.1</span>, <span class="nm">24.5</span>, -<span class="nm">999</span>, <span class="nm">25.0</span>]  <span class="cm"># -999 indica lectura errónea</span>
+<span class="kw">for</span> val <span class="kw">in</span> lecturas:
+    <span class="kw">if</span> val &lt; <span class="nm">0</span>:
+        <span class="kw">continue</span>  <span class="cm"># Saltea el valor inválido y pasa al siguiente</span>
+    <span class="fn">print</span>(<span class="st">f"Muestra válida: {val}°C"</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chall" id="ch-for">
+    <div class="chall-hdr">
+      <span class="chall-badge">Desafío Rápido</span>
+      <span class="chall-tit">🎯 Trazado de `continue`</span>
+      <span class="chall-xp">+20 XP</span>
+    </div>
+    <div class="chall-body">
+      <div class="chall-q">Dada la lista `muestras = [20, -1, 30]`, ¿cuántas iteraciones procesan el print en el bucle?</div>
+      <div class="chall-opts">
+        <button class="chall-opt" onclick="challAns('for',this,0)">A) 3 iteraciones</button>
+        <button class="chall-opt" onclick="challAns('for',this,1)">B) 2 iteraciones (se omite el -1)</button>
+        <button class="chall-opt" onclick="challAns('for',this,2)">C) 1 iteración (se interrumpe el bucle)</button>
+      </div>
+      <div class="chall-fb" id="chall-for-fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 07: BUCLE WHILE
+     ══════════════════════════════════════════════════════ -->
+<section id="while" data-xp="15">
+  <div class="s-eye">// Módulo 07 <span class="s-lvl">+15 XP</span></div>
+  <h2 class="s-h2">Bucle Indeterminado (`while`)</h2>
+  <p class="s-sub">Ejecución continua hasta alcanzar una condición de parada o estado de confort.</p>
+  <div class="div"></div>
+  <div class="card open">
+    <div class="card-hdr" onclick="tog(this)"><div class="card-ico ico-or">⏳</div><div class="card-inf"><div class="card-tag">Bucle de Monitoreo</div><div class="card-tit">Calentamiento Progresivo & Control Continuo</div></div><span class="card-chev">▶</span></div>
+    <div class="card-body">
+      <div class="interactive-box">
+        <div class="box-lbl or">🔥 Simulador de Calentamiento con `while`</div>
+        <div class="controls-grid">
+          <div class="ctl-group">
+            <span class="ctl-label">Temp Inicial (°C):</span>
+            <input type="number" id="wTemp" class="ctl-input" value="12.0" step="1">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Objetivo (°C):</span>
+            <input type="number" id="wObj" class="ctl-input" value="20.0" step="1">
+          </div>
+          <div class="ctl-group">
+            <span class="ctl-label">Incremento/Ciclo:</span>
+            <input type="number" id="wSube" class="ctl-input" value="1.5" step="0.5">
+          </div>
+        </div>
+        <button class="ctl-btn or" onclick="demoWhile()">▶ Ejecutar Bucle `while`</button>
+        <div class="out-terminal" id="whileOut">Configurá los valores para iniciar el bucle...</div>
+      </div>
+      <div class="code-wrap">
+        <span class="code-lbl">python</span>
+<pre class="code">temp_actual = <span class="nm">12.0</span>
+temp_objetivo = <span class="nm">20.0</span>
+
+<span class="cm"># Calentamiento dinámico mientras no se alcance el objetivo</span>
+<span class="kw">while</span> temp_actual &lt; temp_objetivo:
+    <span class="fn">print</span>(<span class="st">f"Calentando... Temp actual: {temp_actual:.1f}°C"</span>)
+    temp_actual += <span class="nm">1.5</span>
+
+<span class="fn">print</span>(<span class="st">"🟢 Confort térmico alcanzado. Caldera en espera."</span>)</pre>
+        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     MÓDULO 08: FUNCIONES
      ══════════════════════════════════════════════════════ -->
 <section id="funciones" data-xp="25">
   <div class="s-eye">// Módulo 08 · Paradigma Funcional <span class="s-lvl">+25 XP</span></div>
@@ -367,7 +633,7 @@ ventilador_on = <span class="kw">False</span></pre>
   <p class="s-sub">Agrupá instrucciones bajo un nombre único, pasales parámetros y reutilizalas en cualquier zona de la maqueta sin repetir código.</p>
   <div class="div div-or"></div>
 
-  <!-- Card 1: Por qué usamos funciones -->
+  <!-- Card 1: DRY -->
   <div class="card open">
     <div class="card-hdr" onclick="tog(this)">
       <div class="card-ico ico-am">📦</div>
@@ -404,7 +670,7 @@ ventilador_on = <span class="kw">False</span></pre>
         <div class="out-terminal" id="fnTerminal">Apretá el botón para simular el retorno de la función...</div>
       </div>
 
-      <!-- Código estrictamente preformateado -->
+      <!-- Código en bloque estricto pre -->
       <div class="code-wrap">
         <span class="code-lbl">python</span>
 <pre class="code"><span class="cm"># SIN función — código repetido e ineficiente (malo)</span>
@@ -590,7 +856,7 @@ temp_cocina = maqueta_domotica[<span class="st">"cocina"</span>][<span class="st
 
 <span class="cm"># Recorrido con .items()</span>
 <span class="kw">for</span> zona, datos <span class="kw">in</span> maqueta_domotica.<span class="fn">items</span>():
-    <span class="fn">print</span>(<span class="st">f"Zona: {zona:<10} | Temp: {datos['temp']}°C | Fan: {datos['actuador']}"</span>)</pre>
+    <span class="fn">print</span>(<span class="st">f"Zona: {zona:&lt;10} | Temp: {datos['temp']}°C | Fan: {datos['actuador']}"</span>)</pre>
         <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
       </div>
     </div>
@@ -883,6 +1149,7 @@ const RANKS = [
 const ACHIEVEMENTS = [
   {id:'start', ico:'🚀', name:'Encendido', desc:'Iniciaste la plataforma'},
   {id:'explorer', ico:'🗺️', name:'Explorador', desc:'Visitaste 6 módulos'},
+  {id:'ch-for', ico:'🔄', name:'Iterador', desc:'Resolviste el desafío de Bucles'},
   {id:'ch-fun', ico:'📦', name:'Modular', desc:'Resolviste el desafío de Funciones'},
   {id:'ch-dic', ico:'📑', name:'Archivista', desc:'Resolviste el desafío de Diccionarios'},
   {id:'ch-poo', ico:'🤖', name:'Constructor', desc:'Resolviste el desafío de POO'},
@@ -966,10 +1233,66 @@ function ir(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth',
 function tog(hdr){ hdr.closest('.card').classList.toggle('open'); }
 
 /* ══════════════════════════════════════════════════════
-   DEMOS INTERACTIVAS
+   DEMOS INTERACTIVAS DE MÓDULOS
    ══════════════════════════════════════════════════════ */
 
-// 1. Funciones Demo
+// Demo I/O (Módulo 03)
+function demoIO(){
+  const z = document.getElementById('ioZona').value || 'Living';
+  const t = parseFloat(document.getElementById('ioTemp').value) || 0;
+  const h = parseFloat(document.getElementById('ioHum').value) || 0;
+  const term = document.getElementById('ioOut');
+  term.innerHTML = `--- MONITOREO DE ${z.toUpperCase()} ---\nLectura: ${t.toFixed(2)}°C | Humedad: ${h}%\nSalida f-string: f"Zona: {nombre_zona} | Temp: {temp}°C"`;
+}
+
+// Demo IF (Módulo 05)
+function demoIf(){
+  const t = parseFloat(document.getElementById('ifVal').value) || 0;
+  const term = document.getElementById('ifOut');
+  if(t > 30.0) {
+    term.innerHTML = `> Evaluando: temp (${t}°C) > 30.0 → TRUE\n🟢 Rama ejecutada: "🔴 ALERTA: Activando refrigeración máxima"`;
+  } else if(t > 26.0) {
+    term.innerHTML = `> Evaluando: temp (${t}°C) > 30.0 → FALSE\n> Evaluando: temp (${t}°C) > 26.0 → TRUE\n🟢 Rama ejecutada: "🟡 ADVERTENCIA: Encendiendo ventiladores auxiliares"`;
+  } else if(t >= 18.0) {
+    term.innerHTML = `> Evaluando: temp (${t}°C) > 30.0 → FALSE\n> Evaluando: temp (${t}°C) > 26.0 → FALSE\n> Evaluando: temp (${t}°C) >= 18.0 → TRUE\n🟢 Rama ejecutada: "🟢 ESTADO: Confort térmico dentro del rango"`;
+  } else {
+    term.innerHTML = `> Evaluando todas las condiciones anteriores → FALSE\n🟢 Rama else ejecutada: "🔵 CALEFACCIÓN: Encendiendo caldera de zona"`;
+  }
+}
+
+// Demo FOR (Módulo 06)
+function demoFor(){
+  const t = parseFloat(document.getElementById('fTemp').value) || 20;
+  const inc = parseFloat(document.getElementById('fSube').value) || 0.5;
+  const h = parseInt(document.getElementById('fHoras').value) || 5;
+  const term = document.getElementById('forOut');
+  let log = `>>> Ejecutando bucle for h in range(1, ${h+1}):\n`;
+  let tempActual = t;
+  for(let i=1; i<=h; i++){
+    log += `Hora ${i}: Registrados ${tempActual.toFixed(1)}°C\n`;
+    tempActual += inc;
+  }
+  term.innerHTML = log;
+}
+
+// Demo WHILE (Módulo 07)
+function demoWhile(){
+  let t = parseFloat(document.getElementById('wTemp').value) || 12;
+  const obj = parseFloat(document.getElementById('wObj').value) || 20;
+  const sube = parseFloat(document.getElementById('wSube').value) || 1.5;
+  const term = document.getElementById('whileOut');
+  let log = `>>> Inicio bucle while temp_actual (${t}°C) < temp_objetivo (${obj}°C):\n`;
+  let c = 1;
+  while(t < obj && c <= 20){
+    log += `Ciclo ${c}: Calentando... ${t.toFixed(1)}°C\n`;
+    t += sube;
+    c++;
+  }
+  log += `✓ Temperatura final: ${t.toFixed(1)}°C. Bucle finalizado.`;
+  term.innerHTML = log;
+}
+
+// Demo Funciones (Módulo 08)
 function ejecutarFuncionDemo(){
   const z = document.getElementById('fnZona').value || 'Zona Desconocida';
   const t = parseFloat(document.getElementById('fnTemp').value) || 0;
@@ -984,7 +1307,7 @@ function ejecutarFuncionDemo(){
   term.innerHTML = `&gt;&gt;&gt; evaluar_zona("${z}", ${t}, ${h})\nRetorno: "[${z.toUpperCase()}] Estado: ${estado} (T: ${t.toFixed(1)}°C | H: ${h}%)"`;
 }
 
-// 2. Diccionarios Inspector Demo
+// Demo Diccionarios (Módulo 09)
 const DICC_MOCK = {
   living: {temp: 22.5, hum: 55, actuador: false},
   cocina: {temp: 29.0, hum: 75, actuador: true},
@@ -1003,7 +1326,7 @@ function actualizarDicInspector(){
   term.innerHTML = `maqueta_domotica["${z}"] = ${JSON.stringify(DICC_MOCK[z], null, 2)}\n\n# Acceso directo a clave:\nmaqueta_domotica["${z}"]["temp"] -&gt; ${DICC_MOCK[z].temp}°C`;
 }
 
-// 3. POO Instanciación Demo
+// Demo POO (Módulo 10)
 let instanciaActual = null;
 
 function instanciarObjetoPOO(){
@@ -1033,7 +1356,7 @@ function ejecutarMetodoPOO(){
   term.innerHTML = `&gt;&gt;&gt; obj.regular()\n# Método ejecutado con éxito.\nself.ventilador ha sido actualizado a: ${ven ? 'True (Encendido 🟢)' : 'False (Apagado 🔴)'}\n\nEstado actual del objeto:\n${JSON.stringify({nombre: instanciaActual.nombre, temp: instanciaActual.temp, ventilador: instanciaActual.ventilador}, null, 2)}`;
 }
 
-// 4. ESP32 Hardware Simulator
+// Demo Hardware ESP32 (Módulo 11)
 function simularHardwareESP32(){
   const rel = document.getElementById('hwRelay').value;
   const ser = document.getElementById('hwServo').value;
@@ -1047,6 +1370,7 @@ function simularHardwareESP32(){
    DESAFÍOS & QUIZ
    ══════════════════════════════════════════════════════ */
 const CHALL = {
+  for: {correct: 1, xp: 20, ok: '✅ Correcto. `continue` saltea los valores negativos, procesando solo los positivos (20 y 30).', no: '❌ Incorrecto. `continue` saltea la iteración actual sin cortar el bucle.'},
   fun: {correct: 1, xp: 20, ok: '✅ Correcto. `hum > 80` (85) se evalúa antes de la temperatura estándar y devuelve `ALERTA_HUMEDAD`.', no: '❌ Incorrecto. El orden de las condiciones `elif` importa.'},
   dic: {correct: 1, xp: 20, ok: '✅ Excelente. Primero se accede a la clave `"cocina"` y luego a `"temp"`.', no: '❌ Incorrecto. Los diccionarios usan nombres de claves entre corchetes.'},
   poo: {correct: 1, xp: 30, ok: '✅ ¡Perfecto! `self` representa la instancia particular que se está creando.', no: '❌ Incorrecto. `self` es la referencia a la instancia concreta.'}
@@ -1140,7 +1464,7 @@ function ansQuiz(qi, oi){
 function enviarQuiz(){
   const nom = document.getElementById('nomQuiz').value.trim();
   if(!nom){
-    alert('Por favor ingresá tu nombre completo antes de enviar.');
+    toast('Por favor ingresá tu nombre completo.', '⚠️');
     return;
   }
   const btn = document.getElementById('sendBtn');
